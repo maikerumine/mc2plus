@@ -19,7 +19,7 @@ dofile(minetest.get_modpath("mcl_portals").."/nodes.lua")
 
 dofile(minetest.get_modpath("mcl_portals").."/craftitems.lua")
 
-dofile(minetest.get_modpath("mcl_portals").."/mapgen.lua")
+--dofile(minetest.get_modpath("mcl_portals").."/mapgen.lua")
 
 dofile(minetest.get_modpath("mcl_portals").."/portal.lua")
 dofile(minetest.get_modpath("mcl_portals").."/portal2.lua")

@@ -4,7 +4,7 @@ minetest.register_craftitem(":mcl_core:emerald", {
 	description = "Emerald",
 	inventory_image = "mcl_core_emerald.png",
 	on_place = function(stack, _, pt)
-		if pt.under and minetest.get_node(pt.under).name == "mcl_core:emeraldblock" then
+		if pt.under and minetest.get_node(pt.under).name == ":mcl_core:emeraldblock" then
 			local done2 = make_portal2(pt.under)
 			if done2 and not minetest.setting_getbool("creative_mode") then
 				stack:take_item()
@@ -90,7 +90,7 @@ minetest.register_craftitem(":mcl_nether:quartz", {
 	stack_max = 64,
 	--end
 	on_place = function(stack,_, pt)
-		if pt.under and minetest.get_node(pt.under).name == "mcl_end:purpur_block" then
+		if pt.under and minetest.get_node(pt.under).name == ":mcl_end:purpur_block" then
 			done3 = make_end_portal(pt.under)  --broken please fix for y
 			if done3 and not minetest.setting_getbool("creative_mode") then
 				stack:take_item()

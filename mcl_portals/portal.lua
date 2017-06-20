@@ -23,19 +23,19 @@ local function build_portal(pos, target)
 	local p2 = {x = p1.x + 3, y = p1.y + 4, z = p1.z}
 
 	for i = 1, 4 do
-		minetest.set_node(p, {name = "mcl_core:obsidian"})
+		minetest.set_node(p, {name = ":mcl_core:obsidian"})
 		p.y = p.y + 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = "mcl_core:obsidian"})
+		minetest.set_node(p, {name = ":mcl_core:obsidian"})
 		p.x = p.x + 1
 	end
 	for i = 1, 4 do
-		minetest.set_node(p, {name = "mcl_core:obsidian"})
+		minetest.set_node(p, {name = ":mcl_core:obsidian"})
 		p.y = p.y - 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = "mcl_core:obsidian"})
+		minetest.set_node(p, {name = ":mcl_core:obsidian"})
 		p.x = p.x - 1
 	end
 
@@ -350,7 +350,7 @@ minetest.register_node(":mcl_core:obsidian", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "default:obsidian" or nn == "mcl_portals:portal" then
+			if nn == ":mcl_core:obsidian" or nn == "mcl_portals:portal" then
 				if nn == "mcl_core:portal" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
@@ -377,7 +377,7 @@ minetest.register_node(":mcl_core:obsidian", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
+			if nn == ":mcl_core:obsidian" or nn == "mcl_portals:portal" then
 				if nn == "mcl_portals:portal" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end

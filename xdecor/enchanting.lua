@@ -1,5 +1,5 @@
 local enchanting = {}
-screwdriver = screwdriver or {}
+--screwdriver = screwdriver or {}
 
 -- Cost in Mese crystal(s) for enchanting.
 local mese_cost = 1
@@ -169,7 +169,7 @@ xdecor.register("enchantment_table", {
 		sounds = mcl_sounds.node_sound_stone_defaults(),
 	_mcl_blast_resistance = 15,
 	_mcl_hardness = 3,
-	on_rotate = screwdriver.rotate_simple,
+	--on_rotate = screwdriver.rotate_simple,
 	can_dig = enchanting.dig,
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,

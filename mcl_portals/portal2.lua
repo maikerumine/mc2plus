@@ -333,9 +333,9 @@ minetest.register_node(":mcl_core:emeraldblock", {
 	is_ground_content = false,
 	--sounds = mcl_sounds.node_sound_stone_defaults(),
 	stack_max = 64,
-	groups = {pickaxey=5, building_block=1, material_stone=1},
-	_mcl_blast_resistance = 6000,
-	_mcl_hardness = 50,
+	groups = {pickaxey=4, building_block=1},
+	_mcl_blast_resistance = 30,
+	_mcl_hardness = 5,
 
 	on_destruct = function(pos)
 		local meta = minetest.get_meta(pos)
