@@ -1,43 +1,10 @@
-xbg = default.gui_bg..default.gui_bg_img..default.gui_slots
-local default_inventory_size = 32
-
-local default_inventory_formspecs = {
-	["8"] = [[ size[8,6]
-		list[context;main;0,0;8,1;]
-		list[current_player;main;0,2;8,4;]
-		listring[current_player;main]
-		listring[context;main] ]]
-		..default.get_hotbar_bg(0,2),
-
-	["16"] = [[ size[8,7]
-		list[context;main;0,0;8,2;]
-		list[current_player;main;0,3;8,4;]
-		listring[current_player;main]
-		listring[context;main] ]]
-		..default.get_hotbar_bg(0,3),
-
-	["24"] = [[ size[8,8]
-		list[context;main;0,0;8,3;]
-		list[current_player;main;0,4;8,4;]
-		listring[current_player;main]
-		listring[context;main]" ]]
-		..default.get_hotbar_bg(0,4),
-
-	["32"] = [[ size[8,9]
-		list[context;main;0,0.3;8,4;]
-		list[current_player;main;0,4.85;8,1;]
-		list[current_player;main;0,6.08;8,3;8]
-		listring[current_player;main]
-		listring[context;main] ]]
-		..default.get_hotbar_bg(0,4.85)
-}
 
 local function get_formspec_by_size(size)
-	local formspec = default_inventory_formspecs[tostring(size)]
-	return formspec or default_inventory_formspecs
+	local formspec = xdecor_inventory_formspecs[tostring(size)]
+	return formspec or xdecor_inventory_formspecs
 end
 
-local default_can_dig = function(pos)
+local xdecor_can_dig = function(pos)
 	local inv = minetest.get_meta(pos):get_inventory()
 	return inv:is_empty("main")
 end
@@ -45,7 +12,7 @@ end
 function xdecor.register(name, def)
 	def.drawtype = def.drawtype or (def.node_box and "nodebox")
 	def.paramtype = def.paramtype or "light"
-	def.sounds = def.sounds or default.node_sound_defaults()
+	def.sounds = def.sounds or xdecor.node_sound_xdecors()
 
 	if not (def.drawtype == "normal" or def.drawtype == "signlike" or
 			def.drawtype == "plantlike" or def.drawtype == "glasslike_framed" or
@@ -67,12 +34,12 @@ function xdecor.register(name, def)
 			local meta = minetest.get_meta(pos)
 			if infotext then meta:set_string("infotext", infotext) end
 
-			local size = inventory.size or default_inventory_size
+			local size = inventory.size or xdecor_inventory_size
 			local inv = meta:get_inventory()
 			inv:set_size("main", size)
 			meta:set_string("formspec", (inventory.formspec or get_formspec_by_size(size))..xbg)
 		end
-		def.can_dig = def.can_dig or default_can_dig
+		def.can_dig = def.can_dig or xdecor_can_dig   --was default?
 	elseif infotext and not def.on_construct then
 		def.on_construct = function(pos)
 			local meta = minetest.get_meta(pos)

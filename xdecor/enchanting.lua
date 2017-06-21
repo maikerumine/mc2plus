@@ -4,6 +4,38 @@ local enchanting = {}
 -- Cost in Mese crystal(s) for enchanting.
 local mese_cost = 1
 
+
+-- GUI related stuff
+xdecor.gui_bg = "bgcolor[#080808BB;true]"
+xdecor.gui_bg_img = "background[5,5;1,1;gui_formbg.png;true]"
+xdecor.gui_slots = "listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
+
+function xdecor.get_hotbar_bg(x,y)
+	local out = ""
+	for i=0,7,1 do
+		out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+	end
+	return out
+end
+
+xdecor.gui_survival_form = "size[8,8.5]"..
+			xdecor.gui_bg..
+			xdecor.gui_bg_img..
+			xdecor.gui_slots..
+			"list[current_player;main;0,4.25;8,1;]"..
+			"list[current_player;main;0,5.5;8,3;8]"..
+			"list[current_player;craft;1.75,0.5;3,3;]"..
+			"list[current_player;craftpreview;5.75,1.5;1,1;]"..
+			"image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]"..
+			"listring[current_player;main]"..
+			"listring[current_player;craft]"..
+			xdecor.get_hotbar_bg(0,4.25)
+
+-- Load files
+local xdecor_path = minetest.get_modpath("xdecor")
+
+
+
 -- Force of the enchantments.
 enchanting.uses     = 1.2  -- Durability
 enchanting.times    = 0.1  -- Efficiency
@@ -26,7 +58,7 @@ function enchanting.formspec(pos, num)
 			tooltip[fast;Your tool digs faster]
 			tooltip[strong;Your armor is more resistant]
 			tooltip[speed;Your speed is increased] ]]
-			..default.gui_slots..default.get_hotbar_bg(0.5,4.5)
+			..xdecor.gui_slots..xdecor.get_hotbar_bg(0.5,4.5)
 
 	local enchant_buttons = {
 		[[ image_button[3.9,0.85;4,0.92;bg_btn.png;fast;Efficiency]
@@ -77,7 +109,7 @@ function enchanting.fields(pos, _, fields, sender)
 	end
 end
 
-function enchanting.dig(pos)
+function enchanting.dig(pos)--broken?
 	local inv = minetest.get_meta(pos):get_inventory()
 	return inv:is_empty("tool") and inv:is_empty("mese")
 end
@@ -163,14 +195,15 @@ xdecor.register("enchantment_table", {
 	tiles = {"xdecor_enchantment_top.png",  "xdecor_enchantment_bottom.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png"},
-	groups = {cracky=1, level=1},
+	groups = {pickaxey=3, handy=2, building_block=1, material_stone=1},
+	--groups = {cracky=1, level=1},
 	stack_max = 1,
-	--sounds = default.node_sound_stone_defaults(),
-		sounds = mcl_sounds.node_sound_stone_defaults(),
-	_mcl_blast_resistance = 15,
-	_mcl_hardness = 3,
+	--sounds = xdecor.node_sound_stone_xdecors(),
+	sounds = mcl_sounds.node_sound_stone_defaults(),
+	--_mcl_blast_resistance = 15,
+	--_mcl_hardness = 3,
 	--on_rotate = screwdriver.rotate_simple,
-	can_dig = enchanting.dig,
+	xdecor_can_dig = enchanting.dig,  --was default?
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,
 	on_destruct = enchanting.destruct,
@@ -266,7 +299,7 @@ function enchanting:register_tools(mod, def)
 	end
 end
 --[[
-enchanting:register_tools("default", {
+enchanting:register_tools("xdecor", {
 	materials = "steel, gold, mese, diamond",
 	tools = {
 		axe    = {enchants = "durable, fast"},
@@ -297,3 +330,11 @@ enchanting:register_tools("3d_armor", {
 	}
 })
 
+minetest.register_craft({
+	output = "xdecor:enchantment_table",
+	recipe = {
+		{"mesecons_torch:redstoneblock","mcl_books:book","mesecons_torch:redstoneblock"},
+		{"mcl_core:emeraldblock","mcl_heads:steve","mcl_core:emeraldblock"},
+		{"mcl_core:obsidian","mcl_core:diamondblock","mcl_core:obsidian"},
+	}
+})

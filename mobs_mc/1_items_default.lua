@@ -389,7 +389,7 @@ minetest.register_craftitem("mobs_mc:magma_cream", {
 --spider
 
 -- Cobweb
-minetest.register_node(":mobs:cobweb", {
+minetest.register_node(":mobs_mc:cobweb", {
 	description = "Cobweb",
 	drawtype = "plantlike",
 	visual_scale = 1.1,
@@ -410,7 +410,7 @@ minetest.register_node(":mobs:cobweb", {
 })
 
 minetest.register_craft({
-	output = "mobs:cobweb",
+	output = "mobs_mc:cobweb",
 	recipe = {
 		{"farming:string", "", "farming:string"},
 		{"", "farming:string", ""},
