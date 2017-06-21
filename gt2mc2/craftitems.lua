@@ -62,6 +62,8 @@ minetest.register_alias("default:stone_with_coal", "mcl_core:stone_with_coal")
 minetest.register_alias("default:iron_nugget", "mcl_core:ironnugget")
 minetest.register_alias("default:gold_nugget", "mcl_core:goldnugget")
 minetest.register_alias("default:mese_crystal", "mcl_core:redstone")
+minetest.register_alias("mcl_core:redstone", "mesecons:redstone")
+
 minetest.register_alias("default:emerald_crystal", "mcl_core:emerald")
 minetest.register_alias("mcl_nether:quartz_crystal", "mcl_nether:quartz")
 minetest.register_alias("default:quartz_crystal_piece", "mcl_nether:quartz")
@@ -111,6 +113,7 @@ minetest.register_alias("dye:dark_green", "mcl_dye:dark_green")
 --flintsteel
 minetest.register_alias("default:flint_and_steel", "mcl_fire:flint_and_steel")
 minetest.register_alias("default:flint", "mcl_fire:flint")
+minetest.register_alias("mcl_fire:flint", "mcl_core:flint")
 
 --fishing
 minetest.register_alias("fishing:fish_raw", "mcl_fishing:fish_raw")
@@ -207,13 +210,16 @@ minetest.register_alias("mobs:mutton", "mcl_mobitems:mutton")
 minetest.register_alias("mobs:mutton_raw", "mcl_mobitems:mutton")
 minetest.register_alias("mobs:cooked_mutton", "mcl_mobitems:cooked_mutton")
 minetest.register_alias("mobs:mutton_cooked", "mcl_mobitems:cooked_mutton")
-minetest.register_alias("mobs:beef", "mcl_mobitems:beef")
-minetest.register_alias("mobs:meat_raw", "mcl_mobitems:beef")
+minetest.register_alias("mobs:beef", "mcl_mobitems:cooked_beef")
+minetest.register_alias("mobs:beef_raw", "mcl_mobitems:cooked_beef")
+minetest.register_alias("mobs:meat_raw", "mcl_mobitems:cooked_beef")
 minetest.register_alias("mobs:meat", "mcl_mobitems:cooked_beef")
 minetest.register_alias("mobs:cooked_beef", "mcl_mobitems:cooked_beef")
 minetest.register_alias("mobs:beef_cooked", "mcl_mobitems:cooked_beef")
 minetest.register_alias("mobs:chicken", "mcl_mobitems:chicken")
+minetest.register_alias("mobs:chicken_raw", "mcl_mobitems:chicken")
 minetest.register_alias("mobs:cooked_chicken", "mcl_mobitems:cooked_chicken")
+minetest.register_alias("mobs:pork_cooked", "mcl_mobitems:porkchop")
 minetest.register_alias("mobs:porkchop", "mcl_mobitems:porkchop")
 minetest.register_alias("mobs:pork_raw", "mcl_mobitems:porkchop")
 minetest.register_alias("mobs:cooked_porkchop", "mcl_mobitems:cooked_porkchop")
@@ -240,6 +246,8 @@ minetest.register_alias("mobs:carrot_on_a_stick", "mcl_mobitems:carrot_on_a_stic
 minetest.register_alias("mobs:arrow", "mcl_throwing:arrow")
 minetest.register_alias("mobs:magic_lasso", "mcl_throwing:arrow")
 minetest.register_alias("mobs:net", "mcl_throwing:arrow")
+minetest.register_alias("mobs:egg", "mcl_throwing:egg")
+minetest.register_alias("mcl_mobitems:egg", "mcl_throwing:egg")
 minetest.register_alias("mobs:protector", "mcl_throwing:arrow")
 
 --hoppers
@@ -258,6 +266,22 @@ minetest.register_alias("boats:boat_dark_oak", "mcl_boats:boat_dark_oak")
 
 --screwdriver
 minetest.register_alias("screwdriver:screwdriver", "mcl_core:bowl")
+
+--clocks compass
+minetest.register_alias("clock:12", "mcl_clock:clock_12")
+minetest.register_alias("clock:16", "mcl_clock:clock_16")
+minetest.register_alias("clock:17", "mcl_clock:clock_17")
+minetest.register_alias("clock:33", "mcl_clock:clock_33")
+minetest.register_alias("mcl_clock:33", "mcl_clock:clock_33")
+minetest.register_alias("compass:16", "mcl_compass:compass_16")
+minetest.register_alias("mcl_compass:compass_17", "mcl_compass:17")
+minetest.register_alias("compass:33", "mcl_compass:compass_33")
+minetest.register_alias("mcl_compass:33", "mcl_compass:compass_33")
+
+
+
+--tnt
+minetest.register_alias("tnt:tnt", "mcl_tnt:tnt")
 
 --vessels
 minetest.register_alias("vessels:shelf", "mcl_core:bowl")
