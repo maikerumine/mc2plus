@@ -53,6 +53,7 @@ minetest.register_alias("default:gravel", "mcl_core:gravel")
 minetest.register_alias("default:clay", "mcl_core:clay")
 minetest.register_alias("default:brick", "mcl_core:brick_block")
 minetest.register_alias("default:fossil", "mcl_core:bone_block")
+minetest.register_alias("default:coalblock", "mcl_core:coalblock")
 
 minetest.register_alias("default:stonebrick", "mcl_core:stonebrick")
 minetest.register_alias("default:stone_block", "mcl_core:stonebrickcarved")

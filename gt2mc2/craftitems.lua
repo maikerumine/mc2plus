@@ -249,6 +249,7 @@ minetest.register_alias("mobs:net", "mcl_throwing:arrow")
 minetest.register_alias("mobs:egg", "mcl_throwing:egg")
 minetest.register_alias("mcl_mobitems:egg", "mcl_throwing:egg")
 minetest.register_alias("mobs:protector", "mcl_throwing:arrow")
+minetest.register_alias("esmobs:bones", "mcl_chests:chest")
 
 --hoppers
 minetest.register_alias("hoppers:hopper", "mcl_hoppers:hopper")
