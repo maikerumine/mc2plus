@@ -61,7 +61,7 @@ if minetest.get_modpath("default") then
 		groups = {oddly_breakable_by_hand = 2, spawns_silverfish = 1},
 		drop = '',
 		is_ground_content = true,
-		--sounds = default.node_sound_stone_defaults(),
+		sounds = default.node_sound_stone_defaults(),
 		after_dig_node = spawn_silverfish,
 	})
 
@@ -71,7 +71,7 @@ if minetest.get_modpath("default") then
 		is_ground_content = false,
 		groups = {oddly_breakable_by_hand = 2, spawns_silverfish = 1},
 		drop = '',
-		--sounds = default.node_sound_stone_defaults(),
+		sounds = default.node_sound_stone_defaults(),
 		after_dig_node = spawn_silverfish,
 	})
 
@@ -81,7 +81,7 @@ if minetest.get_modpath("default") then
 		is_ground_content = false,
 		groups = {oddly_breakable_by_hand = 2, spawns_silverfish = 1},
 		drop = '',
-		--sounds = default.node_sound_stone_defaults(),
+		sounds = default.node_sound_stone_defaults(),
 		after_dig_node = spawn_silverfish,
 	})
 
@@ -93,7 +93,7 @@ if minetest.get_modpath("default") then
 		is_ground_content = false,
 		groups = {oddly_breakable_by_hand = 2, spawns_silverfish = 1},
 		drop = '',
-		--sounds = default.node_sound_stone_defaults(),
+		sounds = default.node_sound_stone_defaults(),
 		after_dig_node = spawn_silverfish,
 	})
 
@@ -103,7 +103,7 @@ if minetest.get_modpath("default") then
 		is_ground_content = false,
 		groups = {oddly_breakable_by_hand = 2, spawns_silverfish = 1},
 		drop = '',
-		--sounds = default.node_sound_stone_defaults(),
+		sounds = default.node_sound_stone_defaults(),
 		after_dig_node = spawn_silverfish,
 	})
 
