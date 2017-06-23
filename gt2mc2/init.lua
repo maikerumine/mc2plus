@@ -426,7 +426,8 @@ minetest.register_alias("farming:corn_7", "mcl_farming:carrot")
 minetest.register_alias("farming:corn_8", "mcl_farming:carrot")
 
 minetest.register_alias("farming:wheat", "mcl_farming:wheat")
-minetest.register_alias("farming:bread", "mcl_farming:bread")
+minetest.register_alias("farming:straw", "mcl_farming:wheat")
+minetest.register_alias("farming:bread", "mcl_core:snow")
 minetest.register_alias("farming:flour", "mcl_farming:bread")
 minetest.register_alias("farming:seed_wheat", "mcl_farming:wheat_seeds")
 minetest.register_alias("mcl_farming:seed_wheat", "mcl_farming:wheat_seeds")
@@ -564,6 +565,8 @@ minetest.register_alias("stairs:stair_desert_stone", "mcl_stairs:stair_redsandst
 minetest.register_alias("stairs:slab_desert_stone", "mcl_stairs:slab_redsandstone")
 minetest.register_alias("stairs:stair_desert_stonebrick", "mcl_stairs:stair_redsandstone")
 minetest.register_alias("stairs:slab_desert_stonebrick", "mcl_stairs:slab_redsandstone")
+
+minetest.register_alias("stairs:stair_stone", "mcl_stairs:stair_stonebrick")
 
 minetest.register_alias("stairs:stair_obsidianbrick", "mcl_stairs:stair_cobble")
 minetest.register_alias("stairs:slab_obsidianbrick", "mcl_stairs:slab_stone")
