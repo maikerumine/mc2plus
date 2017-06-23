@@ -259,14 +259,27 @@ minetest.register_alias("default:fence_junglewood", "mcl_fences:jungle_fence")
 --======================
 --door
 --======================
---minetest.register_alias("doors:door_wood", "mcl_doors:door")
+minetest.register_alias("doors:door_wood", "mcl_doors:dark_oak_door")
+minetest.register_alias("doors:trapdoor_wood", "mcl_doors:dark_oak_door")
+minetest.register_alias("doors:trapdoor_steel", "mcl_doors:dark_oak_door")
 minetest.register_alias("doors:hidden", "air")
 --minetest.register_alias("doors:hidden", "mcl_doors:dark_oak_door_t_1")
 minetest.register_alias("doors:door_wood_a", "mcl_doors:dark_oak_door_b_1")
+minetest.register_alias("doors:door_wood_a_2", "mcl_doors:dark_oak_door_b_1")
 minetest.register_alias("doors:door_wood_b", "mcl_doors:dark_oak_door_b_2")
-minetest.register_alias("doors:door_wood_t_1", "mcl_doors:dark_oak_door_b_1")
-minetest.register_alias("doors:door_wood_t_2", "mcl_doors:dark_oak_door_b_2")
 
+--old style
+minetest.register_alias("doors:door_wood_b_1", "mcl_doors:dark_oak_door_b_1")
+minetest.register_alias("doors:door_wood_b_2", "mcl_doors:dark_oak_door_b_2")
+minetest.register_alias("doors:door_wood_t_1", "mcl_doors:dark_oak_door_t_1")
+minetest.register_alias("doors:door_wood_t_2", "mcl_doors:dark_oak_door_t_2")
+
+minetest.register_alias("doors:door_steel_b", "mcl_doors:iron_door_b_1")
+minetest.register_alias("doors:door_steel_b_1", "mcl_doors:iron_door_b_1")
+minetest.register_alias("doors:door_steel_b_2", "mcl_doors:iron_door_b_2")
+minetest.register_alias("doors:door_steel_a", "mcl_doors:iron_door_t_1")
+minetest.register_alias("doors:door_steel_t_1", "mcl_doors:iron_door_t_1")
+minetest.register_alias("doors:door_steel_t_2", "mcl_doors:iron_door_t_2")
 
 
 --======================
@@ -338,14 +351,14 @@ minetest.register_alias("farming:grapes_8", "mcl_flowers:tallgrass")
 
 --barley
 minetest.register_alias("farming:barley", "mcl_flowers:tallgrass")
-minetest.register_alias("farming:barley_1", "mcl_farming:seed_wheat")
-minetest.register_alias("farming:barley_2", "mcl_farming:seed_wheat")
+minetest.register_alias("farming:barley_1", "mcl_farming:hay_block")
+minetest.register_alias("farming:barley_2", "mcl_farming:hay_block")
 minetest.register_alias("farming:barley_3", "mcl_flowers:tallgrass")
 minetest.register_alias("farming:barley_4", "mcl_flowers:tallgrass")
 minetest.register_alias("farming:barley_5", "mcl_flowers:tallgrass")
 minetest.register_alias("farming:barley_6", "mcl_flowers:tallgrass")
 minetest.register_alias("farming:barley_7", "mcl_flowers:tallgrass")
-minetest.register_alias("farming:seed_barley", "mcl_farming:seed_wheat")
+minetest.register_alias("farming:seed_barley", "mcl_farming:hay_block")
 
 --coffee
 minetest.register_alias("farming:coffee", "mcl_farming:carrot")
@@ -377,6 +390,8 @@ minetest.register_alias("farming:pumpkin_8", "mcl_farming:pumpkin_7")
 
 
 minetest.register_alias("farming:cocoa", "mcl_cocoas:cocoa")
+minetest.register_alias("mcl_cocoas:cocoa", "mcl_dye:brown")
+minetest.register_alias("farming:cocoa_beans", "mcl_dye:brown")
 minetest.register_alias("farming:cocoa_1", "mcl_cocoas:cocoa_1")
 minetest.register_alias("farming:cocoa_2", "mcl_cocoas:cocoa_2")
 minetest.register_alias("farming:cocoa_3", "mcl_cocoas:cocoa_3")
@@ -405,6 +420,7 @@ minetest.register_alias("farming:potato_7", "mcl_farming:potato")
 minetest.register_alias("farming:potato_8", "mcl_farming:potato")
 
 
+minetest.register_alias("farming:carrot_gold", "mcl_farming:carrot_item_gold")
 minetest.register_alias("farming:carrot", "mcl_farming:carrot")
 minetest.register_alias("farming:carrot_1", "mcl_farming:carrot")
 minetest.register_alias("farming:carrot_2", "mcl_farming:carrot")
@@ -429,8 +445,8 @@ minetest.register_alias("farming:wheat", "mcl_farming:wheat")
 minetest.register_alias("farming:straw", "mcl_farming:wheat")
 minetest.register_alias("farming:bread", "mcl_core:snow")
 minetest.register_alias("farming:flour", "mcl_farming:bread")
-minetest.register_alias("farming:seed_wheat", "mcl_farming:wheat_seeds")
-minetest.register_alias("mcl_farming:seed_wheat", "mcl_farming:wheat_seeds")
+minetest.register_alias("farming:seed_wheat", "mcl_farming:hay_block")
+minetest.register_alias("mcl_farming:seed_wheat", "mcl_farming:hay_block")
 minetest.register_alias("farming:wheat_1", "mcl_farming:wheat_5")
 minetest.register_alias("farming:wheat_2", "mcl_farming:wheat_5")
 minetest.register_alias("farming:wheat_3", "mcl_farming:wheat_5")
@@ -458,8 +474,9 @@ minetest.register_alias("farming:cotton_8", "mcl_farming:wheat_5")
 minetest.register_alias("default:underground_fire", "mcl_fire:eternal_fire")
 minetest.register_alias("nether:permanent_flame", "mcl_fire:eternal_fire")
 minetest.register_alias("default:permanent_flame", "mcl_fire:eternal_fire")
+minetest.register_alias("fire:permanent_flame", "mcl_fire:eternal_fire")
 minetest.register_alias("default:basic_flame", "mcl_fire:fire")
-
+minetest.register_alias("fire:basic_flame", "mcl_fire:fire")
 
 --======================
 --flowers
@@ -475,10 +492,23 @@ minetest.register_alias("flowers:mushroom_brown", "mcl_mushrooms:mushroom_brown"
 minetest.register_alias("flowers:mushroom_red", "mcl_mushrooms:mushroom_red")
 
 --======================
---glass
+--hoppers
 --======================
-minetest.register_alias("xpanes:pane_flat", "xpanes:pane_natural_flat")
-minetest.register_alias("xpanes:pane", "xpanes:pane_natural")
+minetest.register_alias("hopper:hopper_item", "mcl_hoppers:hopper")
+minetest.register_alias("hopper:hopper", "mcl_hoppers:hopper")
+minetest.register_alias("hopper:hopper_side", "mcl_hoppers:hopper_side")
+
+--======================
+--mesecons
+--======================
+minetest.register_alias("dispenser:dispenser", "mcl_dispensers:dispenser")
+minetest.register_alias("dropper:dropper", "mcl_droppers:dropper")
+minetest.register_alias("dropper:dropper", "mcl_droppers:dropper")
+minetest.register_alias("mesecons_button:button_off", "mesecons_button:button_stone_off")
+minetest.register_alias("mesecons_button:button_on", "mesecons_button:button_stone_on")
+minetest.register_alias("mesecons_luacontroller:luacontroller0000", "mesecons_delayer:delayer_off_1")
+minetest.register_alias("mesecons_random:ghoststone", "mesecons_delayer:delayer_off_1")
+
 
 --======================
 --MC2 Andisite,granite,diorite
@@ -518,6 +548,14 @@ minetest.register_alias("default:chest_locked", "mcl_chests:chest")
 minetest.register_alias("nssm:ant_dirt", "mcl_core:coarse_dirt")
 
 --======================
+--Nyancat
+--======================
+minetest.register_alias("nyancat:nyancat", "mcl_core:diamondblock")
+minetest.register_alias("nyancat:rainbow", "mcl_core:emeraldblock")
+minetest.register_alias("nyancat:nyancat_rainbow", "mcl_core:emeraldblock")
+
+
+--======================
 --alias to remove old quartz from maps
 --======================
 --minetest.register_alias("default:quartz_crystal", "mcl_nether:quartz")
@@ -534,11 +572,12 @@ minetest.register_alias("default:rack", "mcl_nether:netherrack")
 minetest.register_alias("default:quartz_ore", "mcl_nether:quartz_ore")
 minetest.register_alias("default:quartz_crystal", "mcl_nether:quartz_crystal")
 minetest.register_alias("default:nitherbrick", "mcl_nether:nether_brick")
+minetest.register_alias("default:obsidiannitherbrick", "mcl_nether:nether_brick")
 minetest.register_alias("default:glowstone", "mcl_nether:glowstone")
 minetest.register_alias("default:glowstone_dust", "mcl_nether:glowstone_dust")
 minetest.register_alias("default:rack_with_diamond", "mcl_core:stone_with_diamond")
 minetest.register_alias("default:slowsand", "mcl_nether:soul_sand")
-minetest.register_alias("default:fence_nither", "mcl_nether:fence_nether")
+minetest.register_alias("default:fence_nither", "mcl_fences:nether_brick_fence")
 
 --======================
 --stairs
@@ -596,13 +635,18 @@ minetest.register_alias("stairs:slab_acacia_wood", "mcl_stairs:slab_acaciawood")
 minetest.register_alias("stairs:stair_aspen_wood", "mcl_stairs:stair_birchwood")
 minetest.register_alias("stairs:slab_aspen_wood", "mcl_stairs:slab_birchwood")
 
+--corners
+minetest.register_alias("default:cobble_innerstair", "mcl_stairs:slab_cobble")
+minetest.register_alias("default:cobble_outerstair", "mcl_stairs:slab_cobble")
+
 
 --======================
 --alias for es stuff and misc
 --======================
 minetest.register_alias("esmobs:bones", "mcl_core:chest")
 minetest.register_alias("es:emerald_crystal", "mcl_core:emerald_crystal")
-minetest.register_alias("vines:shears", "mobs:shears")
+minetest.register_alias("vines:rope_block", "mcl_tools:pick_gold")
+minetest.register_alias("vines:shears", "mcl_tools:pick_gold")
 minetest.register_alias("vines:vine", "mcl_core:vine")
 minetest.register_alias("vines:vine_middle", "mcl_core:vine")
 minetest.register_alias("vines:vine_end", "mcl_core:vine")
@@ -667,7 +711,62 @@ minetest.register_alias("xdecor:f_item", "itemframes:item")
 minetest.register_alias("xdecor:workbench", "mcl_anvils:anvil")
 --minetest.register_alias("xdecor:enchantment_table", "mcl_crafting_table:crafting_table")
 minetest.register_alias("xdecor:hammer", "mcl_anvils:anvil")
+--[[
+-- Nodeboxes definitions.
+workbench.defs = {
+	-- Name       Yield   X  Y   Z  W   H  L
+	{"nanoslab",	16, { 0, 0,  0, 8,  1, 8  }},
+	{"micropanel",	16, { 0, 0,  0, 16, 1, 8  }},
+	{"microslab",	8,  { 0, 0,  0, 16, 1, 16 }},
+	{"thinstair",	8,  { 0, 7,  0, 16, 1, 8  },
+			    { 0, 15, 8, 16, 1, 8  }},
+	{"cube", 	4,  { 0, 0,  0, 8,  8, 8  }},
+	{"panel",	4,  { 0, 0,  0, 16, 8, 8  }},
+	{"slab", 	2,  nil			  },
+	{"doublepanel", 2,  { 0, 0,  0, 16, 8, 8  },
+			    { 0, 8,  8, 16, 8, 8  }},
+	{"halfstair",	2,  { 0, 0,  0, 8,  8, 16 },
+			    { 0, 8,  8, 8,  8, 8  }},
+	{"outerstair",	1,  { 0, 0,  0, 16, 8, 16 },
+			    { 0, 8,  8, 8,  8, 8  }},
+	{"stair",	1,  nil			  },
+	{"innerstair",	1,  { 0, 0,  0, 16, 8, 16 },
+			    { 0, 8,  8, 16, 8, 8  },
+			    { 0, 8,  0, 8,  8, 8  }}
+}]]
+--micropanels
+minetest.register_alias("default:wood_micropanel", "mcl_fences:fence")
+minetest.register_alias("default:wood_nanoslab", "mcl_fences:fence")
 
-
+--======================
+--xpanes
+--======================
+minetest.register_alias("xpanes:pane_flat", "xpanes:pane_natural_flat")
+minetest.register_alias("xpanes:pane", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_0", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_1", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_2", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_3", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_4", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_5", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_6", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_7", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_8", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_9", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_10", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_11", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_12", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_13", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_14", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_15", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_16", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_17", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_18", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_19", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_20", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_21", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_22", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_23", "xpanes:pane_natural")
+minetest.register_alias("xpanes:pane_24", "xpanes:pane_natural")
 
 

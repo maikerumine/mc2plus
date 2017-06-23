@@ -23,7 +23,8 @@ minetest.register_alias("default:shovel_mese", "mcl_tools:shovel_gold")
 
 
 
-minetest.register_alias("default:shovel_diamond", "mcl_tools:shovel_diamond")
+minetest.register_alias("default:enchanted_shovel_diamond_durable", "mcl_tools:enchanted_shovel_diamond_durable")
+minetest.register_alias("default:enchanted_shovel_diamond_fast", "mcl_tools:enchanted_shovel_diamond_fast")
 
 minetest.register_alias("default:axe_stone", "mcl_tools:axe_stone")
 minetest.register_alias("default:axe_steel", "mcl_tools:axe_iron")
@@ -31,7 +32,8 @@ minetest.register_alias("default:axe_gold", "mcl_tools:axe_gold")
 
 
 
-minetest.register_alias("default:axe_diamond", "mcl_tools:axe_diamond")
+minetest.register_alias("default:enchanted_axe_diamond_durable", "mcl_tools:enchanted_axe_diamond_durable")
+minetest.register_alias("default:enchanted_axe_diamond_fast", "mcl_tools:enchanted_axe_diamond_fast")
 
 minetest.register_alias("default:sword_stone", "mcl_tools:sword_stone")
 minetest.register_alias("default:sword_steel", "mcl_tools:sword_iron")
