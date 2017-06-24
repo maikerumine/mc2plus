@@ -200,10 +200,12 @@ xdecor.register("enchantment_table", {
 	stack_max = 1,
 	--sounds = xdecor.node_sound_stone_xdecors(),
 	sounds = mcl_sounds.node_sound_stone_defaults(),
-	--_mcl_blast_resistance = 15,
-	--_mcl_hardness = 3,
+	_mcl_blast_resistance = 15,
+	_mcl_hardness = 3,
 	--on_rotate = screwdriver.rotate_simple,
-	xdecor_can_dig = enchanting.dig,  --was default?
+	can_dig = check_player_priv,
+	--xdecor_can_dig = enchanting.dig,  --was default?
+	--can_dig = enchanting.dig,  --was default?
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,
 	on_destruct = enchanting.destruct,

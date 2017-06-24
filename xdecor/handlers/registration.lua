@@ -39,7 +39,8 @@ function xdecor.register(name, def)
 			inv:set_size("main", size)
 			meta:set_string("formspec", (inventory.formspec or get_formspec_by_size(size))..xbg)
 		end
-		def.can_dig = def.can_dig or xdecor_can_dig   --was default?
+		--def.can_dig = def.can_dig or xdecor_can_dig   --was default?
+		def.can_dig = def.can_dig or can_dig   --was default?
 	elseif infotext and not def.on_construct then
 		def.on_construct = function(pos)
 			local meta = minetest.get_meta(pos)

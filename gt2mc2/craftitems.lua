@@ -273,6 +273,7 @@ minetest.register_alias("jdukebox:disc_8", "mcl_jukebox:record_8")
 --======================
 --mob items and end items
 --======================
+--mobs_mc
 minetest.register_alias("default:end_rod", "mcl_end:end_rod")
 minetest.register_alias("default:dragon_egg", "mcl_end:dragon_egg")
 minetest.register_alias("mobs_mc:dragon_egg", "mcl_end:dragon_egg")
@@ -308,6 +309,9 @@ minetest.register_alias("mobs_mc:shulker_shell", "mcl_mobitems:shulker_shell")
 minetest.register_alias("mobs_mc:slimeball", "mcl_mobitems:slimeball")
 minetest.register_alias("mobs_mc:carrot_on_a_stick", "mcl_mobitems:carrot_on_a_stick")
 
+minetest.register_alias("mobs_mc:horse_set", "mobs_mc:horse")
+minetest.register_alias("mobs_mc:llama_set", "mobs_mc:llama")
+
 --heads
 minetest.register_alias("mobs_mc:zombie_head", "mcl_heads:zombie")
 minetest.register_alias("mobs_mc:creeper_head", "mcl_heads:creeper")
@@ -318,7 +322,7 @@ minetest.register_alias("mobs_mc:skeleton2_head", "mcl_heads:wither_skeleton")
 minetest.register_alias("mobs_mc:spider_head", "mcl_heads:steve")
 minetest.register_alias("mobs_mc:zombiepig_head", "mcl_heads:zombie_head")
 
-
+--mobs
 minetest.register_alias("default:end_rod", "mcl_end:end_rod")
 minetest.register_alias("default:dragon_egg", "mcl_end:dragon_egg")
 minetest.register_alias("mobs:dragon_egg", "mcl_end:dragon_egg")
@@ -370,6 +374,47 @@ minetest.register_alias("mobs:egg", "mcl_throwing:egg")
 minetest.register_alias("mobs:cobweb", "mcl_core:cobweb")  --funky
 minetest.register_alias("mcl_mobitems:egg", "mcl_mobitems:egg")
 minetest.register_alias("mobs:protector", "mcl_throwing:arrow")
+
+--esm
+minetest.register_alias("esmobs:rotten_flesh", "mcl_mobitems:rotten_flesh")
+minetest.register_alias("esmobs:mutton", "mcl_mobitems:mutton")
+minetest.register_alias("esmobs:mutton_raw", "mcl_mobitems:mutton")
+minetest.register_alias("esmobs:cooked_mutton", "mcl_mobitems:cooked_mutton")
+minetest.register_alias("esmobs:mutton_cooked", "mcl_mobitems:cooked_mutton")
+minetest.register_alias("esmobs:beef", "mcl_mobitems:cooked_beef")
+minetest.register_alias("esmobs:beef_raw", "mcl_mobitems:cooked_beef")
+minetest.register_alias("esmobs:meat_raw", "mcl_mobitems:cooked_beef")
+minetest.register_alias("esmobs:meat", "mcl_mobitems:cooked_beef")
+minetest.register_alias("esmobs:cooked_beef", "mcl_mobitems:cooked_beef")
+minetest.register_alias("esmobs:beef_cooked", "mcl_mobitems:cooked_beef")
+minetest.register_alias("esmobs:chicken", "mcl_mobitems:chicken")
+minetest.register_alias("esmobs:chicken", "mobs_mc:chicken")
+minetest.register_alias("esmobs:chicken_egg_fried", "mcl_mobitems:chicken")
+minetest.register_alias("esmobs:chicken_raw", "mcl_mobitems:chicken")
+minetest.register_alias("esmobs:cooked_chicken", "mcl_mobitems:cooked_chicken")
+minetest.register_alias("esmobs:pork_cooked", "mcl_mobitems:porkchop")
+minetest.register_alias("esmobs:porkchop", "mcl_mobitems:porkchop")
+minetest.register_alias("esmobs:pork_raw", "mcl_mobitems:porkchop")
+minetest.register_alias("esmobs:cooked_porkchop", "mcl_mobitems:cooked_porkchop")
+minetest.register_alias("esmobs:rabbit", "mcl_mobitems:rabbit")
+minetest.register_alias("esmobs:milk_bucket", "mcl_mobitems:milk_bucket")
+minetest.register_alias("esmobs:spider_eye", "mcl_mobitems:spider_eye")
+minetest.register_alias("esmobs:bone", "mcl_mobitems:bone")
+minetest.register_alias("esmobs:bow_wood", "mcl_throwing:bow")
+minetest.register_alias("esmobs:string", "mcl_mobitems:string")
+minetest.register_alias("esmobs:leather", "mcl_mobitems:leather")
+minetest.register_alias("esmobs:feather", "mcl_mobitems:feather")
+minetest.register_alias("esmobs:rat", "mcl_mobitems:rabbit_stew")
+minetest.register_alias("esmobs:saddle", "mcl_mobitems:saddle")
+minetest.register_alias("esmobs:shulker_shell", "mcl_mobitems:shulker_shell")
+minetest.register_alias("esmobs:slimeball", "mcl_mobitems:slimeball")
+minetest.register_alias("esmobs:carrot_on_a_stick", "mcl_mobitems:carrot_on_a_stick")
+minetest.register_alias("esmobs:arrow", "mcl_throwing:arrow")
+minetest.register_alias("esmobs:magic_lasso", "mcl_throwing:arrow")
+minetest.register_alias("esmobs:net", "mcl_throwing:arrow")
+minetest.register_alias("esmobs:egg", "mcl_throwing:egg")
+minetest.register_alias("esmobs:cobweb", "mcl_core:cobweb")  --funky
+minetest.register_alias("esmobs:protector", "mcl_throwing:arrow")
 minetest.register_alias("esmobs:bones", "mcl_chests:chest")
 
 --======================

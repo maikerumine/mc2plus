@@ -281,11 +281,17 @@ minetest.register_alias("doors:door_steel_a", "mcl_doors:iron_door_t_1")
 minetest.register_alias("doors:door_steel_t_1", "mcl_doors:iron_door_t_1")
 minetest.register_alias("doors:door_steel_t_2", "mcl_doors:iron_door_t_2")
 
+--======================
+--enderchest
+--======================
+minetest.register_alias("default:enderchest", "mcl_chests:ender_chest")
 
 --======================
 --farming oh boy...
 --======================
 --tomato
+minetest.register_alias("farming:bottle_ethanol", "farming:carrot")
+
 minetest.register_alias("farming:tomato", "farming:carrot")
 minetest.register_alias("farming:tomato_1", "mcl_flowers:tallgrass")
 minetest.register_alias("farming:tomato_2", "mcl_flowers:tallgrass")
@@ -546,6 +552,7 @@ minetest.register_alias("default:chest_locked", "mcl_chests:chest")
 --nssm
 --======================
 minetest.register_alias("nssm:ant_dirt", "mcl_core:coarse_dirt")
+minetest.register_alias("nssm:stoneater_pick", "xdecor:enchantment_table")
 
 --======================
 --Nyancat
