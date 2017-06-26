@@ -19,7 +19,7 @@ mobs:register_mob("mobs_mc:iron_golem", {
     collisionbox = {-0.35, -0.01, -0.35, 0.35, 2, 0.35},
     rotate = -180,
 	visual = "mesh",
-	mesh = "iron_golem.b3d",
+	mesh = "mobs_mc_iron_golem.b3d",
 	textures = {
 		{"iron_golem.png"},
 	},
@@ -65,7 +65,7 @@ mobs:register_mob("mobs_mc:iron_golem", {
 	},
 	jump = true,
 	step = 1,
-	blood_texture = "default_steelblock.png",
+	blood_amount = 0,
 })
 
 

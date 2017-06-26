@@ -8,7 +8,7 @@ mobs:register_mob("mobs_mc:pig", {
 	collisionbox = {-0.45, -0.01, -0.45, 0.45, 0.865, 0.45},
 	rotate = -180,
 	visual = "mesh",
-	mesh = "pig.b3d",
+	mesh = "mobs_mc_pig.b3d",
 	textures = {
 		{"mobs_mc_pig.png"},
 	},
@@ -81,7 +81,6 @@ mobs:register_mob("mobs_mc:pig", {
 		-- drop saddle when horse is killed while riding
 		-- also detach from horse properly
 		if self.driver then
-			minetest.add_item(pos, mobs_mc.items.saddle)
 			mobs.detach(self.driver, {x = 1, y = 0, z = 1})
 		end
 

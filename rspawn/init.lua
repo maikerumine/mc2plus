@@ -115,9 +115,9 @@ local function genpos(name, args)
 
 	if spawnanywhere then
 		pos = {
-			x = math.random(-300,300),
+			x = math.random(-500,500),
 			y = math.random(0, 100),
-			z = math.random(-300,300),
+			z = math.random(-500,500),
 		}
 	end
 	if args == "here" then
@@ -240,9 +240,9 @@ minetest.register_on_respawnplayer(function(player)
 	--player:setpos(playerspawns[name])
 	--player:setpos( {x=0, y=35, z=0} ) --works
 	player:setpos({
-				x = math.random(-300,300),
+				x = math.random(-500,500),
 				y = math.random(10, 50),
-				z = math.random(-300,300),
+				z = math.random(-500,500),
 				})
 	return true
 end)

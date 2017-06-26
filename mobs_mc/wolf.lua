@@ -23,7 +23,7 @@ local wolf = {
 	collisionbox = {-0.3, -0.01, -0.3, 0.3, 0.84, 0.3},
 	rotate = -180,
 	visual = "mesh",
-	mesh = "wolf.b3d",
+	mesh = "mobs_mc_wolf.b3d",
 	textures = {
 		{"mobs_mc_wolf.png"},
 	},
@@ -122,6 +122,8 @@ dog.owner = ""
 -- TODO: Start sitting by default
 dog.order = "roam"
 dog.owner_loyal = true
+-- Automatically teleport dog to owner
+dog.do_custom = mobs_mc.make_owner_teleport_function(12)
 dog.on_rightclick = function(self, clicker)
 	local item = clicker:get_wielded_item()
 	if is_flesh(item:get_name()) then

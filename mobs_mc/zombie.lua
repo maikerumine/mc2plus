@@ -20,7 +20,7 @@ local zombie = {
 	--collisionbox = {-0.5, -0.01, -0.5, 0.5, 1.9, 0.5},
     --rotate = -180,
 	visual = "mesh",
-	--mesh = "zombie.b3d",  new
+	-- TODO: Switch to AMC zombie texture
 	mesh = "mobs_zombie.x",
 	textures = {
 		--{"zombie.png"},
@@ -32,7 +32,6 @@ local zombie = {
 		random = "zombie1",
 		death = "zombiedeath",
 		damage = "zombiehurt1",
-		attack = "default_punch3",
 	},
 	walk_velocity = .8,
 	run_velocity = 1.6,

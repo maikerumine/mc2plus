@@ -95,8 +95,8 @@ mg_villages.check_if_ground = function( ci )
 
 	-- pre-generate a list of no-ground-nodes for caching
 	if( ci==nil or replacements_group.node_is_ground[ minetest.get_content_id('air')]==nil) then
-		local no_ground_nodes = {'air','ignore','mcl_core:sandstone','mcl_core:cactus','mcl_core:wood','mcl_core:junglewood',
-			'mcl_core:sprucewood','mcl_core:sprucetree','mcl_core:acaciawood','mcl_core:acaciatree', 'mcl_core:birchwood', 'mcl_core:birchtree',
+		local no_ground_nodes = {'air','ignore','default:sandstonebrick','default:cactus','default:wood','default:junglewood',
+			'default:pine_wood','default:pine_tree','default:acacia_wood','default:acacia_tree', 'default:aspen_wood', 'default:aspen_tree',
 			'ethereal:mushroom_pore','ethereal:mushroom_trunk','ethereal:bamboo', 'ethereal:mushroom',
                         'ethereal:bush', 'default:grass', 'default:grass_1','default:grass_2','default:grass_3','default:grass_4','default:grass_5'};
 		-- TODO: add all those other tree and leaf nodes that might be added by mapgen
@@ -105,8 +105,8 @@ mg_villages.check_if_ground = function( ci )
 				replacements_group.node_is_ground[ minetest.get_content_id( name )] = false;
 			end
 		end
-		local ground_nodes = {'ethereal:dry_dirt', 'mcl_core:coarse_dirt','mcl_core:stone','mcl_core:sandstone','mcl_core:desertstone',
-                        'ethereal:grey_dirt', 'mcl_core:dirt_with_grass_with_snow', 'mcl_core:dirt_with_grass', 'ethereal:grove_dirt', 'ethereal:green_dirt',
+		local ground_nodes = {'ethereal:dry_dirt', 'default:dirt_with_dry_grass','default:stone','default:sandstone','default:desertstone',
+                        'ethereal:grey_dirt', 'default:dirt_with_snow', 'default:dirt_with_grass', 'ethereal:grove_dirt', 'ethereal:green_dirt',
 			'ethereal:grove_dirt','ethereal:jungle_dirt'};
 		for _,name in ipairs( ground_nodes ) do
 			if( minetest.registered_nodes[ name ]) then
@@ -132,7 +132,7 @@ mg_villages.check_if_ground = function( ci )
 		replacements_group.node_is_ground[ ci ] = false;
 	elseif( def.groups and def.groups.tree ) then
 		replacements_group.node_is_ground[ ci ] = false;
-	elseif(	def.drop   and def.drop == 'mcl_core:dirt') then
+	elseif(	def.drop   and def.drop == 'default:dirt') then
 		replacements_group.node_is_ground[ ci ] = true;
 	elseif( def.walkable == true and def.is_ground_content == true and not(def.node_box)) then
 		replacements_group.node_is_ground[ ci ] = true;
@@ -728,23 +728,23 @@ end
 
 mg_villages.grow_a_tree = function( pos, plant_id, minp, maxp, data, a, cid, pr, snow )
 	-- a normal tree; sometimes comes with apples
-	if(     plant_id == cid.c_sapling and minetest.registered_nodes[ 'mcl_core:tree']) then
+	if(     plant_id == cid.c_sapling and minetest.registered_nodes[ 'default:tree']) then
 		mg_villages.grow_tree(       data, a, pos, math.random(1, 4) == 1, math.random(1,100000), snow)
 		return true;
 	-- a normal jungletree
-	elseif( plant_id == cid.c_jsapling and minetest.registered_nodes[ 'mcl_core:jungletree']) then
+	elseif( plant_id == cid.c_jsapling and minetest.registered_nodes[ 'default:jungletree']) then
 		mg_villages.grow_jungletree( data, a, pos, math.random(1,100000), snow)
 		return true;
 	-- a pine tree
-	elseif( plant_id == cid.c_psapling and minetest.registered_nodes[ 'mcl_core:sprucetree']) then
+	elseif( plant_id == cid.c_psapling and minetest.registered_nodes[ 'default:pine_tree']) then
 		mg_villages.grow_pinetree(   data, a, pos, snow);
 		return true;
 	-- an acacia tree; it does not have its own grow function
-	elseif( plant_id == cid.c_asapling and minetest.registered_nodes[ 'mcl_core:acaciatree']) then
+	elseif( plant_id == cid.c_asapling and minetest.registered_nodes[ 'default:acacia_tree']) then
 		data[ a:index( pos.x, pos.y, pos.z )] = cid.c_asapling;
 		return true;
         -- aspen tree from newer minetest game
-	elseif( plant_id == cid.c_aspsapling and minetest.registered_nodes[ 'mcl_core:birchtree']) then
+	elseif( plant_id == cid.c_aspsapling and minetest.registered_nodes[ 'default:aspen_tree']) then
 		data[ a:index( pos.x, pos.y, pos.z )] = cid.c_aspsapling;
 		return true;
 	-- a savannatree from the mg mod
@@ -766,17 +766,17 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 	if( minp.y > 0 ) then
 		return;
 	end
-	--trees which require grow functions to be called
+	-- trees which require grow functions to be called
 	cid.c_savannasapling  = minetest.get_content_id( 'mg:savannasapling');
 	cid.c_pinesapling     = minetest.get_content_id( 'mg:pinesapling');
-	--add farmland
-	cid.c_wheat           = minetest.get_content_id( 'mcl_farming:beetroot_0' );
-	cid.c_cotton          = minetest.get_content_id( 'mcl_farming:potato' );
-	cid.c_shrub           = minetest.get_content_id( 'mcl_core:deadbush');
-	--these extra nodes are used in order to avoid abms on the huge fields around the villages
+	-- add farmland
+	cid.c_wheat           = minetest.get_content_id( 'farming:wheat_8' );
+	cid.c_cotton          = minetest.get_content_id( 'farming:cotton_8' );
+	cid.c_shrub           = minetest.get_content_id( 'default:dry_shrub');
+	-- these extra nodes are used in order to avoid abms on the huge fields around the villages
 	cid.c_soil_wet        = minetest.get_content_id( 'mg_villages:soil' ); --'farming:soil_wet' );
 	cid.c_soil_sand       = minetest.get_content_id( 'mg_villages:desert_sand_soil'); --'farming:desert_sand_soil_wet' );
-	--desert sand soil is only available in minetest_next
+	-- desert sand soil is only available in minetest_next
 	if( not( cid.c_soil_sand )) then
 		cid.c_soil_sand = cid.c_soil_wet;
 	end
@@ -786,11 +786,11 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 	end
 
 	if( mg_villages.realtest_trees ) then
-		cid.c_soil_wet        = minetest.get_content_id( 'mcl_farming:soil' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
-		cid.c_soil_sand       = minetest.get_content_id( 'mcl_farming:soil' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
---		cid.c_wheat           = minetest.get_content_id( 'farming:spelt_4' );
---		cid.c_cotton          = minetest.get_content_id( 'farming:flax_4' );
-		cid.c_shrub           = minetest.get_content_id( 'mcl_core:deadbush');
+		cid.c_soil_wet        = minetest.get_content_id( 'farming:soil' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
+		cid.c_soil_sand       = minetest.get_content_id( 'farming:soil' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
+		cid.c_wheat           = minetest.get_content_id( 'farming:spelt_4' );
+		cid.c_cotton          = minetest.get_content_id( 'farming:flax_4' );
+--		cid.c_shrub           = minetest.get_content_id( 'default:dry_shrub');
 	end
 
 	local pr = PseudoRandom(mg_villages.get_bseed(minp));
@@ -817,15 +817,15 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 						has_snow_cover = true;
 					end
 					-- select the first plant that fits; if the node is not air, keep what is currently inside
-					--if( (plant_id==cid.c_air or plant_id==cid.c_snow) and (( v.p == 1 or pr:next( 1, v.p )==1 ))) then
+					if( (plant_id==cid.c_air or plant_id==cid.c_snow) and (( v.p == 1 or pr:next( 1, v.p )==1 ))) then
 						-- TODO: check if the plant grows on that soil
-					--	plant_id = v.id;
-					--	plant_selected = true;
-					--end
+						plant_id = v.id;
+						plant_selected = true;
+					end
 					-- wheat and cotton require soil
-					--if( plant_id == cid.c_wheat or plant_id == cid.c_cotton ) then
-					--	on_soil = true;
-					--end
+					if( plant_id == cid.c_wheat or plant_id == cid.c_cotton ) then
+						on_soil = true;
+					end
 				end
 
 				local pos = {x=x, y=h+1, z=z};
@@ -915,28 +915,28 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 	local cid = {}
 	cid.c_air    = minetest.get_content_id( 'air' );
 	cid.c_ignore = minetest.get_content_id( 'ignore' );
-	cid.c_stone  = minetest.get_content_id( 'mcl_core:stone');
-	cid.c_dirt   = minetest.get_content_id( 'mcl_core:dirt');
-	cid.c_snow   = minetest.get_content_id( 'mcl_core:snow');
-	cid.c_snowblock   = minetest.get_content_id( 'mcl_core:snowblock');
-	cid.c_dirt_with_snow  = minetest.get_content_id( 'mcl_core:dirt_with_grass_snow' );
-	cid.c_dirt_with_grass = minetest.get_content_id( 'mcl_core:dirt_with_grass' );
-	cid.c_desert_sand = minetest.get_content_id( 'mcl_core:redsand' ); -- PM v
-	cid.c_desert_stone  = minetest.get_content_id( 'mcl_core:redsandstone');
-	cid.c_sand = minetest.get_content_id( 'mcl_core:sand' ); 
-	cid.c_tree = minetest.get_content_id( 'mcl_core:tree');
-	cid.c_sapling = minetest.get_content_id( 'mcl_core:sapling');
-	cid.c_jtree = minetest.get_content_id( 'mcl_core:jungletree');
-	cid.c_jsapling = minetest.get_content_id( 'mcl_core:junglesapling');
-	cid.c_ptree = minetest.get_content_id( 'mcl_core:sprucetree');
-	cid.c_psapling = minetest.get_content_id( 'mcl_core:sprucesapling');
-	cid.c_atree    = minetest.get_content_id( 'mcl_core:acaciatree');
-	cid.c_asapling = minetest.get_content_id( 'mcl_core:acaciasapling');
-	cid.c_asptree    = minetest.get_content_id( 'mcl_core:birchtree');
-	cid.c_aspsapling = minetest.get_content_id( 'mcl_core:birchsapling');
-	cid.c_water = minetest.get_content_id( 'mcl_core:water_source'); -- PM ^
-	cid.c_stone_with_coal = minetest.get_content_id( 'mcl_core:stone_with_coal');
-	cid.c_sandstone       = minetest.get_content_id( 'mcl_core:sandstone');
+	cid.c_stone  = minetest.get_content_id( 'default:stone');
+	cid.c_dirt   = minetest.get_content_id( 'default:dirt');
+	cid.c_snow   = minetest.get_content_id( 'default:snow');
+	cid.c_snowblock   = minetest.get_content_id( 'default:snowblock');
+	cid.c_dirt_with_snow  = minetest.get_content_id( 'default:dirt_with_snow' );
+	cid.c_dirt_with_grass = minetest.get_content_id( 'default:dirt_with_grass' );
+	cid.c_desert_sand = minetest.get_content_id( 'default:desert_sand' ); -- PM v
+	cid.c_desert_stone  = minetest.get_content_id( 'default:desert_stone');
+	cid.c_sand = minetest.get_content_id( 'default:sand' ); 
+	cid.c_tree = minetest.get_content_id( 'default:tree');
+	cid.c_sapling = minetest.get_content_id( 'default:sapling');
+	cid.c_jtree = minetest.get_content_id( 'default:jungletree');
+	cid.c_jsapling = minetest.get_content_id( 'default:junglesapling');
+	cid.c_ptree = minetest.get_content_id( 'default:pine_tree');
+	cid.c_psapling = minetest.get_content_id( 'default:pine_sapling');
+	cid.c_atree    = minetest.get_content_id( 'default:acacia_tree');
+	cid.c_asapling = minetest.get_content_id( 'default:acacia_sapling');
+	cid.c_asptree    = minetest.get_content_id( 'default:aspen_tree');
+	cid.c_aspsapling = minetest.get_content_id( 'default:aspen_sapling');
+	cid.c_water = minetest.get_content_id( 'default:water_source'); -- PM ^
+	cid.c_stone_with_coal = minetest.get_content_id( 'default:stone_with_coal');
+	cid.c_sandstone       = minetest.get_content_id( 'default:sandstone');
 
 	cid.c_msnow_1  = minetest.get_content_id( 'moresnow:snow_top' );
 	cid.c_msnow_2  = minetest.get_content_id( 'moresnow:snow_fence_top');
@@ -978,7 +978,7 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 				if( mg_villages.artificial_snow_probability and math.random( 1, mg_villages.artificial_snow_probability )==1
 				    -- forbid artificial snow for some village types
 			   	    and not( mg_villages.village_type_data[ village.village_type ].no_snow )
-				    and minetest.registered_nodes['mcl_core:snow']) then
+				    and minetest.registered_nodes['default:snow']) then
 					village.artificial_snow = 1;
 				else
 					village.artificial_snow = 0;
@@ -1076,7 +1076,7 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 
 	local c_feldweg =  minetest.get_content_id('cottages:feldweg');
 	if( not( c_feldweg )) then
-		c_feldweg = minetest.get_content_id('mcl_core:cobble');
+		c_feldweg = minetest.get_content_id('default:cobble');
 	end
 
 	for _, village in ipairs(villages) do
@@ -1094,12 +1094,7 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 		end
 	end
 	t1 = time_elapsed( t1, 'place_buildings and place_dirt_roads' );
---stop growing
---=====================
---=====================
---=====================
---=====================
---=====================
+
 	mg_villages.village_area_fill_with_plants( village_area, villages, tmin, tmax, data, param2_data, a, cid );
 	t1 = time_elapsed( t1, 'fill_with_plants' );
 

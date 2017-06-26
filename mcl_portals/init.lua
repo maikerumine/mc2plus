@@ -18,7 +18,7 @@ minetest.register_alias("default:end_portal", "mcl_portals:end_portal")
 dofile(minetest.get_modpath("mcl_portals").."/nodes.lua")
 
 dofile(minetest.get_modpath("mcl_portals").."/craftitems.lua")
-
+--v7 mapgen W.I.P.  MOVED TO MCL_BIOMES
 --dofile(minetest.get_modpath("mcl_portals").."/mapgen.lua")
 
 dofile(minetest.get_modpath("mcl_portals").."/portal.lua")

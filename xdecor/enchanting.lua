@@ -1,11 +1,38 @@
 local enchanting = {}
-screwdriver = screwdriver or {}
+--screwdriver = screwdriver or {}
 
--- Cost in blue crystal(s) for enchanting.
-local blue_cost = 1
+-- Cost in Mese crystal(s) for enchanting.
+local mese_cost = 1
 
 
+-- GUI related stuff
+xdecor.gui_bg = "bgcolor[#080808BB;true]"
+xdecor.gui_bg_img = "background[5,5;1,1;gui_formbg.png;true]"
+xdecor.gui_slots = "listcolors[#00000069;#5A5A5A;#141318;#30434C;#FFF]"
 
+function xdecor.get_hotbar_bg(x,y)
+	local out = ""
+	for i=0,7,1 do
+		out = out .."image["..x+i..","..y..";1,1;gui_hb_bg.png]"
+	end
+	return out
+end
+
+xdecor.gui_survival_form = "size[8,8.5]"..
+			xdecor.gui_bg..
+			xdecor.gui_bg_img..
+			xdecor.gui_slots..
+			"list[current_player;main;0,4.25;8,1;]"..
+			"list[current_player;main;0,5.5;8,3;8]"..
+			"list[current_player;craft;1.75,0.5;3,3;]"..
+			"list[current_player;craftpreview;5.75,1.5;1,1;]"..
+			"image[4.75,1.5;1,1;gui_furnace_arrow_bg.png^[transformR270]"..
+			"listring[current_player;main]"..
+			"listring[current_player;craft]"..
+			xdecor.get_hotbar_bg(0,4.25)
+
+-- Load files
+local xdecor_path = minetest.get_modpath("xdecor")
 
 
 
@@ -23,7 +50,7 @@ function enchanting.formspec(pos, num)
 			bgcolor[#080808BB;true]
 			background[0,0;9,9;ench_ui.png]
 			list[context;tool;0.9,2.9;1,1;]
-			list[context;blue;2,2.9;1,1;]
+			list[context;mese;2,2.9;1,1;]
 			list[current_player;main;0.5,4.5;8,4;]
 			image[2,2.9;1,1;mese_layout.png]
 			tooltip[sharp;Your weapon inflicts more damages]
@@ -67,31 +94,26 @@ function enchanting.fields(pos, _, fields, sender)
 	if fields.quit then return end
 	local inv = minetest.get_meta(pos):get_inventory()
 	local tool = inv:get_stack("tool", 1)
-	local blue = inv:get_stack("blue", 1)
+	local mese = inv:get_stack("mese", 1)
 	local orig_wear = tool:get_wear()
 	local mod, name = tool:get_name():match("(.*):(.*)")
 	local enchanted_tool = (mod or "")..":enchanted_"..(name or "").."_"..next(fields)
 
-	if blue:get_count() >= blue_cost and minetest.registered_tools[enchanted_tool] then
+	if mese:get_count() >= mese_cost and minetest.registered_tools[enchanted_tool] then
 		minetest.sound_play("xdecor_enchanting", {to_player=sender:get_player_name(), gain=0.8})
 		tool:replace(enchanted_tool)
 		tool:add_wear(orig_wear)
-		blue:take_item(blue_cost)
-		inv:set_stack("blue", 1, blue)
+		mese:take_item(mese_cost)
+		inv:set_stack("mese", 1, mese)
 		inv:set_stack("tool", 1, tool)
 	end
 end
 
 function enchanting.dig(pos)--broken?
 	local inv = minetest.get_meta(pos):get_inventory()
-	return inv:is_empty("tool") and inv:is_empty("blue")
-end
---[[
-function enchanting.dig(pos)
-	local inv = minetest.get_meta(pos):get_inventory()
 	return inv:is_empty("tool") and inv:is_empty("mese")
 end
-]]
+
 local function allowed(tool)
 	for item in pairs(minetest.registered_tools) do
 		if item:find("enchanted_"..tool) then return true end
@@ -101,8 +123,8 @@ end
 
 function enchanting.put(_, listname, _, stack)
 	local item = stack:get_name():match("[^:]+$")
-	--if listname == "blue" and item == "mese_crystal" then
-	if listname == "blue" and item == "blue" then
+	--if listname == "mese" and item == "mese_crystal" then
+	if listname == "mese" and item == "blue" then
 		return stack:get_count()
 	elseif listname == "tool" and allowed(item) then
 		return 1 
@@ -116,12 +138,12 @@ end
 
 function enchanting.construct(pos)
 	local meta = minetest.get_meta(pos)
-	meta:set_string("infotext", "Enchantment Table --[THAT CANNOT BE DUG!!! SORRRYY!!!]")
+	meta:set_string("infotext", "Enchantment Table")
 	enchanting.formspec(pos, nil)
 
 	local inv = meta:get_inventory()
 	inv:set_size("tool", 1)
-	inv:set_size("blue", 1)
+	inv:set_size("mese", 1)
 
 	minetest.add_entity({x=pos.x, y=pos.y+0.85, z=pos.z}, "xdecor:book_open")
 	local timer = minetest.get_node_timer(pos)
@@ -170,22 +192,18 @@ end
 
 xdecor.register("enchantment_table", {
 	description = "Enchantment Table",
-	_doc_items_longdesc = "Enchant your tools such as Pick, Sword, Axe, and Shovel.  Armour is also enchantable",
-	_doc_items_hidden = false,
 	tiles = {"xdecor_enchantment_top.png",  "xdecor_enchantment_bottom.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png"},
-	groups = {handy=1,axey=1,wood=1,building_block=1, material_wood=1},
+	groups = {pickaxey=3, handy=2, building_block=1, material_stone=1},
+	--groups = {cracky=1, level=1},
 	stack_max = 1,
+	--sounds = xdecor.node_sound_stone_xdecors(),
 	sounds = mcl_sounds.node_sound_stone_defaults(),
-	_mcl_blast_resistance = 15,
-	_mcl_hardness = 3,
-	on_rotate = screwdriver.rotate_simple,
-
-	--can_dig = enchanting.dig,  --was default?
-	can_dig = true,
-	--drop = 'xdecor:enchantment_table',
-	
+	--_mcl_blast_resistance = 15,
+	--_mcl_hardness = 3,
+	--on_rotate = screwdriver.rotate_simple,
+	xdecor_can_dig = enchanting.dig,  --was default?
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,
 	on_destruct = enchanting.destruct,
@@ -280,7 +298,17 @@ function enchanting:register_tools(mod, def)
 	end
 	end
 end
-
+--[[
+enchanting:register_tools("xdecor", {
+	materials = "steel, gold, mese, diamond",
+	tools = {
+		axe    = {enchants = "durable, fast"},
+		pick   = {enchants = "durable, fast"}, 
+		shovel = {enchants = "durable, fast"},
+		sword  = {enchants = "sharp"}
+	}
+})
+]]
 enchanting:register_tools("mcl_tools", {
 	materials = "iron, gold, stone, diamond",
 	tools = {
@@ -305,7 +333,7 @@ enchanting:register_tools("3d_armor", {
 minetest.register_craft({
 	output = "xdecor:enchantment_table",
 	recipe = {
-		{"bluecons_torch:redstoneblock","mcl_books:book","bluecons_torch:redstoneblock"},
+		{"mesecons_torch:redstoneblock","mcl_books:book","mesecons_torch:redstoneblock"},
 		{"mcl_core:emeraldblock","mcl_heads:steve","mcl_core:emeraldblock"},
 		{"mcl_core:obsidian","mcl_core:diamondblock","mcl_core:obsidian"},
 	}

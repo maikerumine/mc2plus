@@ -10,9 +10,9 @@ minetest.register_alias("mapgen_water_source", "mcl_core:water_source")
 minetest.register_alias("mapgen_river_water_source", "mcl_core:river_water_source")
 minetest.register_alias("mapgen_lava_source", "mcl_core:lava_source")
 minetest.register_alias("mapgen_gravel", "mcl_core:gravel")
-minetest.register_alias("mapgen_desert_stone", "mcl_core:desert_stone")
-minetest.register_alias("mapgen_desert_sand", "mcl_core:desert_sand")
-minetest.register_alias("mapgen_dirt_with_snow", "mcl_core:dirt_with_snow")
+minetest.register_alias("mapgen_redsandstone", "mcl_core:redsandstone")
+minetest.register_alias("mapgen_redsand", "mcl_core:redsand")
+minetest.register_alias("mapgen_dirt_with_grass_snow", "mcl_core:dirt_with_grass_snow")
 minetest.register_alias("mapgen_snowblock", "mcl_core:snowblock")
 minetest.register_alias("mapgen_snow", "mcl_core:snow")
 minetest.register_alias("mapgen_ice", "mcl_core:ice")
@@ -49,12 +49,12 @@ minetest.register_alias("mcl_core:bedrock", "mcl_core:bedrock")
 -- All mapgens except singlenode
 -- Blob ore first to avoid other ores inside blobs
 
---function mcl_core.register_ores()
+function mcl_portals.register_ores()
 --liquids
 minetest.register_ore({
 		ore_type       = "blob",
 		ore            = "mcl_core:lava_source",
-		wherein        = "mcl_core:desert_stone",
+		wherein        = "mcl_core:redsandstone",
 		clust_scarcity = 15*15*10,
 		clust_num_ores = 2,
 		clust_size     = 2,
@@ -83,13 +83,15 @@ minetest.register_ore({
 		y_min          = 2,
 		y_max          = 1140,
 	})
-
+	
+	
+--[[
 --Maikerumine added for nicer looking deserts
 
 minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "mcl_core:desert_stone_with_coal",
-		wherein        = "mcl_core:desert_stone",
+		ore            = "mcl_core:redsandstone_with_coal",
+		wherein        = "mcl_core:redsandstone",
 		clust_scarcity = 6 * 6 * 6,
 		clust_num_ores = 9,
 		clust_size     = 6,
@@ -100,15 +102,15 @@ minetest.register_ore({
 	-- Iron
 minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "mcl_core:desert_stone_with_iron",
-		wherein        = "mcl_core:desert_stone",
+		ore            = "mcl_core:redsandstone_with_iron",
+		wherein        = "mcl_core:redsandstone",
 		clust_scarcity = 6 * 6 * 7,
 		clust_num_ores = 3,
 		clust_size     = 2,
 		y_min          = -80,
 		y_max          = 200,
 	})
-
+]]
 
 minetest.register_ore({
 	ore_type       = "blob",
@@ -188,7 +190,7 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "blob",
-	ore            = "mcl_core:fossil",
+	ore            = "mcl_core:bone_block",
 	wherein        = "mcl_core:sandstone",
 		clust_scarcity  = 36 * 36 * 36,
 		clust_size      = 5,
@@ -210,7 +212,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:stone",
-	wherein        = {"mcl_core:desert_stone","mcl_core:desert_sand","hardenedclay:hardened_clay_brown"},
+	wherein        = {"mcl_core:redsandstone","mcl_core:redsand","mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 3,
 	clust_size     = 4,
@@ -223,7 +225,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:clay",
-	wherein        = {"mcl_core:desert_stone","mcl_core:desert_sand","mcl_core:stone","hardenedclay:hardened_clay_brown"},
+	wherein        = {"mcl_core:redsandstone","mcl_core:redsand","mcl_core:stone","mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 8,
@@ -236,7 +238,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:sandstone",
-	wherein        ={"mcl_core:desert_stone","mcl_core:desert_sand","mcl_core:stone","hardenedclay:hardened_clay_brown"},
+	wherein        ={"mcl_core:redsandstone","mcl_core:redsand","mcl_core:stone","mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 10,
@@ -249,7 +251,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:dirt",
-	wherein        = {"mcl_core:desert_stone","mcl_core:desert_sand","hardenedclay:hardened_clay_brown"},
+	wherein        = {"mcl_core:redsandstone","mcl_core:redsand","mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 4,
@@ -262,7 +264,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:gravel",
-	wherein        = {"mcl_core:desert_stone"},
+	wherein        = {"mcl_core:redsandstone"},
 	clust_scarcity = 1,
 	clust_num_ores = 8,
 	clust_size     = 4,
@@ -275,7 +277,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:coalblock",
-	wherein        = {"mcl_core:desert_stone","mcl_core:stone","hardenedclay:hardened_clay_brown"},
+	wherein        = {"mcl_core:redsandstone","mcl_core:stone","mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 4,
@@ -287,8 +289,8 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "mcl_core:desert_sand",
-	wherein        = {"mcl_core:desert_stone", "hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_core:redsand",
+	wherein        = {"mcl_core:redsandstone", "mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 10,
@@ -300,7 +302,7 @@ minetest.register_ore({
 	minetest.register_ore({
 		ore_type       = "blob",
 		ore            = "mcl_core:lava_source",
-		wherein        = "hardenedclay:hardened_clay_brown",
+		wherein        = "mcl_colorblocks:hardened_clay_brown",
 		clust_scarcity = 15*15*10,
 		clust_num_ores = 2,
 		clust_size     = 2,
@@ -314,8 +316,8 @@ minetest.register_ore({
 --MESA STRATA
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "mcl_core:desert_sand",
-	wherein        = {"mcl_core:desert_stone", "hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_core:redsand",
+	wherein        = {"mcl_core:redsandstone", "mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 8,
 	clust_size     = 4,
@@ -328,8 +330,8 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_gray",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_white",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 27,
 	clust_size     = 1,
@@ -341,8 +343,8 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_black",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_black",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores =27,
 	clust_size     = 1,
@@ -354,8 +356,8 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_orange",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_orange",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 27,
 	clust_size     = 6,
@@ -367,8 +369,8 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_red",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_red",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 8,
 	clust_size     = 2,
@@ -380,8 +382,8 @@ minetest.register_ore({
 
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_yellow",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_yellow",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 1,
@@ -392,8 +394,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_blue",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_blue",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 1,
@@ -404,8 +406,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_yellow",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_yellow",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 1,
@@ -416,8 +418,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_yellow",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_yellow",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 1,
@@ -428,8 +430,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_light_gray",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_light_blue",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 1,
@@ -440,8 +442,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_yellow",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_yellow",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 4,
@@ -452,8 +454,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_white",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_white",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 8,
@@ -464,8 +466,8 @@ minetest.register_ore({
 })
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "hardenedclay:hardened_clay_purple",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	ore            = "mcl_colorblocks:hardened_clay_purple",
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 8,
@@ -477,7 +479,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:obsidian",
-	wherein        = {"hardenedclay:hardened_clay_brown"},
+	wherein        = {"mcl_colorblocks:hardened_clay_brown"},
 	--clust_scarcity = 1,
 	--clust_num_ores = 100,
 	clust_size     = 8,
@@ -491,7 +493,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "mcl_core:coarse_dirt",
-	wherein        = {"mcl_core:mycelium_snow","mcl_core:mycelium","mcl_core:stone","hardenedclay:hardened_clay_brown"},
+	wherein        = {"mcl_core:mycelium_snow","mcl_core:mycelium","mcl_core:stone","mcl_colorblocks:hardened_clay_brown"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 8,
@@ -606,40 +608,9 @@ minetest.register_ore({
 		y_min     = -55,
 		y_max     = -48,
 	})
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:sand_with_diamond",
-		wherein        = "mcl_core:sand",
-		clust_scarcity = 10000,
-		clust_num_ores = 3,
-		clust_size     = 2,
-		y_min     = 85,
-		y_max     = 448,
-	})
 
---
--- Mese
---
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:stone_with_mese",
-		wherein        = "mcl_core:stone",
-		clust_scarcity = 600,
-		clust_num_ores = 6,
-		clust_size     = 3,
-		y_min     = -59,
-		y_max     = -52,
-	})
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:stone_with_mese",
-		wherein        = "mcl_core:stone",
-		clust_scarcity = 1200,
-		clust_num_ores = 4,
-		clust_size     = 3,
-		y_min     = -55,
-		y_max     = -53,
-	})
+
+
 
 --ES Node Registration and location
 	minetest.register_ore({
@@ -663,17 +634,6 @@ minetest.register_ore({
 		    y_min     = -70,
 		    y_max     = -44,
 	})
-	
-	minetest.register_ore({
-		    ore_type       = "scatter",
-		    ore            = "mcl_core:stone_with_emerald",
-		    wherein        = "mcl_core:savannastone",
-		    clust_scarcity = 14*14*14,
-		    clust_num_ores = 2,
-		    clust_size     = 4,
-		    y_min     = 12,
-		    y_max     = 70,
-	})	
 	
 
 
@@ -704,7 +664,7 @@ minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "mcl_core:sand",
 		wherein         = {"mcl_core:stone", "mcl_core:sandstone",
-			"mcl_core:desert_stone"},
+			"mcl_core:redsandstone"},
 		clust_scarcity  = 16 * 16 * 16,
 		clust_size      = 5,
 		y_min           = -70,
@@ -832,40 +792,7 @@ minetest.register_ore({
 		y_max          = -64,
 	})
 
-	--Mese
 
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:stone_with_mese",
-		wherein        = "mcl_core:stone",
-		clust_scarcity = 18 * 18 * 18,
-		clust_num_ores = 3,
-		clust_size     = 2,
-		y_min          = -70,
-		y_max          = -64,
-	})
-
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:stone_with_mese",
-		wherein        = "mcl_core:stone",
-		clust_scarcity = 14 * 14 * 14,
-		clust_num_ores = 5,
-		clust_size     = 3,
-		y_min          = -70,
-		y_max          = -56,
-	})
-
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:mese",
-		wherein        = "mcl_core:stone",
-		clust_scarcity = 36 * 36 * 36,
-		clust_num_ores = 3,
-		clust_size     = 2,
-		y_min          = -70,
-		y_max          = -60,
-	})
 
 	-- Gold
 
@@ -942,22 +869,13 @@ minetest.register_ore({
 	
 --NETHER GENERATION	
 --nether defs
-	minetest.register_ore({
-		ore_type       = "scatter",
-		ore            = "mcl_core:rack_with_diamond",
-		wherein        = {"mcl_core:lava_source","mcl_core:rack","mcl_core:stone"},
-		clust_scarcity = 14 * 14 * 14,
-		clust_num_ores = 12,
-		clust_size     = 5,
-		y_min           = -3390,
-		y_max           = -3130,
-	})
+
 	
 	minetest.register_ore({
 	    ore_type       = "scatter",
-	    ore            = "mcl_core:quartz_ore",
-	    --wherein        = "mcl_core:rack",
-	    wherein        = {"mcl_core:rack","mcl_core:stone"},
+	    ore            = "mcl_nether:quartz_ore",
+	    --wherein        = "mcl_nether:rack",
+	    wherein        = {"mcl_nether:netherrack","mcl_core:stone"},
 	    clust_scarcity = 10*10*10,
 	    clust_num_ores = 6,
 	    clust_size     = 5,
@@ -970,9 +888,9 @@ minetest.register_ore({
 
 	minetest.register_ore({
 		ore_type        = "blob",
-		ore             = "mcl_core:slowsand",
-		wherein         = {"mcl_core:rack", "mcl_core:lava_source",
-			"mcl_core:desert_stone"},
+		ore             = "mcl_nether:soul_sand",
+		wherein         = {"mcl_nether:netherrack", "mcl_core:lava_source",
+			"mcl_core:redsandstone"},
 		clust_scarcity  = 13 * 13 * 13,
 		clust_size      = 5,
 		y_min           = -3390,
@@ -988,12 +906,35 @@ minetest.register_ore({
 		},
 	})
 
+	--magma
+	
+		minetest.register_ore({
+		ore_type        = "blob",
+		ore             = "mcl_nether:magma",
+		wherein         = {"mcl_nether:netherrack", "mcl_core:lava_source",
+			"mcl_core:redsandstone"},
+		clust_scarcity  = 13 * 13 * 13,
+		clust_size      = 5,
+		y_min           = -3390,
+		y_max           = -3000,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.1,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 2316,
+			octaves = 1,
+			persist = 0.0
+		},
+	})
+	
+	
 	-- Glowstone
 
 	minetest.register_ore({
 		ore_type        = "blob",
-		ore             = "mcl_core:glowstone",
-		wherein         = {"mcl_core:rack"},
+		ore             = "mcl_nether:glowstone",
+		wherein         = {"mcl_nether:netherrack"},
 		clust_scarcity  = 26 * 26 * 26,
 		clust_size      = 5,
 		y_min           = -3390,
@@ -1014,7 +955,7 @@ minetest.register_ore({
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "mcl_core:gravel",
-		wherein         = {"mcl_core:rack"},
+		wherein         = {"mcl_nether:netherrack"},
 		clust_scarcity  = 16 * 16 * 16,
 		clust_size      = 5,
 		y_min           = -3390,
@@ -1035,7 +976,7 @@ minetest.register_ore({
 	minetest.register_ore({
 		ore_type       = "scatter",
 		ore            = "mcl_core:lava_source",
-		wherein        = "mcl_core:rack",
+		wherein        = "mcl_nether:netherrack",
 		clust_scarcity =12 *12 * 12,
 		clust_num_ores = 2,
 		clust_size     = 2,
@@ -1048,8 +989,8 @@ minetest.register_ore({
 	
 	minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "mcl_core:underground_fire",
-		wherein        = "mcl_core:rack",
+		ore            = "mcl_fire:eternal_fire",
+		wherein        = "mcl_nether:netherrack",
 		clust_scarcity =12 *22 * 12,
 		clust_num_ores = 5,
 		clust_size     = 5,
@@ -1060,9 +1001,9 @@ minetest.register_ore({
 --brick
 	minetest.register_ore({
 		ore_type        = "blob",
-		ore             = "mcl_core:nitherbrick",
-		wherein         = {"mcl_core:rack", "mcl_core:lava_source",
-			"mcl_core:desert_stone"},
+		ore             = "mcl_nether:nether_brick",
+		wherein         = {"mcl_nether:netherrack", "mcl_core:lava_source",
+			"mcl_core:redsandstone"},
 		clust_scarcity  = 13 * 13 * 13,
 		clust_size      = 5,
 		y_min           = -3390,
@@ -1080,8 +1021,8 @@ minetest.register_ore({
 	
 minetest.register_ore({
 	ore_type       = "sheet",
-	ore            = "mcl_core:nitherbrick",
-	wherein        ={"mcl_core:rack"},
+	ore            = "mcl_nether:nether_brick",
+	wherein        ={"mcl_nether:netherrack"},
 	clust_scarcity = 1,
 	clust_num_ores = 12,
 	clust_size     = 10,
@@ -1094,7 +1035,7 @@ minetest.register_ore({
 minetest.register_ore({
 	ore_type       = "sheet",
 	ore            = "air",
-	wherein        ={"mcl_core:rack"},
+	wherein        ={"mcl_nether:netherrack"},
 	clust_scarcity = 1,
 	clust_num_ores = 32,
 	clust_size     = 10,
@@ -1167,7 +1108,7 @@ minetest.register_ore({
 	})
 	minetest.register_ore({
 		ore_type       = "scatter",
-		ore            = "mcl_core:glowstone",
+		ore            = "mcl_nether:glowstone",
 		wherein        = "mcl_core:water_source",
 		clust_scarcity = 38 * 38 * 38,
 		clust_num_ores = 2,
@@ -1218,7 +1159,7 @@ minetest.register_ore({
 
 	minetest.register_ore({
 		ore_type        = "blob",
-		ore             = "mcl_core:end_stone",
+		ore             = "mcl_end:end_stone",
 		wherein         = {"mcl_core:void", "mcl_core:end_stone","mcl_core:stone","air","ignore"},
 		clust_scarcity  = 30 * 30 * 30,  	--was26
 		clust_size      = 17,				--was5
@@ -1234,7 +1175,7 @@ minetest.register_ore({
 			persist = 0.0
 		},
 	})	
---end
+end
 --
 -- Register biomes
 --
@@ -1247,7 +1188,7 @@ minetest.register_ore({
 
 -- All mapgens except mgv6
 
---function mcl_core.register_biomes(upper_limit)
+function mcl_portals.register_biomes(upper_limit)
 
 	-- Icesheet
 
@@ -1398,7 +1339,7 @@ minetest.register_ore({
 	minetest.register_biome({
 		name = "snowy_grassland",
 		node_dust = "mcl_core:snow",
-		node_top = "mcl_core:dirt_with_snow",
+		node_top = "mcl_core:dirt_with_grass_snow",
 		depth_top = 1,
 		node_filler = "mcl_core:dirt",
 		depth_filler = 1,
@@ -1626,11 +1567,11 @@ minetest.register_ore({
 	minetest.register_biome({
 		name = "desert",
 		--node_dust = "",
-		node_top = "mcl_core:desert_sand",
+		node_top = "mcl_core:redsand",
 		depth_top = 1,
-		node_filler = "mcl_core:desert_sand",
+		node_filler = "mcl_core:redsand",
 		depth_filler = 1,
-		node_stone = "mcl_core:desert_stone",
+		node_stone = "mcl_core:redsandstone",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
@@ -1650,7 +1591,7 @@ minetest.register_ore({
 		depth_top = 1,
 		node_filler = "mcl_core:sand",
 		depth_filler = 3,
-		node_stone = "mcl_core:desert_stone",
+		node_stone = "mcl_core:redsandstone",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
@@ -1752,11 +1693,11 @@ minetest.register_ore({
 		minetest.register_biome({
 		name = "mesa",
 		--node_dust = "",
-		node_top = "hardenedclay:hardened_clay_brown",
+		node_top = "mcl_colorblocks:hardened_clay_brown",
 		depth_top = 1,
-		node_filler = "hardenedclay:hardened_clay_brown",
+		node_filler = "mcl_colorblocks:hardened_clay_brown",
 		depth_filler = 1,
-		node_stone = "hardenedclay:hardened_clay_brown",
+		node_stone = "mcl_colorblocks:hardened_clay_brown",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
@@ -1771,7 +1712,7 @@ minetest.register_ore({
 	minetest.register_biome({
 		name = "savanna",
 		--node_dust = "",
-		node_top = "mcl_core:dirt_with_dry_grass",
+		node_top = "mcl_core:coarse_dirt",
 		depth_top = 1,
 		node_filler = "mcl_core:coarse_dirt",
 		depth_filler = 1,
@@ -1833,7 +1774,7 @@ minetest.register_ore({
 	minetest.register_biome({
 		name = "rainforest",
 		--node_dust = "",
-		node_top = "mcl_core:dirt_with_rainforest_litter",
+		node_top = "mcl_core:podzol",
 		depth_top = 1,
 		node_filler = "mcl_core:dirt",
 		depth_filler = 3,
@@ -1995,9 +1936,9 @@ minetest.register_ore({
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
-		node_filler = "mcl_nether:rack",
+		node_filler = "mcl_nether:netherrack",
 		--depth_filler = ,
-		node_stone =  "mcl_nether:rack",
+		node_stone =  "mcl_nether:netherrack",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
@@ -2141,7 +2082,7 @@ minetest.register_ore({
 	
 	
 
---end
+end
 
 
 
@@ -2150,142 +2091,13 @@ minetest.register_ore({
 -- Register decorations
 --
 
--- Mgv6
 
---function mcl_core.register_mgv6_decorations()
-	minetest.clear_registered_decorations()
-
-	-- Papyrus
-
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"mcl_core:dirt_with_grass"},
-		sidelen = 16,
-		noise_params = {
-			offset = -0.3,
-			scale = 0.7,
-			spread = {x = 100, y = 100, z = 100},
-			seed = 354,
-			octaves = 3,
-			persist = 0.7
-		},
-		y_min = 1,
-		y_max = 1,
-		decoration = "mcl_core:papyrus",
-		height = 2,
-		y_max = 4,
-		spawn_by = "mcl_core:water_source",
-		num_spawn_by = 1,
-	})
-
-	-- Cacti
-
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"mcl_core:desert_sand","hardenedclay:hardened_clay_brown"},
-		sidelen = 16,
-		noise_params = {
-			offset = -0.012,
-			scale = 0.024,
-			spread = {x = 100, y = 100, z = 100},
-			seed = 230,
-			octaves = 3,
-			persist = 0.6
-		},
-		y_min = 1,
-		y_max = 30,
-		decoration = "mcl_core:cactus",
-		height = 3,
-	        y_max = 4,
-	})
-
-	-- Long grasses
-
-	for length = 1, 5 do
-		minetest.register_decoration({
-			deco_type = "simple",
-			place_on = {"mcl_core:dirt_with_grass", "mcl_core:podzol", "mcl_core:dirt_with_rainforest_litter"},
-			sidelen = 16,
-			noise_params = {
-				offset = 0,
-				scale = 0.007,
-				spread = {x = 100, y = 100, z = 100},
-				seed = 329,
-				octaves = 3,
-				persist = 0.6
-			},
-			y_min = 1,
-			y_max = 30,
-			decoration = "mcl_core:grass_"..length,
-		})
-	end
-
-	-- Dry shrubs
-
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"mcl_core:desert_sand", "mcl_core:dirt_with_snow","hardenedclay:hardened_clay_brown", "mcl_core:coarse_dirt"},
-		sidelen = 16,
-		noise_params = {
-			offset = 0,
-			scale = 0.035,
-			spread = {x = 100, y = 100, z = 100},
-			seed = 329,
-			octaves = 3,
-			persist = 0.6
-		},
-		y_min = 1,
-		y_max = 30,
-		decoration = "mcl_core:dry_shrub",
-	})
---end
 
 -- All mapgens except mgv6 and singlenode
 
-local function register_grass_decoration(offset, scale, length)
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"mcl_core:dirt_with_grass", "mcl_core:sand", "mcl_core:podzol"},
-		sidelen = 16,
-		noise_params = {
-			offset = offset,
-			scale = scale,
-			spread = {x = 200, y = 200, z = 200},
-			seed = 329,
-			octaves = 3,
-			persist = 0.6
-		},
-		biomes = {"stone_grassland", "sandstone_grassland",
-			"deciduous_forest", "coniferous_forest",
-			"stone_grassland_dunes", "sandstone_grassland_dunes",
-			"coniferous_forest_dunes"},
-		y_min = 1,
-		y_max = 31000,
-		decoration = "mcl_core:grass_"..length,
-	})
-end
 
-local function register_dry_grass_decoration(offset, scale, length)
-	minetest.register_decoration({
-		deco_type = "simple",
-		place_on = {"mcl_core:dirt_with_dry_grass"},
-		sidelen = 16,
-		noise_params = {
-			offset = offset,
-			scale = scale,
-			spread = {x = 200, y = 200, z = 200},
-			seed = 329,
-			octaves = 3,
-			persist = 0.6
-		},
-		biomes = {"savanna"},
-		y_min = 1,
-		y_max = 31000,
-		decoration = "mcl_core:dry_grass_"..length,
-	})
-end
 
---function mcl_core.register_decorations()
+function mcl_portals.register_decorations()
 	minetest.clear_registered_decorations()
 
 	-- Apple tree and log
@@ -2305,7 +2117,7 @@ end
 		biomes = {"deciduous_forest"},
 		y_min = 1,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/apple_tree.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/apple_tree.mts",
 		flags = "place_center_x, place_center_z",
 	})
 
@@ -2346,20 +2158,20 @@ end
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:dirt_with_grass", "mcl_core:dirt", "mcl_core:dirt_with_rainforest_litter"},
+		place_on = {"mcl_core:dirt_with_grass", "mcl_core:dirt", "mcl_core:podzol"},
 		sidelen = 80,
 		fill_ratio = 0.09,
 		biomes = {"rainforest", "rainforest_swamp"},
 		y_min = 0,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/jungle_tree.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/jungle_tree.mts",
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:dirt_with_grass", "mcl_core:dirt", "mcl_core:dirt_with_rainforest_litter"},
+		place_on = {"mcl_core:dirt_with_grass", "mcl_core:dirt", "mcl_core:podzol"},
 		sidelen = 80,
 		fill_ratio = 0.01,
 		biomes = {"rainforest", "rainforest_swamp"},
@@ -2387,7 +2199,7 @@ end
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:dirt_with_snow", "mcl_core:dirt_with_grass", "mcl_core:podzol"},
+		place_on = {"mcl_core:dirt_with_grass_snow", "mcl_core:dirt_with_grass", "mcl_core:podzol"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0.0096,
@@ -2400,13 +2212,13 @@ end
 		biomes = {"taiga", "coniferous_forest","coniferous_forest_dunes"},
 		y_min = 2,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/pine_tree.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/pine_tree.mts",
 		flags = "place_center_x, place_center_z",
 	})
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:dirt_with_snow", "mcl_core:dirt_with_grass", "mcl_core:podzol"},
+		place_on = {"mcl_core:dirt_with_grass_snow", "mcl_core:dirt_with_grass", "mcl_core:podzol"},
 		sidelen = 80,
 		noise_params = {
 			offset = 0.00018,
@@ -2425,9 +2237,9 @@ end
 				{name = "air", prob = 0},
 				{name = "air", prob = 0},
 				{name = "air", prob = 0},
-				{name = "mcl_core:pine_tree", param2 = 12, prob = 191},
-				{name = "mcl_core:pine_tree", param2 = 12},
-				{name = "mcl_core:pine_tree", param2 = 12, prob = 127},
+				{name = "mcl_core:sprucetree", param2 = 12, prob = 191},
+				{name = "mcl_core:sprucetree", param2 = 12},
+				{name = "mcl_core:sprucetree", param2 = 12, prob = 127},
 				{name = "air", prob = 0},
 				{name = "mcl_mushrooms:mushroom_red", prob = 63},
 				{name = "air", prob = 0},
@@ -2441,7 +2253,7 @@ end
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:dirt_with_dry_grass"},
+		place_on = {"mcl_core:dirt_with_grass", "mcl_core:coarse_dirt"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -2454,14 +2266,14 @@ end
 		biomes = {"savanna"},
 		y_min = 1,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/acacia_tree.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/acacia_tree.mts",
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:dirt_with_dry_grass"},
+		place_on = {"mcl_core:coarse_dirt"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -2480,9 +2292,9 @@ end
 				{name = "air", prob = 0},
 				{name = "air", prob = 0},
 				{name = "air", prob = 0},
-				{name = "mcl_core:acacia_tree", param2 = 12, prob = 191},
-				{name = "mcl_core:acacia_tree", param2 = 12},
-				{name = "mcl_core:acacia_tree", param2 = 12, prob = 127},
+				{name = "mcl_core:acaciatree", param2 = 12, prob = 191},
+				{name = "mcl_core:acaciatree", param2 = 12},
+				{name = "mcl_core:acaciatree", param2 = 12, prob = 127},
 			},
 		},
 		flags = "place_center_x",
@@ -2505,7 +2317,7 @@ minetest.register_decoration({
 		biomes = {"savanna"},
 		y_min = 7,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/acacia_tree.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/acacia_tree.mts",
 		flags = "place_center_x, place_center_z",
 		rotation = "random",
 	})
@@ -2528,7 +2340,7 @@ minetest.register_decoration({
 		biomes = {"deciduous_forest"},
 		y_min = 1,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/aspen_tree.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/aspen_tree.mts",
 		flags = "place_center_x, place_center_z",
 	})
 
@@ -2553,9 +2365,9 @@ minetest.register_decoration({
 				{name = "air", prob = 0},
 				{name = "air", prob = 0},
 				{name = "air", prob = 0},
-				{name = "mcl_core:aspen_tree", param2 = 12},
-				{name = "mcl_core:aspen_tree", param2 = 12},
-				{name = "mcl_core:aspen_tree", param2 = 12, prob = 127},
+				{name = "mcl_core:birchtree", param2 = 12},
+				{name = "mcl_core:birchtree", param2 = 12},
+				{name = "mcl_core:birchtree", param2 = 12, prob = 127},
 				{name = "mcl_mushrooms:mushroom_red", prob = 63},
 				{name = "mcl_mushrooms:mushroom_brown", prob = 63},
 				{name = "air", prob = 0},
@@ -2568,7 +2380,7 @@ minetest.register_decoration({
 
 	minetest.register_decoration({
 		deco_type = "schematic",
-		place_on = {"mcl_core:desert_sand", "mcl_core:sand"},
+		place_on = {"mcl_core:redsand", "mcl_core:sand"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.0003,
@@ -2581,7 +2393,7 @@ minetest.register_decoration({
 		biomes = {"desert"},
 		y_min = 5,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/large_cactus.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/large_cactus.mts",
 		flags = "place_center_x",
 		rotation = "random",
 	})
@@ -2590,7 +2402,7 @@ minetest.register_decoration({
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:desert_sand", "mcl_core:sand"},
+		place_on = {"mcl_core:redsand", "mcl_core:sand"},
 		sidelen = 16,
 		noise_params = {
 			offset = -0.0003,
@@ -2625,7 +2437,7 @@ minetest.register_decoration({
 		biomes = {"savanna_swamp"},
 		y_min = 0,
 		y_max = 0,
-		schematic = minetest.get_modpath("mcl_core").."/schematics/papyrus.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/papyrus.mts",
 	})
 
 --mooshroom deco
@@ -2661,7 +2473,7 @@ minetest.register_decoration({
 		biomes = {"mooshroom", "mooshroom_cold"},
 		y_min = -6000,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_mushrooms").."/schematics/mushroom_large.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/mushroom_large.mts",
 		flags = "place_center_x",
 		rotation = "random",
 	})
@@ -2675,7 +2487,7 @@ minetest.register_decoration({
 		biomes = {"mooshroom", "mooshroom_cold"},
 		y_min = -6000,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_mushrooms").."/schematics/mushroom_small.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/mushroom_small.mts",
 		flags = "place_center_x",
 		rotation = "random",
 	})	
@@ -2689,7 +2501,7 @@ minetest.register_decoration({
 		biomes = {"mooshroom", "mooshroom_cold"},
 		y_min = -6000,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_mushrooms").."/schematics/mushroom_brown.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/mushroom_brown.mts",
 		flags = "place_center_x",
 		rotation = "random",
 	})
@@ -2703,7 +2515,7 @@ minetest.register_decoration({
 		biomes = { "deciduous_forest"},
 		y_min = -6000,
 		y_max = 31000,
-		schematic = minetest.get_modpath("mcl_mushrooms").."/schematics/mushroom_brown.mts",
+		schematic = minetest.get_modpath("mcl_portals").."/schematics/mushroom_brown.mts",
 		flags = "place_center_x",
 		rotation = "random",
 	})
@@ -2715,7 +2527,7 @@ minetest.register_decoration({
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:desert_sand", "mcl_core:dirt_with_snow","hardenedclay:hardened_clay_brown"},
+		place_on = {"mcl_core:redsand", "mcl_core:dirt_with_grass_snow","color:hardened_clay_brown", "mcl_core:coarse_dirt"},
 		sidelen = 16,
 		noise_params = {
 			offset = 0,
@@ -2725,10 +2537,10 @@ minetest.register_decoration({
 			octaves = 3,
 			persist = 0.6
 		},
-		biomes = {"desert", "tundra","mesa"},
+		biomes = {"desert", "tundra","mesa", "savanna"},
 		y_min = 2,
 		y_max = 31000,
-		decoration = "mcl_core:dry_shrub",
+		decoration = "mcl_core:deadbush",
 	})
 
 
@@ -2763,7 +2575,7 @@ minetest.register_decoration({
 	--Red Mushroom
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:rack"},
+		place_on = {"mcl_nether:netherrack"},
 		sidelen = 80,
 		fill_ratio = 0.4,
 		biomes = {"underground"},
@@ -2774,7 +2586,7 @@ minetest.register_decoration({
 	--Brown Mushroom
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:rack"},
+		place_on = {"mcl_nether:netherrack"},
 		sidelen = 80,
 		fill_ratio = 0.3,
 		biomes = {"underground"},
@@ -2785,24 +2597,24 @@ minetest.register_decoration({
 	--Fire
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:rack"},
+		place_on = {"mcl_nether:netherrack"},
 		sidelen = 8,
 		fill_ratio = 0.9,
 		biomes = {"underground"},
 		y_min = -6000,
 		y_max = 31000,
-		decoration = "fire:permanent_flame",
+		decoration = "fire:eternal_flame",
 	})
 	--Wart
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:slowsand"},
+		place_on = {"mcl_nether:soul_sand"},
 		sidelen = 80,
 		fill_ratio = 0.1,
 		biomes = {"underground"},
 		y_min = -6000,
 		y_max = 31000,
-		decoration = "mcl_core:wart",
+		decoration = "mcl_nether:nether_wart",
 	})
 	
 
@@ -2907,7 +2719,7 @@ minetest.register_decoration({
 	-- Tall grass
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:dirt_with_grass", "mcl_core:podzol"},
+		place_on = {"mcl_core:dirt_with_grass", "mcl_core:podzol", "mcl_core:coarse_dirt"},
 		sidelen = 8,
 		noise_params = {
 			offset = 0.01,
@@ -2925,7 +2737,7 @@ minetest.register_decoration({
 	-- Add a small amount of tall grass everywhere to avoid areas completely empty devoid of tall grass
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:dirt_with_grass", "mcl_core:podzol"},
+		place_on = {"mcl_core:dirt_with_grass", "mcl_core:podzol", "mcl_core:coarse_dirt"},
 		sidelen = 8,
 		fill_ratio = 0.01,
 		y_min = 1,
@@ -2935,7 +2747,7 @@ minetest.register_decoration({
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:end_stone"},
+		place_on = {"mcl_end:end_stone"},
 		sidelen = 8,
 		fill_ratio = 0.01,
 		y_min = -7000,
@@ -2983,7 +2795,7 @@ minetest.register_decoration({
 
 
 	
---end
+end
 
 --
 -- Detect mapgen to select functions
@@ -2994,14 +2806,14 @@ minetest.register_decoration({
 
 local mg_params = minetest.get_mapgen_params()
 if mg_params.mgname == "v6" then
-	--mcl_core.register_ores()
-	--mcl_core.register_mgv6_decorations()
+	mcl_portals.register_ores()
+	mcl_portals.register_mgv6_decorations()
 elseif mg_params.mgname ~= "singlenode" then
-	--mcl_core.register_biomes()
-	--mcl_core.register_ores()
-	--mcl_core.register_decorations()
+	mcl_portals.register_biomes()
+	mcl_portals.register_ores()
+	mcl_portals.register_decorations()
 end
---[[
+
 
 --
 -- Detect mapgen to select functions  newest
@@ -3009,14 +2821,14 @@ end
 
 local mg_name = minetest.get_mapgen_setting("mg_name")
 if mg_name == "v6" then
-	mcl_core.register_ores()
-	mcl_core.register_mgv6_decorations()
+	mcl_portals.register_ores()
+	mcl_portals.register_mgv6_decorations()
 else
-	mcl_core.register_biomes()
-	mcl_core.register_ores()
-	mcl_core.register_decorations()
+	mcl_portals.register_biomes()
+	mcl_portals.register_ores()
+	mcl_portals.register_decorations()
 end
-]]
+
 
 
 --bedrock code
@@ -3055,25 +2867,25 @@ replace("mcl_core:lava_flowing", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:water_source", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:water_flowing", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:sandstone", "mcl_core:bedrock", -80, -64)
-replace("mcl_core:desert_stone", "mcl_core:bedrock", -80, -64)
-replace("mcl_core:desert_sand", "mcl_core:bedrock", -80, -64)
-replace("mcl_core:mese", "mcl_core:bedrock", -80, -64)
+--replace("mcl_core:redsandstone", "mcl_core:bedrock", -80, -64)
+--replace("mcl_core:redsand", "mcl_core:bedrock", -80, -64)
+--replace("mcl_core:mese", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:stone_with_gold", "mcl_core:bedrock", -80, -64)
 --replace("mcl_core:stone_with_diamond", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:stone_with_iron", "mcl_core:bedrock",  -80, -64)
 replace("mcl_core:stone_with_mese", "mcl_core:bedrock",  -80, -64)
 replace("mcl_core:stone_with_coal", "mcl_core:bedrock", -80, -64)
-replace("mcl_core:desert_stone_with_iron", "mcl_core:bedrock",  -80, -64)
+--replace("mcl_core:redsandstone_with_iron", "mcl_core:bedrock",  -80, -64)
 replace("default:granite", "mcl_core:bedrock", -80, -64)
-replace("default:marble", "mcl_core:bedrock", -80, -64)
-replace("hardenedclay:hardened_clay_brown", "mcl_core:bedrock", -80, -64)
+--replace("default:marble", "mcl_core:bedrock", -80, -64)
+--replace("mcl_colorblocks:hardened_clay_brown", "mcl_core:bedrock", -80, -64)
 
 
 --dungeon swap
-replace("mcl_core:cobblestone", "mcl_nether:netherbrick", -3900, -2400)
-replace("mcl_core:mossycobble", "mcl_nether:netherbrick", -3900, -2400)
-replace("stairs:stair_cobble", "stairs:stair_netherbrick", -3900, -2400)
-replace("stairs:stair_mossycobble", "stairs:stair_netherbrick", -3900, -2400)
+replace("mcl_core:cobblestone", "mcl_nether:nether_brick", -3900, -2400)
+replace("mcl_core:mossycobble", "mcl_nether:nether_brick", -3900, -2400)
+replace("stairs:stair_cobble", "stairs:stair_nether_brick", -3900, -2400)
+replace("stairs:stair_mossycobble", "stairs:stair_nether_brick", -3900, -2400)
 
 replace("mcl_core:cobblestone", "mcl_end:purpur_block", -6900, -4400)
 replace("mcl_core:mossycobble", "mcl_end:purpur_block", -6900, -4400)
@@ -3095,12 +2907,12 @@ local function bedrock(old)
 end
 bedrock("air")
 bedrock("mcl_core:stone")
-bedrock("mcl_core:desert_stone")
+bedrock("mcl_core:redsandstone")
 bedrock("mcl_core:gravel")
 bedrock("mcl_core:dirt")
 bedrock("mcl_core:sand")
-bedrock("mcl_core:desert_sand")
-bedrock("mcl_core:desert_cobble")
+--bedrock("mcl_core:redsand")
+--bedrock("mcl_core:desert_cobble")
 bedrock("mcl_core:cobble")
 bedrock("mcl_core:mossycobble")
 bedrock("stairs:stair_cobble")
