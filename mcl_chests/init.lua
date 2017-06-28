@@ -519,6 +519,33 @@ minetest.register_craft({
 	burntime = 15
 })
 
+
+minetest.register_abm({
+	nodenames = {"mcl_chests:ender_chest"},
+	interval = 1,
+	chance = 2,
+	action = function(pos, node)
+		minetest.add_particlespawner(
+			16, --amount
+			4, --time
+			{x=pos.x-0.5, y=pos.y-0.5, z=pos.z-0.5}, --minpos
+			{x=pos.x+0.5, y=pos.y+0.5, z=pos.z+0.5}, --maxpos
+			{x=-0.5, y=-0.5, z=-0.5}, --minvel
+			{x=0.5, y=0.5, z=0.5}, --maxvel
+			{x=0,y=0,z=0}, --minacc
+			{x=0,y=0,z=0}, --maxacc
+			0.5, --minexptime
+			3, --maxexptime
+			1, --minsize
+			2, --maxsize
+			false, --collisiondetection
+			--"nether_particle.png" --texture
+			"default_particle.png" --texture
+		)
+	end,
+})
+
+
 minetest.register_node("mcl_chests:ender_chest", {
 	description = "Ender Chest",
 	_doc_items_longdesc = "Ender chests grant you access to a single personal interdimensional inventory with 27 slots. This inventory is the same no matter from which ender chest you access it from. If you put one item into one ender chest, you will find it in all other ender chests worldwide. Each player will only see their own items, but not the items of other players.",

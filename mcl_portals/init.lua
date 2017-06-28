@@ -105,9 +105,9 @@ end
 minetest.after(0,
 function ()
 prevent_place_above("bucket:bucket_water");
-prevent_place_above("default:water_source");
+prevent_place_above("mcl_core:water_source");
 prevent_place_above("bucket:bucket_lava");
-prevent_place_above("default:lava_source");
+prevent_place_above("mcl_core:lava_source");
 end
 )
 

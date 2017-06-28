@@ -80,11 +80,14 @@ mobs_mc.items = {
 	redstone = "default:mese_crystal_fragment",
 	glass_bottle = "vessels:glass_bottle",
 	sugar = "default:papyrus",
+	wheat = "farming:wheat",
+	hay_bale = "farming:straw",
 
 	-- Other
 	nether_brick_block = "nether:brick",
 	mycelium = "ethereal:mushroom_dirt",
 	carrot = "farming:carrot",
+	potato = "farming:potato",
 	golden_carrot = "farming:carrot_gold",
 	fishing_rod = "fishing:pole_wood",
 	fish_raw = "fishing:fish_raw",
@@ -93,6 +96,8 @@ mobs_mc.items = {
 	pufferfish_raw = "fishing:pike_raw",
 	bone = "bonemeal:bone",
 	slimeball = "mesecons_materials:glue",
+	apple = "default:apple",
+	golden_apple = "default:apple",
 
 	-- TODO: Add actual ender pearl
 	ender_pearl = "farorb:farorb",
@@ -125,9 +130,9 @@ mobs_mc.follow = {
 	sheep = { mobs_mc.items.wheat },
 	cow = { mobs_mc.items.wheat },
 	chicken = { "farming:seed_wheat", "farming:seed_cotton" },
-	horse = { "default:apple", mobs_mc.items.wheat }, -- TODO
-	pig = { "farming:potato", mobs_mc.items.carrot, mobs_mc.items.carrot_on_a_stick,
-		"default:apple", -- Minetest Game extra
+	horse = { mobs_mc.items.apple, mobs_mc.items.sugar, mobs_mc.items.wheat, mobs_mc.items.hay_bale, mobs_mc.items.golden_apple, mobs_mc.items.golden_carrot }, -- TODO
+	pig = { mobs_mc.items.potato, mobs_mc.items.carrot, mobs_mc.items.carrot_on_a_stick,
+		mobs_mc.items.apple, -- Minetest Game extra
 	},
 	rabbit = { mobs_mc.items.dandelion, mobs_mc.items.carrot, mobs_mc.items.carrot_gold, "farming_plus:carrot_item", },
 	ocelot = { mobs_mc.items.fish_raw, mobs_mc.items.salmon_raw, mobs_mc.items.clownfish_raw, mobs_mc.items.pufferfish_raw,
@@ -212,10 +217,10 @@ mobs_mc.spawn = {
 	grassland = { mobs_mc.items.grass_block, "ethereal:prairie_dirt" },
 	savanna = { "default:dirt_with_dry_grass" },
 	grassland_savanna = { mobs_mc.items.grass_block, "default:dirt_with_dry_grass" },
-	desert = { "default:desert_sand" },
+	desert = { "default:desert_sand", "group:sand" },
 	jungle = { "default:dirt_with_rainforest_litter", "default:jungleleaves" },
 	snow = { "default:snow", "default:snowblock", "default:dirt_with_snow" },
-	end_city = { "default:cobble" },
+	end_city = { "default:cobble", "mcl_end:end_stone"},
 	wolf = { mobs_mc.items.grass_block, "default:dirt_with_rainforest_litter", "default:dirt", "default:dirt_with_snow", "default:snow", "default:snowblock" },
 
 	-- These probably don't need overrides

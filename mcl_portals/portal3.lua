@@ -1,3 +1,5 @@
+mcl_portals = {}
+
 -- Parameters
 
 local END_DEPTH = -5750  --5600 is good emerald area
@@ -15,6 +17,125 @@ local np_cave = {
 }
 
 
+
+-- Nodes
+
+minetest.register_node("mcl_portals:end_portal", {
+	description = "END Portal",
+	tiles = {
+		"default_transparent.png",
+		"default_transparent.png",
+		"default_transparent.png",
+		"default_transparent.png",
+		{
+			name = "default_portal.png^[colorize:#FFFFFF:150",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 0.5,
+			},
+		},
+		{
+			name = "default_portal.png^[colorize:#FFFFFF:150",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 0.5,
+			},
+		},
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	use_texture_alpha = true,
+	walkable = false,
+	diggable = false,
+	pointable = false,
+	buildable_to = false,
+	is_ground_content = false,
+	drop = "",
+	light_source = 5,
+	post_effect_color = {a = 128, r = 133, g =133, b = 133},
+	alpha = 192,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.1,  0.5, 0.5, 0.1},
+		},
+	},
+	groups = {not_in_creative_inventory = 1}
+})
+
+minetest.register_node(":mcl_end:purpur_block", {
+	description = "Purpur Block",
+	tiles = {"default:purpur_block"},
+	is_ground_content = false,
+	--sounds = mcl_sounds.node_sound_stone_defaults(),
+	stack_max = 64,
+	groups = {pickaxey=5, building_block=1, material_stone=1},
+	_mcl_blast_resistance = 6000,
+	_mcl_hardness = 50,
+
+	on_destruct = function(pos)
+		local meta = minetest.get_meta(pos)
+		local p1 = minetest.string_to_pos(meta:get_string("p1"))
+		local p2 = minetest.string_to_pos(meta:get_string("p2"))
+		local target3 = minetest.string_to_pos(meta:get_string("target3"))
+		if not p1 or not p2 then
+			return
+		end
+
+		for x = p1.x, p2.x do
+		for y = p1.y, p2.y do
+		for z = p1.z, p2.z do
+			local nn = minetest.get_node({x = x, y = y, z = z}).name
+			if nn == ":mcl_end:purpur_block" or nn == "mcl_portals:end_portal" then
+				if nn == "mcl_portals:end_portal" then
+					minetest.remove_node({x = x, y = y, z = z})
+				end
+				local m = minetest.get_meta({x = x, y = y, z = z})
+				m:set_string("p1", "")
+				m:set_string("p2", "")
+				m:set_string("target3", "")
+			end
+		end
+		end
+		end
+
+		meta = minetest.get_meta(target3)
+		if not meta then
+			return
+		end
+		p1 = minetest.string_to_pos(meta:get_string("p1"))
+		p2 = minetest.string_to_pos(meta:get_string("p2"))
+		if not p1 or not p2 then
+			return
+		end
+
+		for x = p1.x, p2.x do
+		for y = p1.y, p2.y do
+		for z = p1.z, p2.z do
+			local nn = minetest.get_node({x = x, y = y, z = z}).name
+			if nn == ":mcl_end:purpur_block" or nn == "mcl_portals:end_portal" then
+				if nn == "mcl_portals:end_portal" then
+					minetest.remove_node({x = x, y = y, z = z})
+				end
+				local m = minetest.get_meta({x = x, y = y, z = z})
+				m:set_string("p1", "")
+				m:set_string("p2", "")
+				m:set_string("target3", "")
+			end
+		end
+		end
+		end
+	end,
+})
+
+
+
 -- Functions
 
 local function build_end_portal(pos, target3)
@@ -23,19 +144,19 @@ local function build_end_portal(pos, target3)
 	local p2 = {x = p1.x + 3, y = p1.y + 4, z = p1.z}
 
 	for i = 1, 4 do
-		minetest.set_node(p, {name = "mcl_end:purpur_block"})
+		minetest.set_node(p, {name = ":mcl_end:purpur_block"})
 		p.y = p.y + 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = "mcl_end:purpur_block"})
+		minetest.set_node(p, {name = ":mcl_end:purpur_block"})
 		p.x = p.x + 1
 	end
 	for i = 1, 4 do
-		minetest.set_node(p, {name = "mcl_end:purpur_block"})
+		minetest.set_node(p, {name = ":mcl_end:purpur_block"})
 		p.y = p.y - 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = "mcl_end:purpur_block"})
+		minetest.set_node(p, {name = ":mcl_end:purpur_block"})
 		p.x = p.x - 1
 	end
 
@@ -95,7 +216,7 @@ local function move_check2(p1, max, dir)
 
 	while p[dir] ~= max do
 		p[dir] = p[dir] + d
-		if minetest.get_node(p).name ~= "mcl_end:purpur_block" then
+		if minetest.get_node(p).name ~= ":mcl_end:purpur_block" then
 			return false
 		end
 	end
@@ -271,123 +392,6 @@ minetest.register_abm({
 					end, obj, pos, target3)
 				end
 			end
-		end
-	end,
-})
-
-
--- Nodes
-
-minetest.register_node("mcl_portals:end_portal", {
-	description = "END Portal",
-	tiles = {
-		"default_transparent.png",
-		"default_transparent.png",
-		"default_transparent.png",
-		"default_transparent.png",
-		{
-			name = "default_portal.png^[colorize:#FFFFFF:150",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.5,
-			},
-		},
-		{
-			name = "default_portal.png^[colorize:#FFFFFF:150",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.5,
-			},
-		},
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	paramtype2 = "facedir",
-	sunlight_propagates = true,
-	use_texture_alpha = true,
-	walkable = false,
-	diggable = false,
-	pointable = false,
-	buildable_to = false,
-	is_ground_content = false,
-	drop = "",
-	light_source = 5,
-	post_effect_color = {a = 128, r = 133, g =133, b = 133},
-	alpha = 192,
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.1,  0.5, 0.5, 0.1},
-		},
-	},
-	groups = {not_in_creative_inventory = 1}
-})
-
-minetest.register_node(":mcl_end:purpur_block", {
-	description = "Purpur Block",
-	tiles = {"default:purpur_block"},
-	is_ground_content = false,
-	--sounds = mcl_sounds.node_sound_stone_defaults(),
-	stack_max = 64,
-	groups = {pickaxey=5, building_block=1, material_stone=1},
-	_mcl_blast_resistance = 6000,
-	_mcl_hardness = 50,
-
-	on_destruct = function(pos)
-		local meta = minetest.get_meta(pos)
-		local p1 = minetest.string_to_pos(meta:get_string("p1"))
-		local p2 = minetest.string_to_pos(meta:get_string("p2"))
-		local target3 = minetest.string_to_pos(meta:get_string("target3"))
-		if not p1 or not p2 then
-			return
-		end
-
-		for x = p1.x, p2.x do
-		for y = p1.y, p2.y do
-		for z = p1.z, p2.z do
-			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_end:purpur_block" or nn == "mcl_portals:end_portal" then
-				if nn == "mcl_portals:end_portal" then
-					minetest.remove_node({x = x, y = y, z = z})
-				end
-				local m = minetest.get_meta({x = x, y = y, z = z})
-				m:set_string("p1", "")
-				m:set_string("p2", "")
-				m:set_string("target3", "")
-			end
-		end
-		end
-		end
-
-		meta = minetest.get_meta(target3)
-		if not meta then
-			return
-		end
-		p1 = minetest.string_to_pos(meta:get_string("p1"))
-		p2 = minetest.string_to_pos(meta:get_string("p2"))
-		if not p1 or not p2 then
-			return
-		end
-
-		for x = p1.x, p2.x do
-		for y = p1.y, p2.y do
-		for z = p1.z, p2.z do
-			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_end:purpur_block" or nn == "mcl_portals:end_portal" then
-				if nn == "mcl_portals:end_portal" then
-					minetest.remove_node({x = x, y = y, z = z})
-				end
-				local m = minetest.get_meta({x = x, y = y, z = z})
-				m:set_string("p1", "")
-				m:set_string("p2", "")
-				m:set_string("target3", "")
-			end
-		end
-		end
 		end
 	end,
 })

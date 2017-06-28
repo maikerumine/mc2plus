@@ -1,4 +1,4 @@
-
+mcl_portals = {}
 minetest.register_node("mcl_portals:void", {
 	description = "Void (you hacker you!)",
 	inventory_image = "mcl_core_void.png",

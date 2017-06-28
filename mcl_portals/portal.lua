@@ -1,3 +1,5 @@
+mcl_portals = {}
+
 -- Parameters
 
 local NETHER_DEPTH = -2100
@@ -14,6 +16,125 @@ local np_cave = {
 	persist = 0.7
 }
 
+-- Nodes
+
+minetest.register_node("mcl_portals:portal", {
+	description = "Nether Portal",
+	tiles = {
+		"default_transparent.png",
+		"default_transparent.png",
+		"default_transparent.png",
+		"default_transparent.png",
+		{
+			--name = "default_portal.png^[colorize:#FF0000:150",
+			name = "default_portal.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 0.5,
+			},
+		},
+		{
+			--name = "default_portal.png^[colorize:#FF0000:150",
+			name = "default_portal.png",
+			animation = {
+				type = "vertical_frames",
+				aspect_w = 16,
+				aspect_h = 16,
+				length = 0.5,
+			},
+		},
+	},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2 = "facedir",
+	sunlight_propagates = true,
+	use_texture_alpha = true,
+	walkable = false,
+	diggable = false,
+	pointable = false,
+	buildable_to = false,
+	is_ground_content = false,
+	drop = "",
+	light_source = 5,
+	post_effect_color = {a = 180, r = 128, g = 23, b = 23},
+	alpha = 192,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.1,  0.5, 0.5, 0.1},
+		},
+	},
+	groups = {not_in_creative_inventory = 1}
+})
+
+minetest.register_node(":mcl_core:obsidian", {
+	description = "Obsidian",
+	tiles = {"default_obsidian.png"},
+	is_ground_content = false,
+	--sounds = mcl_sounds.node_sound_stone_defaults(),
+	stack_max = 64,
+	groups = {pickaxey=5, building_block=1, material_stone=1},
+	_mcl_blast_resistance = 6000,
+	_mcl_hardness = 50,
+
+	on_destruct = function(pos)
+		local meta = minetest.get_meta(pos)
+		local p1 = minetest.string_to_pos(meta:get_string("p1"))
+		local p2 = minetest.string_to_pos(meta:get_string("p2"))
+		local target = minetest.string_to_pos(meta:get_string("target"))
+		if not p1 or not p2 then
+			return
+		end
+
+		for x = p1.x, p2.x do
+		for y = p1.y, p2.y do
+		for z = p1.z, p2.z do
+			local nn = minetest.get_node({x = x, y = y, z = z}).name
+			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
+				if nn == "mcl_portals:portal" then
+					minetest.remove_node({x = x, y = y, z = z})
+				end
+				local m = minetest.get_meta({x = x, y = y, z = z})
+				m:set_string("p1", "")
+				m:set_string("p2", "")
+				m:set_string("target", "")
+			end
+		end
+		end
+		end
+
+		meta = minetest.get_meta(target)
+		if not meta then
+			return
+		end
+		p1 = minetest.string_to_pos(meta:get_string("p1"))
+		p2 = minetest.string_to_pos(meta:get_string("p2"))
+		if not p1 or not p2 then
+			return
+		end
+
+		for x = p1.x, p2.x do
+		for y = p1.y, p2.y do
+		for z = p1.z, p2.z do
+			local nn = minetest.get_node({x = x, y = y, z = z}).name
+			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
+				if nn == "mcl_portals:portal" then
+					minetest.remove_node({x = x, y = y, z = z})
+				end
+				local m = minetest.get_meta({x = x, y = y, z = z})
+				m:set_string("p1", "")
+				m:set_string("p2", "")
+				m:set_string("target", "")
+			end
+		end
+		end
+		end
+	end,
+})
+
+
 
 -- Functions
 
@@ -23,19 +144,19 @@ local function build_portal(pos, target)
 	local p2 = {x = p1.x + 3, y = p1.y + 4, z = p1.z}
 
 	for i = 1, 4 do
-		minetest.set_node(p, {name = ":mcl_core:obsidian"})
+		minetest.set_node(p, {name = "mcl_core:obsidian"})
 		p.y = p.y + 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = ":mcl_core:obsidian"})
+		minetest.set_node(p, {name = "mcl_core:obsidian"})
 		p.x = p.x + 1
 	end
 	for i = 1, 4 do
-		minetest.set_node(p, {name = ":mcl_core:obsidian"})
+		minetest.set_node(p, {name = "mcl_core:obsidian"})
 		p.y = p.y - 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = ":mcl_core:obsidian"})
+		minetest.set_node(p, {name = "mcl_core:obsidian"})
 		p.x = p.x - 1
 	end
 
@@ -228,7 +349,8 @@ minetest.register_abm({
 			1, --minsize
 			2, --maxsize
 			false, --collisiondetection
-			"default_particle.png^[colorize:#FF0000:150" --texture
+			--"default_particle.png^[colorize:#FF0000:150" --texture
+			"default_particle.png" --texture
 		)
 		--for _, obj in ipairs(minetest.get_objects_inside_radius(pos, 1)) do
 		for _,obj in ipairs(minetest.get_objects_inside_radius(pos,1)) do		--maikerumine added for objects to travel
@@ -276,119 +398,4 @@ minetest.register_abm({
 })
 
 
--- Nodes
-
-minetest.register_node("mcl_portals:portal", {
-	description = "Nether Portal",
-	tiles = {
-		"default_transparent.png",
-		"default_transparent.png",
-		"default_transparent.png",
-		"default_transparent.png",
-		{
-			name = "default_portal.png^[colorize:#FF0000:150",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.5,
-			},
-		},
-		{
-			name = "default_portal.png^[colorize:#FF0000:150",
-			animation = {
-				type = "vertical_frames",
-				aspect_w = 16,
-				aspect_h = 16,
-				length = 0.5,
-			},
-		},
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	paramtype2 = "facedir",
-	sunlight_propagates = true,
-	use_texture_alpha = true,
-	walkable = false,
-	diggable = false,
-	pointable = false,
-	buildable_to = false,
-	is_ground_content = false,
-	drop = "",
-	light_source = 5,
-	post_effect_color = {a = 180, r = 128, g = 23, b = 23},
-	alpha = 192,
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.1,  0.5, 0.5, 0.1},
-		},
-	},
-	groups = {not_in_creative_inventory = 1}
-})
-
-minetest.register_node(":mcl_core:obsidian", {
-	description = "Obsidian",
-	tiles = {"default_obsidian.png"},
-	is_ground_content = false,
-	--sounds = mcl_sounds.node_sound_stone_defaults(),
-	stack_max = 64,
-	groups = {pickaxey=5, building_block=1, material_stone=1},
-	_mcl_blast_resistance = 6000,
-	_mcl_hardness = 50,
-
-	on_destruct = function(pos)
-		local meta = minetest.get_meta(pos)
-		local p1 = minetest.string_to_pos(meta:get_string("p1"))
-		local p2 = minetest.string_to_pos(meta:get_string("p2"))
-		local target = minetest.string_to_pos(meta:get_string("target"))
-		if not p1 or not p2 then
-			return
-		end
-
-		for x = p1.x, p2.x do
-		for y = p1.y, p2.y do
-		for z = p1.z, p2.z do
-			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == ":mcl_core:obsidian" or nn == "mcl_portals:portal" then
-				if nn == "mcl_core:portal" then
-					minetest.remove_node({x = x, y = y, z = z})
-				end
-				local m = minetest.get_meta({x = x, y = y, z = z})
-				m:set_string("p1", "")
-				m:set_string("p2", "")
-				m:set_string("target", "")
-			end
-		end
-		end
-		end
-
-		meta = minetest.get_meta(target)
-		if not meta then
-			return
-		end
-		p1 = minetest.string_to_pos(meta:get_string("p1"))
-		p2 = minetest.string_to_pos(meta:get_string("p2"))
-		if not p1 or not p2 then
-			return
-		end
-
-		for x = p1.x, p2.x do
-		for y = p1.y, p2.y do
-		for z = p1.z, p2.z do
-			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == ":mcl_core:obsidian" or nn == "mcl_portals:portal" then
-				if nn == "mcl_portals:portal" then
-					minetest.remove_node({x = x, y = y, z = z})
-				end
-				local m = minetest.get_meta({x = x, y = y, z = z})
-				m:set_string("p1", "")
-				m:set_string("p2", "")
-				m:set_string("target", "")
-			end
-		end
-		end
-		end
-	end,
-})
 

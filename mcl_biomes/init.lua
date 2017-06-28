@@ -2575,7 +2575,7 @@ end
 
 --the -64 bedrock
 replace("air", "mcl_core:bedrock", -80, -64)
-replace("air", "mcl_core:lava_source", -64, -54)
+replace("air", "mcl_core:lava_source", -64, -58)
 replace("mcl_core:stone", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:gravel", "mcl_core:bedrock", -80, -64)
 replace("mcl_core:dirt", "mcl_core:bedrock", -80, -64)
@@ -2599,6 +2599,12 @@ replace("mcl_core:stone_with_coal", "mcl_core:bedrock", -80, -64)
 replace("default:granite", "mcl_core:bedrock", -80, -64)
 replace("mcl_colorblocks:hardened_clay_orange", "mcl_core:bedrock", -80, -64)
 
+--lava delete
+replace("mapgen_lava_source_lava_flowing", "mcl_end:end_stone", -6900, -4400)
+replace("mcl_core:lava_flowing", "mcl_end:end_stone", -6900, -4400)
+replace("mapgen_air", "mcl_end:end_stone", -6900, -4400)
+replace("mapgen_lava_source_lava_source", "mcl_end:end_stone", -6900, -4400)
+replace("mcl_core:lava_source", "mcl_end:end_stone", -6900, -4400)
 
 --dungeon swap
 replace("mcl_core:cobblestone", "mcl_nether:nether_brick", -3900, -2400)
