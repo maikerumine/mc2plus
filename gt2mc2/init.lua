@@ -222,7 +222,7 @@ minetest.register_alias("default:coral_skeleton", "mcl_core:coalblock")
 
 minetest.register_alias("default:nyancat", "mcl_core:nyancat")
 minetest.register_alias("default:nyancat_rainbow", "mcl_core:nyancat_rainbow")
-minetest.register_alias("default:apple", "mcl_farming:melon")  --did this to fix map
+minetest.register_alias("default:apple", "mcl_flowers:tallgrass")  --did this to fix map
 
 
 

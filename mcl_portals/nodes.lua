@@ -12,6 +12,7 @@ minetest.register_node("mcl_portals:nether_air", {
 	diggable = false,
 	buildable_to = true,
 	air_equivalent = true,
+	floodable = true,
 	drop = "",
 	groups = {not_in_creative_inventory=1, air=1},
 	light_source = 7 --test only
@@ -29,6 +30,7 @@ minetest.register_node("mcl_portals:void", {
 	diggable = false,
 	buildable_to = true,
 	air_equivalent = true,
+	floodable = false,
 	drop = "",
 	groups = {not_in_creative_inventory=1, air=1},
 	light_source = 14 --test only
@@ -46,6 +48,7 @@ minetest.register_node("mcl_portals:dummy", {
 	diggable = false,
 	buildable_to = true,
 	air_equivalent = true,
+	floodable = true,
 	drop = "",
 	groups = {not_in_creative_inventory=1, air=1},
 })

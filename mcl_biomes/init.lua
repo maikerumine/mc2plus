@@ -679,7 +679,7 @@ minetest.register_ore({
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "mcl_nether:glowstone",
-		wherein         = {"mcl_nether:netherrack"},
+		wherein         = {"mcl_nether:netherrack", "mcl_portals:nether_air"},
 		clust_scarcity  = 26 * 26 * 26,
 		clust_size      = 5,
 		y_min           = -3390,

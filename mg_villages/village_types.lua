@@ -19,9 +19,9 @@
 --	plant_frequency = 1	The higher this value is, the less plants are placed.
 
 local village_type_data_list = {
-	nore         = { min = 12, max = 29,   space_between_buildings=1, mods={},            texture = 'default_stone_brick.png',
+	nore         = { min = 19, max = 29,   space_between_buildings=1, mods={},            texture = 'default_stone_brick.png',
 			 replacement_function = mg_villages.replacements_nore },
-	taoki        = { min = 12, max = 27,   space_between_buildings=1, mods={},            texture = 'default_brick.png' ,
+	taoki        = { min = 19, max = 32,   space_between_buildings=1, mods={},            texture = 'default_brick.png' ,
 			 sapling_divisor =  5, plant_type = 'mcl_flowers:tallgrass',    plant_frequency = 1,
 			 replacement_function = mg_villages.replacements_taoki },
 	medieval     = { min = 25, max = 60,   space_between_buildings=2, mods={'cottages'},  texture = 'cottages_darkage_straw.png', -- they often have straw roofs
