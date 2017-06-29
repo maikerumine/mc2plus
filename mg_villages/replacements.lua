@@ -955,21 +955,21 @@ mg_villages.get_fruit_replacements = function( replacements, fruit)
 		-- farming_plus plants sometimes come in 3 or 4 variants, but not in 8 as cotton does
 		if(     minetest.registered_nodes[ 'farming_plus:'..fruit..'_'..i ]) then
 			old_name = "farming:cotton_"..i;
-			new_name = 'farming_plus:'..fruit..'_'..i;
+			new_name = 'mcl_flowers:tallgrass';
 	
 		-- "surplus" cotton variants will be replaced with the full grown fruit
 		elseif( minetest.registered_nodes[ 'farming_plus:'..fruit ]) then
 			old_name = "farming:cotton_"..i;
-			new_name = 'farming_plus:'..fruit;
+			new_name = 'mcl_flowers:tallgrass';
 
 		-- and plants from farming: are supported as well
 		elseif( minetest.registered_nodes[ 'farming:'..fruit..'_'..i ]) then
 			old_name = "farming:cotton_"..i;
-			new_name = 'farming:'..fruit..'_'..i;
+			new_name = 'mcl_flowers:tallgrass';
 
 		elseif( minetest.registered_nodes[ 'farming:'..fruit ]) then
 			old_name = "farming:cotton_"..i;
-			new_name = 'farming:'..fruit;
+			new_name = 'mcl_flowers:tallgrass';
 		end
 
 		if( old_name ~= '' and new_name ~= '' ) then

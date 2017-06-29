@@ -72,9 +72,9 @@ mg_villages.medieval_subtype = false;
 -- on average, every n.th node inside a village area may be one of these trees - and it will be a relatively dense packed forrest
 mg_villages.sapling_probability = {};
 
-mg_villages.sapling_probability[ minetest.get_content_id( 'default:sapling' )       ] = 25; -- suitable for a relatively dense forrest of normal trees
-mg_villages.sapling_probability[ minetest.get_content_id( 'default:junglesapling' ) ] = 40; -- jungletrees are a bit bigger and need more space
-mg_villages.sapling_probability[ minetest.get_content_id( 'default:pinesapling' )   ] = 30; 
+mg_villages.sapling_probability[ minetest.get_content_id( 'mcl_core:sapling' )       ] = 25; -- suitable for a relatively dense forrest of normal trees
+mg_villages.sapling_probability[ minetest.get_content_id( 'mcl_core:junglesapling' ) ] = 40; -- jungletrees are a bit bigger and need more space
+mg_villages.sapling_probability[ minetest.get_content_id( 'mcl_core:spruceapling' )   ] = 30; 
 if( minetest.get_modpath( 'mg' )) then
 	mg_villages.sapling_probability[ minetest.get_content_id( 'mg:savannasapling'     ) ] = 30; 
 	mg_villages.sapling_probability[ minetest.get_content_id( 'mg:pinesapling'        ) ] = 35; 
@@ -187,8 +187,8 @@ mg_villages.VILLAGE_CHECK_COUNT = 1  --was1
 --mg_villages.VILLAGE_MAX_SIZE = 40
 mg_villages.VILLAGE_CHANCE = 55
 -- min and max size are only used in case of them beeing not provided by the village type (see buildings.lua)
-mg_villages.VILLAGE_MIN_SIZE = 23
-mg_villages.VILLAGE_MAX_SIZE = 55 --55
+mg_villages.VILLAGE_MIN_SIZE = 13
+mg_villages.VILLAGE_MAX_SIZE = 35 --55
 mg_villages.FIRST_ROADSIZE = 3
 mg_villages.BIG_ROAD_CHANCE = 0
 
