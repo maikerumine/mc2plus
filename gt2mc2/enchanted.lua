@@ -1,3 +1,12 @@
+
+
+minetest.register_alias("xdecor:enchantment_table", "mcl_enchanting:enchantment_table")
+minetest.register_alias("xdecor:book_open", "mcl_enchanting:book_open")
+mobs:alias_mob("xdecor:book_open", "mcl_enchanting:book_open")
+
+
+
+
 -- mods/gt2mc/init.lua
 
 --		axe    = {enchants = "durable, fast"},

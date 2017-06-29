@@ -96,7 +96,7 @@ mg_villages.check_if_ground = function( ci )
 	-- pre-generate a list of no-ground-nodes for caching
 	if( ci==nil or replacements_group.node_is_ground[ minetest.get_content_id('air')]==nil) then
 		local no_ground_nodes = {'air','ignore','mcl_core:sandstone','mcl_core:cactus','default:wood','mcl_core:junglewood',
-			'mcl_core:sprucewood','mcl_core:pine_tree','mcl_core:acaciawood','mcl_core:acaciatree', 'mcl_core:aspenwood', 'mcl_core:birchtree',
+			'mcl_core:sprucewood','mcl_core:jungleleaves','mcl_core:spruceleaves','mcl_core:acacialeaves','mcl_core:birchleaves','mcl_core:leaves','mcl_core:tree','mcl_core:pine_tree','mcl_core:acaciawood','mcl_core:acaciatree', 'mcl_core:aspenwood', 'mcl_core:birchtree',
 			'ethereal:mushroom_pore','ethereal:mushroom_trunk','ethereal:bamboo', 'ethereal:mushroom',
                         'ethereal:bush', 'default:grass', 'default:grass_1','default:grass_2','default:grass_3','default:grass_4','default:grass_5'};
 		-- TODO: add all those other tree and leaf nodes that might be added by mapgen
