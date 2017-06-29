@@ -632,7 +632,7 @@ minetest.register_ore({
 	-- Slow Sand
 
 	minetest.register_ore({
-		ore_type        = "blob",
+		ore_type        = "sheet",
 		ore             = "mcl_nether:soul_sand",
 		wherein         = {"mcl_nether:netherrack", "mcl_core:lava_source",
 			"mcl_core:redsandstone"},
@@ -654,7 +654,7 @@ minetest.register_ore({
 	--magma
 	
 		minetest.register_ore({
-		ore_type        = "blob",
+		ore_type        = "sheet",
 		ore             = "mcl_nether:magma",
 		wherein         = {"mcl_nether:netherrack", "mcl_core:lava_source",
 			"mcl_core:redsandstone"},
@@ -698,7 +698,7 @@ minetest.register_ore({
 	-- Gravel
 
 	minetest.register_ore({
-		ore_type        = "blob",
+		ore_type        = "sheet",
 		ore             = "mcl_core:gravel",
 		wherein         = {"mcl_nether:netherrack"},
 		clust_scarcity  = 16 * 16 * 16,
@@ -2600,11 +2600,11 @@ replace("default:granite", "mcl_core:bedrock", -80, -64)
 replace("mcl_colorblocks:hardened_clay_orange", "mcl_core:bedrock", -80, -64)
 
 --lava delete
-replace("mapgen_lava_source_lava_flowing", "mcl_end:end_stone", -6900, -4400)
-replace("mcl_core:lava_flowing", "mcl_end:end_stone", -6900, -4400)
-replace("mapgen_air", "mcl_end:end_stone", -6900, -4400)
-replace("mapgen_lava_source_lava_source", "mcl_end:end_stone", -6900, -4400)
-replace("mcl_core:lava_source", "mcl_end:end_stone", -6900, -4400)
+replace("mapgen_lava_source_lava_flowing", "mcl_end:end_stone", -6900, -5400)
+replace("mcl_core:lava_flowing", "mcl_end:end_stone", -6900, -5400)
+replace("mapgen_air", "mcl_end:end_stone", -6900, -5400)
+replace("mapgen_lava_source_lava_source", "mcl_end:end_stone", -6900, -5400)
+replace("mcl_core:lava_source", "mcl_end:end_stone", -6900, -5400)
 
 --dungeon swap
 replace("mcl_core:cobblestone", "mcl_nether:nether_brick", -3900, -2400)

@@ -14,17 +14,16 @@ minetest.register_alias("default:end_portal", "mcl_portals:end_portal")
 		
 			
 -- Load files
+dofile(minetest.get_modpath("mcl_portals").."/craftitems.lua")  --must register first
 
+--minetest.after(2, function()
 dofile(minetest.get_modpath("mcl_portals").."/nodes.lua")
-
-dofile(minetest.get_modpath("mcl_portals").."/craftitems.lua")
 --v7 mapgen W.I.P.  MOVED TO MCL_BIOMES
 --dofile(minetest.get_modpath("mcl_portals").."/mapgen.lua")
-
 dofile(minetest.get_modpath("mcl_portals").."/portal.lua")
 dofile(minetest.get_modpath("mcl_portals").."/portal2.lua")
 dofile(minetest.get_modpath("mcl_portals").."/portal3.lua")
-
+--end)
 
 
 -- ANTI GRIEF by rnd

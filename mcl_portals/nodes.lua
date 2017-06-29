@@ -1,4 +1,22 @@
 mcl_portals = {}
+
+minetest.register_node("mcl_portals:nether_air", {
+	description = "Void (you hacker you!)",
+	inventory_image = "mcl_core_void.png",
+	wield_image = "mcl_core_void.png",
+	drawtype = "airlike",
+	paramtype = "light",
+	sunlight_propagates = true,
+	walkable = false,
+	pointable = false,
+	diggable = false,
+	buildable_to = true,
+	air_equivalent = true,
+	drop = "",
+	groups = {not_in_creative_inventory=1, air=1},
+	light_source = 7 --test only
+})
+
 minetest.register_node("mcl_portals:void", {
 	description = "Void (you hacker you!)",
 	inventory_image = "mcl_core_void.png",
@@ -12,7 +30,7 @@ minetest.register_node("mcl_portals:void", {
 	buildable_to = true,
 	air_equivalent = true,
 	drop = "",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, air=1},
 	light_source = 14 --test only
 })
 
@@ -29,5 +47,5 @@ minetest.register_node("mcl_portals:dummy", {
 	buildable_to = true,
 	air_equivalent = true,
 	drop = "",
-	groups = {not_in_creative_inventory=1},
+	groups = {not_in_creative_inventory=1, air=1},
 })

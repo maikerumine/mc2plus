@@ -1016,7 +1016,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end
 end)
 
-
+--TODO Modify to make realms
 -- Generate bedrock layer or layers
 local BEDROCK_MIN = mcl_vars.mg_bedrock_overworld_min
 local BEDROCK_MAX = mcl_vars.mg_bedrock_overworld_max
@@ -1036,7 +1036,8 @@ minetest.register_on_generated(function(minp, maxp)
 	if minp.y <= GEN_MAX then
 		local c_bedrock = minetest.get_content_id("mcl_core:bedrock")
 		--local c_void = minetest.get_content_id("mcl_core:void")
-		local c_lava = minetest.get_content_id("mcl_core:lava_source")
+		--local c_lava = minetest.get_content_id("mcl_core:lava_source")
+		local c_lava = minetest.get_content_id("mcl_portals:nether_air")
 		local c_air = minetest.get_content_id("air")
 
 		local max_y = math.min(maxp.y, GEN_MAX)
@@ -1080,8 +1081,8 @@ minetest.register_on_generated(function(minp, maxp)
 						data[p_pos] = setdata
 						lvm_used = true
 					elseif mcl_vars.mg_lava and y <= mcl_vars.mg_lava_overworld_max then
-						if data[p_pos] == c_air then
-							data[p_pos] = c_lava
+						if data[p_pos] == c_air then --this makes all air lava i.e. caves
+							data[p_pos] = c_lava	--this makes all air lava i.e. caves
 						end
 						lvm_used = true
 					end

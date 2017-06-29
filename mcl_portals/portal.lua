@@ -1,4 +1,4 @@
-mcl_portals = {}
+--mcl_portals = {}
 
 -- Parameters
 
@@ -69,75 +69,10 @@ minetest.register_node("mcl_portals:portal", {
 	groups = {not_in_creative_inventory = 1}
 })
 
-minetest.register_node(":mcl_core:obsidian", {
-	description = "Obsidian",
-	tiles = {"default_obsidian.png"},
-	is_ground_content = false,
-	--sounds = mcl_sounds.node_sound_stone_defaults(),
-	stack_max = 64,
-	groups = {pickaxey=5, building_block=1, material_stone=1},
-	_mcl_blast_resistance = 6000,
-	_mcl_hardness = 50,
-
-	on_destruct = function(pos)
-		local meta = minetest.get_meta(pos)
-		local p1 = minetest.string_to_pos(meta:get_string("p1"))
-		local p2 = minetest.string_to_pos(meta:get_string("p2"))
-		local target = minetest.string_to_pos(meta:get_string("target"))
-		if not p1 or not p2 then
-			return
-		end
-
-		for x = p1.x, p2.x do
-		for y = p1.y, p2.y do
-		for z = p1.z, p2.z do
-			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
-				if nn == "mcl_portals:portal" then
-					minetest.remove_node({x = x, y = y, z = z})
-				end
-				local m = minetest.get_meta({x = x, y = y, z = z})
-				m:set_string("p1", "")
-				m:set_string("p2", "")
-				m:set_string("target", "")
-			end
-		end
-		end
-		end
-
-		meta = minetest.get_meta(target)
-		if not meta then
-			return
-		end
-		p1 = minetest.string_to_pos(meta:get_string("p1"))
-		p2 = minetest.string_to_pos(meta:get_string("p2"))
-		if not p1 or not p2 then
-			return
-		end
-
-		for x = p1.x, p2.x do
-		for y = p1.y, p2.y do
-		for z = p1.z, p2.z do
-			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
-				if nn == "mcl_portals:portal" then
-					minetest.remove_node({x = x, y = y, z = z})
-				end
-				local m = minetest.get_meta({x = x, y = y, z = z})
-				m:set_string("p1", "")
-				m:set_string("p2", "")
-				m:set_string("target", "")
-			end
-		end
-		end
-		end
-	end,
-})
-
 
 
 -- Functions
-
+--Build arrival portal
 local function build_portal(pos, target)
 	local p = {x = pos.x - 1, y = pos.y - 1, z = pos.z}
 	local p1 = {x = pos.x - 1, y = pos.y - 1, z = pos.z}
@@ -284,9 +219,29 @@ function make_portal(pos)
 		else
 			p = {x = p1.x, y = y, z = p1.z + d}
 		end
-		if minetest.get_node(p).name ~= "air" then
+		--if minetest.get_node(p).name ~= "air"
+		if minetest.get_node(p).name ~= "air" 
+		--or minetest.get_node(p).name ~= "void" 
+		--or minetest.get_node(p).name ~= "mcl_portals:void" 
+		--or minetest.get_node(p).name ~= "mcl_portals:nether_air" 
+		then
 			return false
 		end
+		--[[
+		if minetest.get_node(p).name ~= "void" 
+		then
+			return false
+		end
+		
+		if minetest.get_node(p).name ~= "mcl_portals:void" 
+		then
+			return false
+		end
+		
+		if minetest.get_node(p).name ~= "mcl_portals:nether_air" 
+		then
+			return false
+		end]]
 	end
 	end
 
@@ -314,7 +269,12 @@ function make_portal(pos)
 		else
 			p = {x = p1.x, y = y, z = p1.z + d}
 		end
-		if minetest.get_node(p).name == "air" then
+		--if minetest.get_node(p).name == "air"
+		if minetest.get_node(p).name == "air" 
+		--or minetest.get_node(p).name == "void" 
+		--or minetest.get_node(p).name == "mcl_portals:void" 
+		--or minetest.get_node(p).name == "mcl_portals:nether_air" 
+		then
 			minetest.set_node(p, {name = "mcl_portals:portal", param2 = param2})
 		end
 		local meta = minetest.get_meta(p)
