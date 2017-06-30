@@ -18,7 +18,7 @@ mobs:register_mob("mobs_mc:polar_bear", {
 	hp_max = 30,
 	collisionbox = {-0.7, -0.01, -0.7, 0.7, 1.39, 0.7},
 	visual = "mesh",
-	mesh = "mobs_mc_polar_bear.b3d",
+	mesh = "mobs_mc_polarbear.b3d",
 	textures = {
 		{"mobs_mc_polarbear.png"},
 	},
@@ -42,7 +42,6 @@ mobs:register_mob("mobs_mc:polar_bear", {
 		max = 2,},
 
 	},
-	drawtype = "front",
 	water_damage = 0,
 	floats = 1,
 	lava_damage = 5,
@@ -50,6 +49,7 @@ mobs:register_mob("mobs_mc:polar_bear", {
 	fear_height = 4,
 	sounds = {
 		random = "Cowhurt1", -- TODO: Replace
+		distance = 16,
 	},
 	animation = {
 		speed_normal = 25,		speed_run = 50,
