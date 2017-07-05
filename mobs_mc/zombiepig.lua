@@ -3,6 +3,9 @@
 --made for MC like Survival game
 --License for code WTFPL and otherwise stated in readmes
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
 
 --dofile(minetest.get_modpath("mobs").."/api.lua")
 --###################
@@ -23,7 +26,7 @@ local pigman = {
 	collisionbox = {-0.3, -0.01, -0.3, 0.3, 1.94, 0.3},
 	visual = "mesh",
 	mesh = "mobs_mc_zombie_pigman.b3d",
-	textures = {{"mobs_mc_zombie_pigman.png"}},
+	textures = {{"mobs_mc_zombie_pigman.png^mobs_mc_zombie_pigman_sword.png"}},
 	visual_size = {x=3, y=3},
 	sounds = {
 		random = "zombie1", -- TODO: replace
@@ -99,7 +102,7 @@ mobs:spawn_specific("mobs_mc:pigman", mobs_mc.spawn.nether_portal, {"air", "mcl_
 mobs:alias_mob("mobs:pigman", "mobs_mc:pigman")
 
 -- spawn eggs
-mobs:register_egg("mobs_mc:pigman", "Zombie Pigman", "mobs_mc_spawn_icon_zombie_pigman.png", 0)
+mobs:register_egg("mobs_mc:pigman", S("Zombie Pigman"), "mobs_mc_spawn_icon_zombie_pigman.png", 0)
 
 if minetest.settings:get_bool("log_mods") then
 	minetest.log("action", "MC Pigmen loaded")

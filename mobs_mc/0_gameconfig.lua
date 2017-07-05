@@ -48,9 +48,12 @@ mobs_mc.items = {
 	shulker_shell = "mobs_mc:shulker_shell",
 	magma_cream = "mobs_mc:magma_cream",
 	spider_eye = "mobs_mc:spider_eye",
+	snowball = "mobs_mc:snowball",
 	totem = "mobs_mc:totem",
 	rotten_flesh = "mobs_mc:rotten_flesh",
 	nether_star = "mobs_mc:nether_star",
+	bone = "mobs_mc:bone",
+	slimeball = "mobs_mc:slimeball",
 
 	arrow = "mobs_mc:arrow",
 	bow = "mobs_mc:bow_wood",
@@ -61,6 +64,8 @@ mobs_mc.items = {
 	shears = "mobs:shears",
 
 	-- Minetest Game
+	top_snow = "default:snow",
+	snow_block = "default:snowblock",
 	mushroom_red = "flowers:mushroom_red",
 	bucket = "bucket:bucket_empty",
 	grass_block = "default:dirt_with_grass",
@@ -68,6 +73,7 @@ mobs_mc.items = {
 	stick = "default:stick",
 	flint = "default:flint",
 	iron_ingot = "default:steel_ingot",
+	iron_block = "default:steelblock",
 	fire = "fire:basic_flame",
 	gunpowder = "tnt:gunpowder",
 	flint_and_steel = "fire:flint_and_steel",
@@ -107,8 +113,11 @@ mobs_mc.items = {
 	salmon_raw = "fishing:carp_raw",
 	clownfish_raw = "fishing:clownfish_raw",
 	pufferfish_raw = "fishing:pike_raw",
+
 	bone = "bonemeal:bone",
 	slimeball = "mesecons_materials:glue",
+	cookie = "farming:cookie",
+
 
 	-- TODO: Add actual ender pearl
 	ender_pearl = "farorb:farorb",
@@ -135,6 +144,7 @@ mobs_mc.items = {
 	wool_black = "wool:black",
 	-- Light blue intentionally missing
 
+	-- Special items
 	music_discs = {}, -- No music discs by default; used by creeper. Override this if your subgame has music discs.
 }
 
@@ -142,8 +152,9 @@ mobs_mc.items = {
 mobs_mc.follow = {
 	sheep = { mobs_mc.items.wheat },
 	cow = { mobs_mc.items.wheat },
-	chicken = { "farming:seed_wheat", "farming:seed_cotton" },
-	horse = { mobs_mc.items.apple, mobs_mc.items.sugar, mobs_mc.items.wheat, mobs_mc.items.hay_bale, mobs_mc.items.golden_apple, mobs_mc.items.golden_carrot }, -- TODO
+	chicken = { "farming:seed_wheat", "farming:seed_cotton" }, -- seeds in general
+	parrot = { "farming:seed_wheat", "farming:seed_cotton" }, -- seeds in general
+	horse = { mobs_mc.items.apple, mobs_mc.items.sugar, mobs_mc.items.wheat, mobs_mc.items.hay_bale, mobs_mc.items.golden_apple, mobs_mc.items.golden_carrot },
 	pig = { mobs_mc.items.potato, mobs_mc.items.carrot, mobs_mc.items.carrot_on_a_stick,
 		mobs_mc.items.apple, -- Minetest Game extra
 	},
@@ -244,9 +255,13 @@ mobs_mc.spawn = {
 	water = { mobs_mc.items.water_source, "mcl_core:water_source", "default:water_source" },
 }
 
+mobs_mc.misc = {
+	shears_wear = 276, -- Wear to add per shears usage (238 uses)
+}
+
 -- Item name overrides from mobs_mc_gameconfig (if present)
 if minetest.get_modpath("mobs_mc_gameconfig") and mobs_mc.override then
-	local tables = {"items", "follow", "replace", "spawn"}
+	local tables = {"items", "follow", "replace", "spawn", "misc"}
 	for t=1, #tables do
 		local tbl = tables[t]
 		if mobs_mc.override[tbl] then

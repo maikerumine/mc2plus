@@ -3,6 +3,9 @@
 --made for MC like Survival game
 --License for code WTFPL and otherwise stated in readmes
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
 
 --maikerumines throwing code
 --arrow (weapon)
@@ -31,7 +34,7 @@ minetest.register_node("mobs_mc:arrow_box", {
 			{7.5/17, -2.5/17, -2.5/17, 8.5/17, -3.5/17, -3.5/17},
 		}
 	},
-	tiles = {"throwing_arrow.png", "throwing_arrow.png", "throwing_arrow_back.png", "throwing_arrow_front.png", "throwing_arrow_2.png", "throwing_arrow.png"},
+	tiles = {"mcl_throwing_arrow.png^[transformFX", "mcl_throwing_arrow.png^[transformFX", "mcl_throwing_arrow_back.png", "mcl_throwing_arrow_front.png", "mcl_throwing_arrow.png", "mcl_throwing_arrow.png^[transformFX"},
 	groups = {not_in_creative_inventory=1},
 })
 
@@ -130,8 +133,10 @@ end
 
 if c("arrow") then
 	minetest.register_craftitem("mobs_mc:arrow", {
-		description = "Arrow",
-		inventory_image = "throwing_arrow_2.png",
+		description = S("Arrow"),
+		_doc_items_longdesc = S("Arrows are ammunition for bows."),
+		_doc_items_usagehelp = S("To use arrows as ammunition for a bow, put them in the inventory slot following the bow. Slots are counted left to right, top to bottom."),
+		inventory_image = "mcl_throwing_arrow_inv.png",
 	})
 end
 
@@ -148,8 +153,10 @@ end
 
 if c("bow") then
 	minetest.register_tool("mobs_mc:bow_wood", {
-		description = "Bow",
-		inventory_image = "mobs_mc_bow.png",
+		description = S("Bow"),
+		_doc_items_longdesc = S("Bows are ranged weapons to shoot arrows at your foes."),
+		_doc_items_usagehelp = S("To use the bow, you first need to have at least one arrow in slot following the bow. Leftclick to shoot. Each hit deals 3 damage."),
+		inventory_image = "mcl_throwing_bow.png",
 		on_use = function(itemstack, user, pointed_thing)
 			if throwing_shoot_arrow(itemstack, user, pointed_thing) then
 				if not minetest.settings:get_bool("creative_mode") then
@@ -170,14 +177,19 @@ if c("bow") then
 	})
 end
 
+local how_to_throw = "Hold it in your and and leftclick to throw."
+
 -- egg throwing item
 -- egg entity
 if c("egg") then
+	local egg_GRAVITY = 9
+	local egg_VELOCITY = 19
+
 	mobs:register_arrow("mobs_mc:egg_entity", {
 		visual = "sprite",
 		visual_size = {x=.5, y=.5},
 		textures = {"mobs_chicken_egg.png"},
-		velocity = 6,
+		velocity = egg_velocity,
 
 		hit_player = function(self, player)
 			player:punch(minetest.get_player_by_name(self.playername) or self.object, 1.0, {
@@ -233,9 +245,6 @@ if c("egg") then
 		end
 	})
 
-	local egg_GRAVITY = 9
-	local egg_VELOCITY = 19
-
 	-- shoot egg
 	local mobs_shoot_egg = function (item, player, pointed_thing)
 
@@ -275,15 +284,103 @@ if c("egg") then
 		local ent2 = obj:get_luaentity()
 		ent2.playername = player:get_player_name()
 
-		item:take_item()
+		if not minetest.settings:get_bool("creative_mode") then
+			item:take_item()
+		end
 
 		return item
 	end
 
 	minetest.register_craftitem("mobs_mc:egg", {
-		description = "Egg",
+		description = S("Egg"),
+		_doc_items_longdesc = S("Eggs can be thrown and break on impact. There is a small chance that 1 or even 4 chicks will pop out"),
+		_doc_items_usagehelp = how_to_throw,
 		inventory_image = "mobs_chicken_egg.png",
 		on_use = mobs_shoot_egg,
+	})
+end
+
+if c("snowball") then
+	local snowball_GRAVITY = 9
+	local snowball_VELOCITY = 19
+
+	mobs:register_arrow("mobs_mc:snowball_entity", {
+		visual = "sprite",
+		visual_size = {x=.5, y=.5},
+		textures = {"mcl_throwing_snowball.png"},
+		velocity = snowball_VELOCITY,
+
+		hit_player = function(self, player)
+			-- FIXME: No knockback
+			player:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = {},
+			}, nil)
+		end,
+
+		hit_mob = function(self, mob)
+			-- Hurt blazes, but not damage to anything else
+			local dmg = {}
+			if mob:get_luaentity().name == "mobs_mc:blaze" then
+				dmg = {fleshy = 3}
+			end
+			-- FIXME: No knockback
+			mob:punch(self.object, 1.0, {
+				full_punch_interval = 1.0,
+				damage_groups = dmg,
+			}, nil)
+		end,
+
+	})
+
+	-- shoot snowball
+	local mobs_shoot_snowball = function (item, player, pointed_thing)
+
+		local playerpos = player:getpos()
+
+		local obj = minetest.add_entity({
+			x = playerpos.x,
+			y = playerpos.y +1.5,
+			z = playerpos.z
+		}, "mobs_mc:snowball_entity")
+
+		local ent = obj:get_luaentity()
+		local dir = player:get_look_dir()
+
+		ent.velocity = snowball_VELOCITY -- needed for api internal timing
+		ent.switch = 1 -- needed so that egg doesn't despawn straight away
+
+		obj:setvelocity({
+			x = dir.x * snowball_VELOCITY,
+			y = dir.y * snowball_VELOCITY,
+			z = dir.z * snowball_VELOCITY
+		})
+
+		obj:setacceleration({
+			x = dir.x * -3,
+			y = -snowball_GRAVITY,
+			z = dir.z * -3
+		})
+
+		-- pass player name to egg for chick ownership
+		local ent2 = obj:get_luaentity()
+		ent2.playername = player:get_player_name()
+
+		if not minetest.settings:get_bool("creative_mode") then
+			item:take_item()
+		end
+
+		return item
+	end
+
+
+	-- Snowball
+	minetest.register_craftitem("mobs_mc:snowball", {
+		description = S("Snowball"),
+		_doc_items_longdesc = S("Snowballs can be thrown at your enemies. A snowball deals 3 damage to blazes, but is harmless to anything else."),
+		_doc_items_usagehelp = how_to_throw,
+		inventory_image = "mcl_throwing_snowball.png",
+		on_use = mobs_shoot_snowball,
 	})
 end
 

@@ -3,6 +3,9 @@
 --made for MC like Survival game
 --License for code WTFPL and otherwise stated in readmes
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
 
 --dofile(minetest.get_modpath("mobs").."/api.lua")
 
@@ -100,10 +103,15 @@ mobs:register_mob("mobs_mc:llama", {
 			return
 		end
 
-		-- Feed, tame or heal llama
-		if mobs:feed_tame(self, clicker, 1, true, true) then
-			return
+		local item = clicker:get_wielded_item()
+		if item:get_name() == mobs_mc.items.hay_bale then
+			-- Breed with hay bale
+			if mobs:feed_tame(self, clicker, 1, true, false) then return end
+		else
+			-- Feed with anything else
+			if mobs:feed_tame(self, clicker, 1, false, true) then return end
 		end
+		if mobs:protect(self, clicker) then return end
 
 		-- Make sure tamed llama is mature and being clicked by owner only
 		if self.tamed and not self.child and self.owner == clicker:get_player_name() then
@@ -122,9 +130,9 @@ mobs:register_mob("mobs_mc:llama", {
 				mobs.attach(self, clicker)
 			end
 
-		-- Used to capture llama with lasso
+		-- Used to capture llama
 		elseif not self.driver and clicker:get_wielded_item():get_name() ~= "" then
-			mobs:capture_mob(self, clicker, 0, 0, 80, false, nil)
+			mobs:capture_mob(self, clicker, 0, 5, 60, false, nil)
 		end
 	end
 
@@ -134,7 +142,7 @@ mobs:register_mob("mobs_mc:llama", {
 mobs:register_spawn("mobs_mc:llama", mobs_mc.spawn.savanna, minetest.LIGHT_MAX+1, 0, 15000, 1, 40)
 
 -- spawn eggs
-mobs:register_egg("mobs_mc:llama", "Llama", "mobs_mc_spawn_icon_llama.png", 0)
+mobs:register_egg("mobs_mc:llama", S("Llama"), "mobs_mc_spawn_icon_llama.png", 0)
 
 if minetest.settings:get_bool("log_mods") then
 	minetest.log("action", "MC Llama loaded")

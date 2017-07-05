@@ -1,5 +1,8 @@
 --License for code WTFPL and otherwise stated in readmes
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
 
 
 --dofile(minetest.get_modpath("mobs").."/api.lua")
@@ -38,8 +41,10 @@ mobs:register_mob("mobs_mc:chicken", {
 		max = 2,},
 	},
 	water_damage = 1,
-	lava_damage = 5,
+	lava_damage = 4,
 	light_damage = 0,
+	fall_damage = 0,
+	fall_speed = -2.25,
 	sounds = {
 		random = "mobs_chicken",
 		death = "Chickenhurt1", -- TODO: replace
@@ -58,10 +63,9 @@ mobs:register_mob("mobs_mc:chicken", {
 	fear_height = 4,
 
 	on_rightclick = function(self, clicker)
-
-		if mobs:feed_tame(self, clicker, 8, true, true) then return end
+		if mobs:feed_tame(self, clicker, 1, true, true) then return end
 		if mobs:protect(self, clicker) then return end
-		if mobs:capture_mob(self, clicker, 30, 50, 80, false, nil) then return end
+		if mobs:capture_mob(self, clicker, 0, 60, 5, false, nil) then return end
 	end,
 
 	do_custom = function(self, dtime)
@@ -91,10 +95,10 @@ mobs:register_mob("mobs_mc:chicken", {
 })
 
 --spawn
-mobs:register_spawn("mobs_mc:chicken", mobs_mc.spawn.grassland, minetest.LIGHT_MAX+1, 9, 7000, 3, 31000)
+mobs:register_spawn("mobs_mc:chicken", mobs_mc.spawn.grassland, minetest.LIGHT_MAX+1, 9, 17000, 3, 31000)
 
 -- spawn eggs
-mobs:register_egg("mobs_mc:chicken", "Chicken", "mobs_mc_spawn_icon_chicken.png", 0)
+mobs:register_egg("mobs_mc:chicken", S("Chicken"), "mobs_mc_spawn_icon_chicken.png", 0)
 
 if minetest.settings:get_bool("log_mods") then
 	minetest.log("action", "MC chicken loaded")

@@ -3,6 +3,9 @@
 --made for MC like Survival game
 --License for code WTFPL and otherwise stated in readmes
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
 
 --dofile(minetest.get_modpath("mobs").."/api.lua")
 
@@ -23,7 +26,7 @@ mobs:register_mob("mobs_mc:witherskeleton", {
 	visual = "mesh",
 	mesh = "mobs_mc_witherskeleton.b3d",
 	textures = {
-		{"mobs_mc_witherskeleton.png"},
+		{"mobs_mc_wither_skeleton.png^mobs_mc_wither_skeleton_sword.png"},
 	},
 	visual_size = {x=3.6, y=3.6},
 	makes_footstep_sound = true,
@@ -84,7 +87,7 @@ mobs:register_mob("mobs_mc:witherskeleton", {
 --spawn
 mobs:register_spawn("mobs_mc:witherskeleton", mobs_mc.spawn.nether_fortress, 7, 0, 5000, 3, -3000, true)
 -- spawn eggs
-mobs:register_egg("mobs_mc:witherskeleton", "Wither Skeleton", "mobs_mc_spawn_icon_witherskeleton.png", 0)
+mobs:register_egg("mobs_mc:witherskeleton", S("Wither Skeleton"), "mobs_mc_spawn_icon_witherskeleton.png", 0)
 
 if minetest.settings:get_bool("log_mods") then
 	minetest.log("action", "MC Wither Skeleton loaded")

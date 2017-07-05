@@ -1,5 +1,9 @@
 --License for code WTFPL and otherwise stated in readmes
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
+
 local rabbit = {
 	type = "animal",
 	passive = true,
@@ -49,13 +53,10 @@ local rabbit = {
 	replace_rate = 10,
 	replace_what = mobs_mc.replace.rabbit,
 	on_rightclick = function(self, clicker)
-
-		-- feed or tame
-		if mobs:feed_tame(self, clicker, 4, true, true) then
-			return
-		end
-
-		mobs:capture_mob(self, clicker, 30, 50, 80, false, nil)
+		-- Feed, tame protect or capture
+		if mobs:feed_tame(self, clicker, 1, true, true) then return end
+		if mobs:protect(self, clicker) then return end
+		if mobs:capture_mob(self, clicker, 0, 50, 80, false, nil) then return end
 	end,
 	do_custom = function(self)
 		-- Easter egg: Change texture if rabbit is named “Toast”
@@ -103,7 +104,7 @@ mobs:register_mob("mobs_mc:killer_bunny", killer_bunny)
 
 local spawn = {
 	name = "mobs_mc:rabbit",
-	chance = 5000,
+	chance = 15000,
 	active_object_count = 99,
 	min_light = 0,
 	max_light = minetest.LIGHT_MAX+1,
@@ -159,10 +160,10 @@ end
 mobs:spawn(spawn_grass)
 
 -- Spawn egg
-mobs:register_egg("mobs_mc:rabbit", "Rabbit", "mobs_mc_spawn_icon_rabbit.png", 0)
+mobs:register_egg("mobs_mc:rabbit", S("Rabbit"), "mobs_mc_spawn_icon_rabbit.png", 0)
 
 -- Note: This spawn egg does not exist in Minecraft
-mobs:register_egg("mobs_mc:killer_bunny", "Killer Bunny", "mobs_mc_spawn_icon_rabbit.png^[colorize:#FF0000:192", 0) -- TODO: Update inventory image
+mobs:register_egg("mobs_mc:killer_bunny", S("Killer Bunny"), "mobs_mc_spawn_icon_rabbit.png^[colorize:#FF0000:192", 0) -- TODO: Update inventory image
 
 
 -- compatibility

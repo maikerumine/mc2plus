@@ -2,6 +2,10 @@
 --################### ENDERMITE
 --###################
 
+-- intllib
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
+
 mobs:register_mob("mobs_mc:endermite", {
 	type = "monster",
 	passive = false,
@@ -29,10 +33,7 @@ mobs:register_mob("mobs_mc:endermite", {
 	fear_height = 4,
 	view_range = 16,
 	damage = 2,
-	on_rightclick = function(self, clicker)
-		mobs:capture_mob(self, clicker, 25, 80, 0, true, nil)
-	end,
 	blood_amount = 0,
 })
 
-mobs:register_egg("mobs_mc:endermite", "Endermite", "mobs_mc_spawn_icon_endermite.png", 0)
+mobs:register_egg("mobs_mc:endermite", S("Endermite"), "mobs_mc_spawn_icon_endermite.png", 0)
