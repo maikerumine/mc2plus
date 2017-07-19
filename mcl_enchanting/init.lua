@@ -417,7 +417,7 @@ minetest.register_craft({
 	output = "mcl_enchanting:enchantment_table",
 	recipe = {
 		{"mesecons_torch:redstoneblock","mcl_books:book","mesecons_torch:redstoneblock"},
-		{"mcl_core:emeraldblock","mcl_heads:steve","mcl_core:emeraldblock"},
+		{"mcl_core:emeraldblock","mobs_mc:head_creeper","mcl_core:emeraldblock"},
 		{"mcl_core:obsidian","mcl_core:diamondblock","mcl_core:obsidian"},
 	}
 })

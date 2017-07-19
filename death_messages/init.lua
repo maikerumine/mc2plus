@@ -187,56 +187,56 @@ minetest.register_on_dieplayer(function(player)
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-		player:setpos(death)
+		--player:setpos(death)
 	elseif node.name == "default:lava_flowing"  then
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
-		player:setpos(death)
+		--player:setpos(death)
 	-- Death by drowning
 	elseif player:get_breath() == 0 then
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("water"))
-		player:setpos(death)
+		--player:setpos(death)
 	-- Death by fire
 	elseif node.name == "fire:basic_flame" then
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
-		player:setpos(death)
+		--player:setpos(death)
 	-- Death by Toxic water
 	elseif node.name == "es:toxic_water_source" then
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		player:setpos(death)
+		--player:setpos(death)
 	elseif node.name == "es:toxic_water_flowing" then
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		player:setpos(death)
+		--player:setpos(death)
 	elseif node.name == "groups:radioactive" then
 		minetest.chat_send_all(
 		string.char(0x1b).."(c@#ffffff)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
-		player:setpos(death)	
+		--player:setpos(death)	
 		
 	-- Death by something else
 	else
-		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
-		string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
-		minetest.after(0.5, function(holding)
-			player:setpos(death)  --gamebreaker?
-		end)
+		--minetest.chat_send_all(
+		--string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		--string.char(0x1b).."(c@#ff0000)"..get_message("other"))  --toospammy
+		--minetest.after(0.5, function(holding)
+			--player:setpos(death)  --gamebreaker?
+		--end)
 	end
 	
 	
-	minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
-	minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
+	--minetest.chat_send_all(string.char(0x1b).."(c@#000000)".."[DEATH COORDINATES] "..string.char(0x1b).."(c@#ffffff)" .. player_name .. string.char(0x1b).."(c@#000000)".." left a corpse full of diamonds here: " ..
+	--minetest.pos_to_string(pos) .. string.char(0x1b).."(c@#aaaaaa)".." Come and get them!")
 	--player:setpos(death)
-	minetest.sound_play("pacmine_death", { gain = 0.35})
+	--minetest.sound_play("pacmine_death", { gain = 0.35})  NOPE!!!
 	
 end)
 
