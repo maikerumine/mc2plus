@@ -23,9 +23,49 @@ Origin of those models:
 
 ## Textures
 
-* Mob and item textures from [Pixel Perfection](https://www.planetminecraft.com/texture_pack/131pixel-perfection/), a texture pack for Minecraft.
-    * Author: [XSSheep](https://www.planetminecraft.com/member/xssheep/)
-    * License: CC BY-SA 4.0
+* Mob and item textures are heavily based on [Pixel Perfection](https://www.planetminecraft.com/texture_pack/131pixel-perfection/), a texture pack for Minecraft.
+    * Original author: [XSSheep](https://www.planetminecraft.com/member/xssheep/)
+    * License (if not mentioned otherwise): CC BY-SA 4.0
+    * Some textures have been modified or added
+    * Modifications and additions by MysticTempest:
+        * `mobs_mc_cave_spider.png`
+        * `mobs_mc_enderman_eyes.png`
+        * `mobs_mc_enderman.png`
+        * `mobs_mc_ghast.png`
+        * `mobs_mc_skeleton.png`
+        * `mobs_mc_slime.png`
+        * `mobs_mc_spider_eyes.png`
+        * `mobs_mc_spider.png`
+        * `mobs_mc_squid.png`
+        * `mobs_mc_zombie.png`
+        * `mobs_mc_villager_butcher.png`
+        * `mobs_mc_villager_farmer.png`
+        * `mobs_mc_villager_librarian.png`
+        * `mobs_mc_villager.png`
+        * `mobs_mc_villager_priest.png`
+        * `mobs_mc_villager_smith.png`
+        * `mobs_mc_parrot_blue.png`
+        * `mobs_mc_parrot_green.png`
+        * `mobs_mc_parrot_grey.png`
+        * `mobs_mc_parrot_red_blue.png`
+        * `mobs_mc_parrot_yellow_blue.png`
+        * `mobs_mc_evoker_base.png`
+        * `mobs_mc_illusionist_bow.png`
+        * `mobs_mc_illusionist.png`
+        * `mobs_mc_vindicator_axe.png`
+        * `mobs_mc_vindicator_base.png`
+        * `mobs_mc_horse_skeleton.png`
+    * Additions by kingoscargames:
+        * `mobs_mc_vex.png`
+        * `mobs_mc_vex_charging.png`
+        * `mobs_mc_llama.png`
+        * `mobs_mc_llama_creamy.png`
+        * `mobs_mc_llama_brown.png`
+        * `mobs_mc_llama_white.png`
+        * `mobs_mc_llama_gray.png`
+        * `mobs_mc_llama_chest.png`
+        * `mobs_mc_endermite.png`
+
 * “Spawn egg” textures (`mobs_mc_spawn_icon_*`) by 22i
 * Any other texture not mentioned here are licensed under the MIT License
 
