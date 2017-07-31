@@ -1,17 +1,16 @@
---mcl_portals = {}
+mcl_portals = {}
 
 --node override
---minetest.after(2, function()
+minetest.after(1, function()
 minetest.register_node(":mcl_core:obsidian", {
 	description = "Obsidian-p",
 	tiles = {"default_obsidian.png"},
 	is_ground_content = false,
-	--sounds = mcl_sounds.node_sound_stone_defaults(),
 	stack_max = 64,
 	groups = {pickaxey=5, building_block=1, material_stone=1},
 	_mcl_blast_resistance = 6000,
 	_mcl_hardness = 50,
-
+	
 	on_destruct = function(pos)
 		local meta = minetest.get_meta(pos)
 		local p1 = minetest.string_to_pos(meta:get_string("p1"))
@@ -68,12 +67,11 @@ minetest.register_node(":mcl_core:obsidian", {
 })
 --end)
 
---minetest.after(2, function()
+--minetest.after(1, function()
 minetest.register_node(":mcl_core:emeraldblock", {
 	description = "Emerald Block-p",
 	tiles = {"mcl_core_emerald_block.png"},
 	is_ground_content = false,
-	--sounds = mcl_sounds.node_sound_stone_defaults(),
 	stack_max = 64,
 	groups = {pickaxey=4, building_block=1},
 	_mcl_blast_resistance = 30,
@@ -135,12 +133,11 @@ minetest.register_node(":mcl_core:emeraldblock", {
 })
 --end)
 
---minetest.after(2, function()
+--minetest.after(1, function()
 minetest.register_node(":mcl_end:purpur_block", {
 	description = "Purpur Block-p",
 	tiles = {"mcl_end_purpur_block.png"},
 	is_ground_content = false,
-	--sounds = mcl_sounds.node_sound_stone_defaults(),
 	stack_max = 64,
 	groups = {pickaxey=5, building_block=1, material_stone=1},
 	_mcl_blast_resistance = 6000,
@@ -206,7 +203,7 @@ minetest.register_node(":mcl_end:purpur_block", {
 
 	
 -- Flint and steel
-minetest.after(1, function()
+--minetest.after(1, function()
 minetest.register_tool(":mcl_fire:flint_and_steel", {
 	description = "Flint and Steel-p",
 	_doc_items_longdesc = "Flint and steel is a tool to start fires and ignite blocks.",
@@ -247,7 +244,7 @@ minetest.register_tool(":mcl_fire:flint_and_steel", {
 	sound = { breaks = "default_tool_breaks" },	
 	
 })
-end)
+--end)
 
 
 --REF
@@ -271,7 +268,7 @@ minetest.register_craftitem(":default:mese_crystal_fragment", {
 --local node_under = minetest.get_node(pt.under).name
 
 --Emerald Realm
-minetest.after(1, function()
+--minetest.after(1, function()
 minetest.register_craftitem(":mcl_core:emerald", {
 	description = "Emerald-p",
 	_doc_items_longdesc = "Emeralds are not very useful on their own, but many villagers have a love for emeralds and often use it as a currency in trading.",
@@ -296,11 +293,11 @@ minetest.register_craftitem(":mcl_core:emerald", {
 		return itemstack
 	end,
 })
-end)
+--end)
 
 
 --The End [temp realm]
-minetest.after(1, function()
+--minetest.after(1, function()
 minetest.register_craftitem(":mcl_nether:quartz", {
 	description = "Nether Quartz-p",
 	_doc_items_longdesc = "Nether quartz is a versatile crafting ingredient.",

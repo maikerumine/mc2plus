@@ -104,7 +104,7 @@ minetest.register_craftitem("simple_banners:mcl_dye", {
 	groups = {not_in_creative_inventory = 1,not_in_craft_guide = 1},
 	stack_max = 1,
 })
-
+--[[
 --BEGIN EXAMPLES
 --These are used to simplify the craft guide by giving a generic craft for all the colours.
 minetest.register_craft({
@@ -207,7 +207,7 @@ minetest.register_craft({
 })
 
 --END EXAMPLES
-
+]]
 
 
 
@@ -232,6 +232,7 @@ minetest.register_node("simple_banners:plain", {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 },
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:plain 12",
 	recipe = {
@@ -240,7 +241,7 @@ minetest.register_craft({
 			{ "", "group:stick", ""},
 	}
 })
-
+]]
 --PLAIN COLOR
 --color craft
 minetest.register_node("simple_banners:plain_".. clrs[i][1], {
@@ -262,6 +263,7 @@ minetest.register_node("simple_banners:plain_".. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:plain_".. clrs[i][1] .. " 1",
 	type = "shapeless",
@@ -269,7 +271,7 @@ minetest.register_craft({
 			  "simple_banners:plain",  "mcl_dye:" .. clrs[i][1] ,
 	}
 })
-
+]]
 
 --BANNER BASIC
 -- Cross
@@ -295,6 +297,7 @@ minetest.register_node("simple_banners:cross_top_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:cross_top_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -310,7 +313,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:cross_top_".. clrs[i][1] ,
 	}
 })
-
+]]
 minetest.register_node("simple_banners:cross_bottom_" .. clrs[i][1], {
 	description = clrs[i][2] .. " Cross Bottom Pattern",
 		drawtype = "nodebox",
@@ -330,6 +333,7 @@ minetest.register_node("simple_banners:cross_bottom_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:cross_bottom_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -345,7 +349,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:cross_bottom_".. clrs[i][1] ,
 	}
 })
-
+]]
 -- X
 minetest.register_node("simple_banners:x_top_" .. clrs[i][1], {
 	description = clrs[i][2] .. " X Top Pattern",
@@ -366,6 +370,7 @@ minetest.register_node("simple_banners:x_top_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:x_top_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -381,7 +386,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:x_top_".. clrs[i][1] ,
 	}
 })
-
+]]
 minetest.register_node("simple_banners:x_bottom_" .. clrs[i][1], {
 	description = clrs[i][2] .. " X Bottom Pattern",
 		drawtype = "nodebox",
@@ -401,6 +406,7 @@ minetest.register_node("simple_banners:x_bottom_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:x_bottom_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -416,7 +422,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:x_bottom_".. clrs[i][1] ,
 	}
 })
-
+]]
 --DIAG 1
 minetest.register_node("simple_banners:diag1_top_" .. clrs[i][1], {
 	description = clrs[i][2] .. " Diagonal 1 Top Pattern",
@@ -437,6 +443,7 @@ minetest.register_node("simple_banners:diag1_top_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:diag1_top_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -452,7 +459,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:diag1_top_".. clrs[i][1] ,
 	}
 })
-
+]]
 minetest.register_node("simple_banners:diag1_bottom_" .. clrs[i][1], {
 	description = clrs[i][2] .. " Diagonal 1 Bottom Pattern",
 		drawtype = "nodebox",
@@ -472,6 +479,7 @@ minetest.register_node("simple_banners:diag1_bottom_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:diag1_bottom_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -487,7 +495,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:diag1_bottom_".. clrs[i][1] ,
 	}
 })
-
+]]
 --DIAG 2
 minetest.register_node("simple_banners:diag2_top_" .. clrs[i][1], {
 	description = clrs[i][2] .. " Diagonal 2 Top Pattern",
@@ -508,6 +516,7 @@ minetest.register_node("simple_banners:diag2_top_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:diag2_top_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -523,7 +532,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:diag2_top_".. clrs[i][1] ,
 	}
 })
-
+]]
 minetest.register_node("simple_banners:diag2_bottom_" .. clrs[i][1], {
 	description = clrs[i][2] .. " Diagonal 2 Bottom Pattern",
 		drawtype = "nodebox",
@@ -543,6 +552,7 @@ minetest.register_node("simple_banners:diag2_bottom_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:diag2_bottom_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -558,7 +568,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:diag2_bottom_".. clrs[i][1] ,
 	}
 })
-
+]]
 --SUN 1
 minetest.register_node("simple_banners:sun1_top_" .. clrs[i][1], {
 	description = clrs[i][2] .. "Sun 1 Pattern Top",
@@ -579,6 +589,7 @@ minetest.register_node("simple_banners:sun1_top_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:sun1_top_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -594,7 +605,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:sun1_top_".. clrs[i][1] ,
 	}
 })
-
+]]
 minetest.register_node("simple_banners:sun1_bottom_" .. clrs[i][1], {
 	description = clrs[i][2] .. "Sun 1 Pattern Bottom",
 		drawtype = "nodebox",
@@ -614,6 +625,7 @@ minetest.register_node("simple_banners:sun1_bottom_" .. clrs[i][1], {
 		groups = {snappy = 2, choppy = 2, oddly_breakable_by_hand = 3, flammable = 3 ,not_in_craft_guide = 1},
 		sounds = mcl_sounds.node_sound_wood_defaults(),
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:sun1_bottom_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -630,7 +642,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:sun1_bottom_".. clrs[i][1] ,
 	}
 })
-
+]]
 --MOON
 minetest.register_node("simple_banners:moon_top_" .. clrs[i][1], {
 	description = clrs[i][2] .. "Moon Pattern Top",
@@ -655,6 +667,7 @@ minetest.register_node("simple_banners:moon_top_" .. clrs[i][1], {
 		minetest.swap_node(pos, node)
 	end,
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:moon_top_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -670,7 +683,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:moon_top_".. clrs[i][1] ,
 	}
 })
-
+]]
 minetest.register_node("simple_banners:moon_bottom_" .. clrs[i][1], {
 	description = clrs[i][2] .. "Moon Pattern Bottom",
 		drawtype = "nodebox",
@@ -694,6 +707,7 @@ minetest.register_node("simple_banners:moon_bottom_" .. clrs[i][1], {
 		minetest.swap_node(pos, node)
 	end,
 })
+--[[
 minetest.register_craft({
 	output = "simple_banners:moon_bottom_".. clrs[i][1] .. " 1",
 	recipe = {
@@ -709,7 +723,7 @@ minetest.register_craft({
 			  "simple_banners:plain", "simple_banners:moon_bottom_".. clrs[i][1] ,
 	}
 })
-
+]]
 
 
 --TESTING AREA
