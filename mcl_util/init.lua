@@ -201,7 +201,7 @@ end
 function mcl_util.is_in_void(pos)
 	local void, void_deadly
 	void = pos.y < mcl_vars.mg_overworld_min
-	void_deadly = pos.y < mcl_vars.mg_overworld_min - 6904
+	void_deadly = pos.y < mcl_vars.mg_overworld_min - 7904
 	return void, void_deadly
 end
 

@@ -1,4 +1,4 @@
-mcl_portals = {}
+--mcl_portals = {}
 
 -- Parameters
 

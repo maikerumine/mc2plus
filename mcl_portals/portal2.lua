@@ -80,19 +80,19 @@ local function build_portal2(pos, target2)
 	local p2 = {x = p1.x + 3, y = p1.y + 4, z = p1.z}
 
 	for i = 1, 4 do
-		minetest.set_node(p, {name = ":mcl_core:emeraldblock"})
+		minetest.set_node(p, {name = "mcl_core:emeraldblock"})
 		p.y = p.y + 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = ":mcl_core:emeraldblock"})
+		minetest.set_node(p, {name = "mcl_core:emeraldblock"})
 		p.x = p.x + 1
 	end
 	for i = 1, 4 do
-		minetest.set_node(p, {name = ":mcl_core:emeraldblock"})
+		minetest.set_node(p, {name = "mcl_core:emeraldblock"})
 		p.y = p.y - 1
 	end
 	for i = 1, 3 do
-		minetest.set_node(p, {name = ":mcl_core:emeraldblock"})
+		minetest.set_node(p, {name = "mcl_core:emeraldblock"})
 		p.x = p.x - 1
 	end
 
@@ -152,7 +152,7 @@ local function move_check2(p1, max, dir)
 
 	while p[dir] ~= max do
 		p[dir] = p[dir] + d
-		if minetest.get_node(p).name ~= ":mcl_core:emeraldblock" then
+		if minetest.get_node(p).name ~= "mcl_core:emeraldblock" then
 			return false
 		end
 	end

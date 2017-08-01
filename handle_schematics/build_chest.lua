@@ -959,8 +959,9 @@ end
 
 minetest.register_node("handle_schematics:build", { --TODO
 	description = "Building-Spawner",
-	tiles = {"default_chest_side.png", "default_chest_top.png", "default_chest_side.png",
-		"default_chest_side.png", "default_chest_side.png", "default_chest_front.png"},
+	tiles = {"default_chest_top.png", "mcl_chests_chest_bottom.png",
+		"mcl_chests_chest_right.png", "mcl_chests_chest_left.png",
+		"mcl_chests_chest_back.png", "default_chest_front.png"},
 --        drawtype = 'signlike',
 --        paramtype = "light",
 --        paramtype2 = "wallmounted",

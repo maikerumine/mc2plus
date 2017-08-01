@@ -1,15 +1,15 @@
-mcl_portals = {}
+--mcl_portals = {}
 
 --node override
-minetest.after(1, function()
-minetest.register_node(":mcl_core:obsidian", {
-	description = "Obsidian-p",
+--minetest.after(1, function()
+minetest.override_item("mcl_core:obsidian", {
+	description = "Obsidian",
 	tiles = {"default_obsidian.png"},
 	is_ground_content = false,
 	stack_max = 64,
-	groups = {pickaxey=5, building_block=1, material_stone=1},
-	_mcl_blast_resistance = 6000,
-	_mcl_hardness = 50,
+	--groups = {handy=1,pickaxey=5, building_block=1, material_stone=1},
+	--_mcl_blast_resistance = 6000,
+	--_mcl_hardness = 50,
 	
 	on_destruct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -68,14 +68,14 @@ minetest.register_node(":mcl_core:obsidian", {
 --end)
 
 --minetest.after(1, function()
-minetest.register_node(":mcl_core:emeraldblock", {
-	description = "Emerald Block-p",
+minetest.override_item("mcl_core:emeraldblock", {
+	description = "Emerald Block",
 	tiles = {"mcl_core_emerald_block.png"},
 	is_ground_content = false,
 	stack_max = 64,
-	groups = {pickaxey=4, building_block=1},
-	_mcl_blast_resistance = 30,
-	_mcl_hardness = 5,
+	--groups = {pickaxey=4, building_block=1},
+	--_mcl_blast_resistance = 30,
+	--_mcl_hardness = 5,
 
 	on_destruct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -134,14 +134,14 @@ minetest.register_node(":mcl_core:emeraldblock", {
 --end)
 
 --minetest.after(1, function()
-minetest.register_node(":mcl_end:purpur_block", {
-	description = "Purpur Block-p",
+minetest.override_item("mcl_end:purpur_block", {
+	description = "Purpur Block",
 	tiles = {"mcl_end_purpur_block.png"},
 	is_ground_content = false,
 	stack_max = 64,
-	groups = {pickaxey=5, building_block=1, material_stone=1},
-	_mcl_blast_resistance = 6000,
-	_mcl_hardness = 50,
+	--groups = {pickaxey=5, building_block=1, material_stone=1},
+	--_mcl_blast_resistance = 6000,
+	--_mcl_hardness = 50,
 
 	on_destruct = function(pos)
 		local meta = minetest.get_meta(pos)
@@ -204,8 +204,8 @@ minetest.register_node(":mcl_end:purpur_block", {
 	
 -- Flint and steel
 --minetest.after(1, function()
-minetest.register_tool(":mcl_fire:flint_and_steel", {
-	description = "Flint and Steel-p",
+minetest.override_item("mcl_fire:flint_and_steel", {
+	description = "Flint and Steel",
 	_doc_items_longdesc = "Flint and steel is a tool to start fires and ignite blocks.",
 	_doc_items_usagehelp = "Rightclick the surface of a block to attempt to light a fire in front of it. On netherrack it will start an eternal fire. Using it on TNT will ignite it.",
 	inventory_image = "mcl_fire_flint_and_steel.png",
@@ -250,7 +250,7 @@ minetest.register_tool(":mcl_fire:flint_and_steel", {
 --REF
 --[[
 -- Nether and Realm Craftitems
-minetest.register_craftitem(":default:mese_crystal_fragment", {
+minetest.override_item(":default:mese_crystal_fragment", {
 	description = "Mese Crystal Fragment",
 	inventory_image = "default_mese_crystal_fragment.png",
 	on_place = function(stack, _, pt)
@@ -269,8 +269,8 @@ minetest.register_craftitem(":default:mese_crystal_fragment", {
 
 --Emerald Realm
 --minetest.after(1, function()
-minetest.register_craftitem(":mcl_core:emerald", {
-	description = "Emerald-p",
+minetest.override_item("mcl_core:emerald", {
+	description = "Emerald",
 	_doc_items_longdesc = "Emeralds are not very useful on their own, but many villagers have a love for emeralds and often use it as a currency in trading.",
 	inventory_image = "mcl_core_emerald.png",
 	groups = { tool = 1, craftitem=1 },
@@ -298,25 +298,34 @@ minetest.register_craftitem(":mcl_core:emerald", {
 
 --The End [temp realm]
 --minetest.after(1, function()
-minetest.register_craftitem(":mcl_nether:quartz", {
-	description = "Nether Quartz-p",
+minetest.override_item("mcl_nether:quartz", {
+	description = "Nether Quartz",
 	_doc_items_longdesc = "Nether quartz is a versatile crafting ingredient.",
 	inventory_image = "mcl_nether_quartz.png",
 	groups = { tool = 1, craftitem=1 },
 	stack_max = 64,
 	--end
-	on_rightclick = function(stack,_, pt)
-	local node_under = minetest.get_node(pt.under).name
-		if pt.under and minetest.get_node(pt.under).name == ":mcl_end:purpur_block" then
-			done3 = make_end_portal(pt.under)  --broken please fix for y
-			if done3 and not minetest.setting_getbool("creative_mode") then
-				stack:take_item()
-				--stack:add_wear(1000)
-			end
+	
+on_place = function(itemstack, user, pointed_thing)
+		--local node_under = minetest.get_node(pt.under).name  --old
+		local nodedef = minetest.registered_nodes[minetest.get_node(pointed_thing.under).name]  --new
+
+		minetest.sound_play(
+			"fire_flint_and_steel",
+			{pos = pointed_thing.above, gain = 0.5, max_hear_distance = 8}
+		)
+		if pointed_thing.under and minetest.get_node(pointed_thing.under).name == "mcl_end:purpur_block" then
+			done3 = make_end_portal(pointed_thing.under)
 		end
-		return stack
+
+		if not minetest.setting_getbool("creative_mode") and used == true then
+			itemstack:take_item()-- 1 uses
+		end
+		return itemstack
 	end,
+	
+
 })
-end)
+--end)
 
 
