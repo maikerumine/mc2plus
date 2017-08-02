@@ -14,21 +14,21 @@ mg_villages.all_buildings_list = {}
 local buildings = {
 
 -- the houses the mod came with
-	{yoff= 0, scm="house", orients={2},                 typ='house',    weight={nore=1  },         inh=4},
-	{yoff= 0, scm="wheat_field",                        typ='field',    weight={nore=1   }, inh=-1},
-	{yoff= 0, scm="cotton_field",                       typ='field',    weight={nore=1   }, inh=-1},
-	{yoff= 1, scm="lamp", no_rotate=true,               typ='deco',     weight={nore=1/5 }},
-	{yoff=-5, scm="well", no_rotate=true, pervillage=1, typ='well',     weight={nore=1   }},
-	{yoff= 0, scm="fountain", pervillage=3,             typ='fountain', weight={nore=1/4 },             axis=1},
-	{yoff= 0, scm="small_house", orients={3},           typ='house',    weight={nore=1   }, axis=1, inh=2},
-	{yoff= 0, scm="house_with_garden", orients={1},     typ='house',    weight={nore=1   }, axis=1, inh=3},
-	{yoff= 0, scm="church", orients={3}, pervillage=1,  typ='church',   weight={nore=1   },             axis=1, inh=-1},
-	{yoff= 0, scm="tower", orients={0},                 typ='tower',    weight={nore=1/7  },         inh=-1},
-	{yoff= 0, scm="forge", orients={0}, pervillage=2,   typ='forge',    weight={nore=1 },         inh=-1},
-	{yoff= 0, scm="library", orients={1}, pervillage=2, typ='secular',  weight={nore=1               }, axis=1, inh=-1},
-	{yoff= 0, scm="inn", orients={1}, pervillage=4,     typ='tavern',   weight={nore=1/2 }, axis=1, inh=-1}, -- has room for 4 guests
-	{yoff= 0, scm="pub", orients={3}, pervillage=2,     typ='tavern',   weight={nore=1/3 }, axis=1, inh=-1},
-	{yoff=-1, scm="chateau_without_garden", orients={0,1,2,3}, pervillage=2,  typ='mansion',  weight={nore=1,   single=1}, inh=8},
+	{yoff= 0, scm="house", orients={2},                 weight={nore=1,   single=2   },         inh=4},
+	{yoff= 0, scm="wheat_field",                        weight={nore=1   }},
+	{yoff= 0, scm="cotton_field",                       weight={nore=1   }},
+	{yoff= 1, scm="lamp", no_rotate=true,               weight={nore=1/5 }},
+	{yoff=-5, scm="well", no_rotate=true, pervillage=1, weight={nore=1   }},
+	{yoff= 0, scm="fountain", pervillage=3,             weight={nore=1/4 },             axis=1},
+	{yoff= 0, scm="small_house", orients={3},           weight={nore=1,   single=2   }, axis=1, inh=2},
+	{yoff= 0, scm="house_with_garden", orients={1},     weight={nore=1,   single=2   }, axis=1, inh=3},
+	{yoff= 0, scm="church", orients={3}, pervillage=1,  weight={nore=1   },             axis=1, inh=-1},
+	{yoff= 0, scm="tower", orients={0},                 weight={nore=1/7, single=1   },         inh=-1, typ='tower'},
+	{yoff= 0, scm="forge", orients={0}, pervillage=2,   weight={nore=1,   single=1/3 },         inh=-1, typ='forge'},
+	{yoff= 0, scm="library", orients={1}, pervillage=2, weight={nore=1               }, axis=1, inh=-1},
+	{yoff= 0, scm="inn", orients={1}, pervillage=4,     weight={nore=1/2, single=1/3 }, axis=1, inh=-1, typ='tavern'}, -- has room for 4 guests
+	{yoff= 0, scm="pub", orients={3}, pervillage=2,     weight={nore=1/3, single=1/3 }, axis=1, inh=-1, typ='tavern'},
+
 
 -- log cabins by Sokomine (requiring cottages, glasspanes)
 	{yoff= 0, scm="logcabin1",    orients={1}, weight={logcabin=1,   single=1}, axis=1, inh=2, typ='hut'},
@@ -62,7 +62,7 @@ local buildings = {
 --	{scm="church_2_twoelk", yoff= 0, orients={0}, farming_plus=0, avoid='', typ='church',    weight={medieval=4}, pervillage=1},    
 	{scm="forge_1",         yoff= 0, orients={0}, farming_plus=0, avoid='', typ='forge',     weight={medieval=2,   single=1/2}, pervillage=1,   inh=-1},
 	{scm="mill_1",          yoff= 0, orients={0}, farming_plus=0, avoid='', typ='mill',      weight={medieval=2            }, pervillage=1,   inh=-1},
-	{scm="watermill_1",     yoff=-3, orients={1}, farming_plus=0, avoid='', typ='mill',      weight={medieval=2            }, pervillage=1,   inh=-2},
+	{scm="watermill_1",     yoff=-3, orients={0}, farming_plus=0, avoid='', typ='mill',      weight={medieval=2            }, pervillage=1,   inh=-2},
 	{scm="hut_1",           yoff= 0, orients={0}, farming_plus=0, avoid='', typ='hut',       weight={medieval=1,   single=1  },                 inh=1},
 	{scm="hut_2",           yoff= 0, orients={0}, farming_plus=0, avoid='', typ='hut',       weight={medieval=1,   single=1  },                 inh=2},
 	{scm="farm_full_1",     yoff= 0, orients={0}, farming_plus=0, avoid='', typ='farm_full', weight={medieval=1/4, single=1  },               inh=2},
@@ -91,8 +91,6 @@ local buildings = {
 	{scm="well_6",          yoff= 0, orients={0}, farming_plus=0, avoid='well', typ='well',  weight={medieval=1/12, single=1/2}, pervillage=4},
 	{scm="well_7",          yoff= -1, orients={0}, farming_plus=0, avoid='well', typ='well', weight={medieval=1/12, single=1/2}, pervillage=4},
 	{scm="well_8",          yoff= 0, orients={0}, farming_plus=0, avoid='well', typ='well',  weight={medieval=1/12, single=1/2}, pervillage=4},
-
-	{scm="allmende_3_90",   yoff=-2, orients={0}, farming_plus=0, avoid='', typ='allmende',  weight={medieval=3,taoki=3,nore=3,logcabin=1,grasshut=1}, pervillage=1},
 
 	{scm="tree_place_1",    yoff= 1, orients={0}, farming_plus=0, avoid='', typ='village_square', weight={medieval=1/12}, pervillage=1},
 	{scm="tree_place_2",    yoff= 1, orients={0}, farming_plus=0, avoid='', typ='village_square', weight={medieval=1/12}, pervillage=1},
@@ -194,25 +192,46 @@ local buildings = {
 
 
    -- Houses from Taokis Structure I/O Mod (see https://forum.minetest.net/viewtopic.php?id=5524)
-	{scm="default_town_farm",          yoff= -1, orients={1}, farming_plus=0, avoid='',     typ='field',  weight={taoki=1,}, axis=1},
-	{scm="default_town_house_large_1", yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/4}, axis=1, inh=10},
-	{scm="default_town_house_large_2", yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/4}, axis=1, inh=8},
-	{scm="default_town_house_medium",  yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/2}, axis=1, inh=6},
-	{scm="default_town_house_small",   yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1, },   axis=1, inh=4},
-	{scm="default_town_house_tiny_1",  yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1, },   axis=1, inh=3},
-	{scm="default_town_house_tiny_2",  yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1},   axis=1, inh=3},
-	{scm="default_town_house_tiny_3",  yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1},   axis=1, inh=2},
-	{scm="default_town_park",          yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='deco',   weight={taoki=1            },   axis=1},
-	{scm="default_town_tower",         yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='tower',  weight={taoki=1/6}, axis=1, inh=-1},
-	{scm="default_town_well",          yoff= -6, orients={1}, farming_plus=0, avoid='',     typ='well',   weight={taoki=1/4          }, axis=1},
-	{scm="default_town_fountain",      yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='fountain',weight={taoki=1/4          }, axis=1},
+	{scm="default_town_farm",          yoff= -1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1,   single=1}, axis=1},
+	{scm="default_town_house_large_1", yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/4, single=1}, axis=1, inh=10},
+	{scm="default_town_house_large_2", yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/4, single=1}, axis=1, inh=8},
+	{scm="default_town_house_medium",  yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/2, single=1}, axis=1, inh=6},
+	{scm="default_town_house_small",   yoff= -4, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1,   single=1},   axis=1, inh=4},
+	{scm="default_town_house_tiny_1",  yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1,   single=1},   axis=1, inh=3},
+	{scm="default_town_house_tiny_2",  yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1,   single=1},   axis=1, inh=3},
+	{scm="default_town_house_tiny_3",  yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1,   single=1},   axis=1, inh=2},
+	{scm="default_town_park",          yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1            },   axis=1},
+	{scm="default_town_tower",         yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/6, single=1}, axis=1, inh=-1},
+	{scm="default_town_well",          yoff= -6, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/4          }, axis=1},
+	{scm="default_town_fountain",      yoff=  1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/4          }, axis=1},
 	-- the hotel seems to be only the middle section of the building; it's build for another spawning algorithm
-	{scm="default_town_hotel",         yoff= 1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/5}},
---maikerumine added thius:
-	-- the hotel seems to be only the middle section of the building; it's build for another spawning algorithm
-	--{scm="chateau_without_garden",     yoff=-1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/5}},
-	--because it is nice
-	
+--	{scm="default_town_hotel",         yoff= -1, orients={1}, farming_plus=0, avoid='',     typ='house',  weight={taoki=1/5}},
+
+   -- include houses from LadyMacBeth, originally created for Mauvebics mm2 modpack; the houses seem to be in canadian village style
+	{scm="c_bank",                     yoff=  1, orients={2}, farming_plus=0, avoid='',     typ='shop',    weight={canadian=1}, inh=-2},
+	{scm="c_bank2",                    yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='shop',    weight={canadian=1}, inh=-2},
+	{scm="c_bar",                      yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='tavern',  weight={canadian=1}, inh=-2},
+	{scm="c_hotel",                    yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='tavern',  weight={canadian=1}, inh=-2},
+	{scm="c_postoffice",               yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='shop',    weight={canadian=1}, pervillage=1, inh=-2},
+	{scm="c_bordello",                 yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='tavern',  weight={canadian=1}, pervillage=1, inh=-2},
+	{scm="c_library",                  yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='secular', weight={canadian=1}, pervillage=1, inh=-2},
+
+	{scm="g_observatory",              yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='secular', weight={canadian=1}, pervillage=1, inh=-2},
+	{scm="g_court",                    yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='secular', weight={canadian=1}, pervillage=1, inh=-2},
+	{scm="g_prefecture",               yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='secular', weight={canadian=1}, pervillage=1, inh=-2},
+	{scm="g_townhall",                 yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='secular', weight={canadian=1}, pervillage=1, inh=-2},
+	{scm="g_park2",                    yoff= -1, orients={0}, farming_plus=0, avoid='',     typ='secular', weight={canadian=2},},
+
+	{scm="r_apartments",               yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='house_large',  weight={canadian=4}, inh=20},
+	{scm="r_rowhouses",                yoff=  1, orients={2}, farming_plus=0, avoid='',     typ='house_large',  weight={canadian=4}, inh=16},
+	{scm="r_manorhouse",               yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='house_large',  weight={canadian=3}, inh=4},
+	{scm="r_triplex",                  yoff=  1, orients={0}, farming_plus=0, avoid='',     typ='house_large',  weight={canadian=3}, inh=10},
+
+	{scm="field_1",         yoff=-2, orients={0,1,2,3}, farming_plus=0, avoid='',        typ='field',    weight={fields=1}},
+	{scm="field_2",         yoff=-2, orients={0,1,2,3}, farming_plus=0, avoid='',        typ='field',    weight={fields=1}},
+	{scm="field_3",         yoff=-2, orients={0,1,2,3}, farming_plus=0, avoid='',        typ='field',    weight={fields=1}},
+	{scm="field_4",         yoff=-2, orients={0,1,2,3}, farming_plus=0, avoid='',        typ='field',    weight={fields=1}},
+
 	{scm="tent_tiny_1",                yoff=0, orients={3}, farming_plus=0, avoid='',        typ='tent',    weight={tent=1,   single=1},   inh=1},
 	{scm="tent_tiny_2",                yoff=0, orients={3}, farming_plus=0, avoid='',        typ='tent',    weight={tent=1,   single=1},   inh=1},
 	{scm="tent_big_1",                 yoff=0, orients={3}, farming_plus=0, avoid='',        typ='tent',    weight={tent=1,   single=1}},           -- no sleeping place
@@ -250,41 +269,22 @@ local buildings = {
 			weight={nore=1/8,taoki=1/8,medieval=1/8,charachoal=1/8,lumberjack=1/8,claytrader=1/8,logcabin=1/8,canadian=1/8,grasshut=1/8,tent=1/8}},
 	{scm="empty_5", yoff=0, typ='empty', inh=0, pervillage=2,
 			weight={nore=1/8,taoki=1/8,medieval=1/8,charachoal=1/8,lumberjack=1/8,claytrader=1/8,logcabin=1/8,canadian=1/8,grasshut=1/8,tent=1/8}},
+}
 
-	{scm="house_medieval_fancy_1_90", yoff= 0, orients={0}, farming_plus=0, avoid='', typ='farm_full', weight={medieval=1/4, single=1  }, inh=6},
-	{scm="cow_shed_1_270",            yoff= 0, orients={0}, farming_plus=0, avoid='', typ='shed',      weight={medieval=1/4, single=1  }, inh=-1},
-	{scm="shed_with_forge_v2_1_0",    yoff= 0, orients={0}, farming_plus=0, avoid='', typ='forge',     weight={medieval=1,single=1/2}, inh=1},
 
-	
-	}
 
 
 -- read the data files and fill in information like size and nodes that need on_construct to be called after placing;
 -- skip buildings that cannot be used due to missing mods
 mg_villages.add_building = function( building_data )
 
-	local file_name = building_data.mts_path .. building_data.scm;
 	-- a building will only be used if it is used by at least one supported village type (=mods required for that village type are installed)
 	local is_used = false;
 	for typ,weight in pairs( building_data.weight ) do
-		if( typ and weight and typ ~= 'single' and mg_villages.village_type_data[ typ ] and mg_villages.village_type_data[ typ ].supported ) then
+		if( typ and weight and weight>0 and typ ~= 'single' and mg_villages.village_type_data[ typ ] and mg_villages.village_type_data[ typ ].supported ) then
 			is_used = true;
 		end
-		-- add the building to the menu list for the build chest ("single" would be too many houses)
-		-- the empty plots are added to each village and of no intrest here
-		if( build_chest and build_chest.add_entry and typ and typ ~= 'single' and (not( building_data.typ ) or building_data.typ ~= 'empty')) then
-			build_chest.add_entry( {'main','mg_villages', typ, building_data.scm, file_name });
-		end
 	end
-	-- buildings as such may have a type as well
-	if( build_chest and build_chest.add_entry and building_data.typ ) then
-		build_chest.add_entry( {'main','mg_villages', building_data.typ, building_data.scm, file_name });
-	end
-	-- store information about all buildings - no matter weather they can be used or not - for later presentation in the build_chest's menu
-	if( build_chest and build_chest.add_building ) then
-		build_chest.add_building( file_name, building_data );
-	end
-
 
 	if( not( is_used )) then
 		-- do nothing; skip this file
@@ -297,9 +297,16 @@ mg_villages.add_building = function( building_data )
 
 	-- determine the size of the building
 	local res = nil;
-	-- read the size of the building;
-	-- convert to .mts for later usage if necessary
-	res  = handle_schematics.analyze_file( file_name, building_data.we_origin, building_data.mts_path .. building_data.scm ); 
+	-- read the size of the building
+	res  = handle_schematics.analyze_mts_file( building_data.mts_path .. building_data.scm ); 
+	-- alternatively, read the mts file
+	if( not( res )) then
+		res = mg_villages.analyze_we_file( building_data.mts_path .. building_data.scm, building_data.we_origin );
+		-- convert to .mts for later usage
+		if( res ) then
+			handle_schematics.store_mts_file(  building_data.mts_path .. building_data.scm, res );
+		end
+	end
 
 	if( not( res )) then
 		mg_villages.print(mg_villages.DEBUG_LEVEL_WARNING, 'SKIPPING '..tostring( building_data.scm )..' due to import failure.');
@@ -315,24 +322,16 @@ mg_villages.add_building = function( building_data )
 		building_data.sizez = res.size.z;
 		building_data.ysize = res.size.y;
 			
-		-- some buildings may be rotated	
-		if( not( building_data.orients ) and res.rotated ) then
-			building_data.orients = {};
-			if(     res.rotated == 0 ) then
-				building_data.orients[1] = 0;
-			elseif( res.rotated == 90 ) then
-				building_data.axis = 1; -- important when mirroring
-				building_data.orients[1] = 1;
-			elseif( res.rotated == 180 ) then
-				building_data.orients[1] = 2;
-			elseif( res.rotated == 270 ) then
-				building_data.orients[1] = 3; 
-				building_data.axis = 1; -- important when mirroring
-			end
+		-- some buildings may be rotated
+		if(   res.rotated == 90
+		  or  res.rotated == 270 ) then
+
+			building_data.sizex = res.size.z;
+			building_data.sizez = res.size.x;
 		end
 
-		if( not( building_data.yoff ) and res.burried ) then
-			building_data.yoff = 1-res.burried;
+		if( not( building_data.yoff ) or building_data.yoff == 0 ) then
+			building_data.yoff = res.burried;
 		end
 
 		-- we do need at least the list of nodenames which will need on_constr later on
@@ -340,8 +339,6 @@ mg_villages.add_building = function( building_data )
 		building_data.nodenames        = res.nodenames;
 		building_data.on_constr        = res.on_constr;
 		building_data.after_place_node = res.after_place_node;
-		building_data.door_a           = res.door_a;
-		building_data.door_b           = res.door_b;
 
 		if( res.scm_data_cache ) then
 			building_data.scm_data_cache   = res.scm_data_cache;
@@ -438,5 +435,36 @@ for i,v in ipairs( buildings ) do
 end
 buildings = nil;
 
--- roads are built in a diffrent way
-mg_villages.BUILDINGS["road"] = {yoff = 0, ysize = 2, scm = {}}
+
+-- TODO: add a better way of adding road and wall
+
+--local gravel = minetest.get_content_id("default:gravel")
+-- this special "gravel" will not be removed by mapgen and will not fall down like gravel usually does
+local gravel = minetest.get_content_id('mg_villages:road'); --"default:gravel")
+local c_air  = minetest.get_content_id("air");
+local rgravel = {}
+for i = 1, 2000 do
+	rgravel[i] = gravel
+end
+local rgravel2 = {}
+for i = 1, 2000 do
+	rgravel2[i] = rgravel
+end
+local rair = {}
+for i = 1, 2000 do
+	rair[i] = c_air
+end
+local rair2 = {}
+for i = 1, 2000 do
+	rair2[i] = rair
+end
+local road_scm = {rgravel2, rair2}
+mg_villages.BUILDINGS["road"] = {yoff = 0, ysize = 2, scm = road_scm}
+
+local rwall = {{minetest.get_content_id("default:stonebrick")}}
+local wall = {}
+for i = 1, 6 do
+	wall[i] = rwall
+end
+mg_villages.BUILDINGS["wall"] = {yoff = 1, ysize = 6, scm = wall}
+

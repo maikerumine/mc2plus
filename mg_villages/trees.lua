@@ -1,4 +1,4 @@
--- this code is taken from https://github.com/VanessaE/dreambuilder_game/blob/master/mods/mcl_core/trees.lua
+-- this code is taken from https://github.com/VanessaE/dreambuilder_game/blob/master/mods/default/trees.lua
 
 local c_air = minetest.get_content_id("air")
 local c_ignore = minetest.get_content_id("ignore")
@@ -108,7 +108,7 @@ mg_villages.grow_jungletree = function(data, a, pos, seed, snow)
     end
 end
 
--- taken from minetest_game/mods/mcl_core/trees.lua
+-- taken from minetest_game/mods/default/trees.lua
 mg_villages.trees_add_pine_needles = function(data, vi, c_air, c_ignore, c_snow, c_pine_needles)
 	if data[vi] == c_air or data[vi] == c_ignore or data[vi] == c_snow then
 		data[vi] = c_pine_needles
@@ -127,11 +127,11 @@ mg_villages.grow_pinetree = function(data, a, pos, snow)
 
 	local c_air = minetest.get_content_id("air")
 	local c_ignore = minetest.get_content_id("ignore")
-	local c_pinetree = minetest.get_content_id("mcl_core:pine_tree")
-	local c_pine_needles  = minetest.get_content_id("mcl_core:pine_needles")
+	local c_pinetree = minetest.get_content_id("mcl_core:sprucetree")
+	local c_pine_needles  = minetest.get_content_id("mcl_core:spruceleaves")
 	local c_snow = minetest.get_content_id("mcl_core:snow")
 	local c_snowblock = minetest.get_content_id("mcl_core:snowblock")
-	local c_dirtsnow = minetest.get_content_id("mcl_core:dirt_with_snow")
+	local c_dirtsnow = minetest.get_content_id("mcl_core:dirt_with_grass_snow")
 
 	-- Scan for snow nodes near sapling
 --	local snow = false

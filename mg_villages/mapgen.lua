@@ -1,30 +1,4 @@
 
-------------------------------------------------------------------------------
--- Interface for other mdos
-
--- this function gets executed only once per village - namely when the first
--- part of a village is generated;
--- relevant data about the vilalge can be found in the following data structure:
---     mg_villages.all_villages[ village_id ]
-mg_villages.new_village_spawned = function( village_id )
-	-- dummy function
-end
-
-
--- use this function if you want to i.e. spawn mobs/traders/etc;
--- the village data structure contains information about the entire village;
--- minp, maxp indicates which part has actually been spawned;
--- the function may add information to the  village  data structure if needed;
--- the voxelmanip data (data, param2_data, a) is just for reading, i.e. finding
---   a good spawning position for the trader
-mg_villages.part_of_village_spawned = function( village, minp, maxp, data, param2_data, a, cid )
-	-- mobf needs a way to spawn its traders
-	if( minetest.get_modpath( 'mobf_trader' )) then
-		mob_village_traders.part_of_village_spawned( village, minp, maxp, data, param2_data, a, cid );
-	end
-end
-------------------------------------------------------------------------------
-
 
 mg_villages.wseed = 0;
 
@@ -83,43 +57,29 @@ mg_villages.villages_in_mapchunk = function( minp, mapchunk_size )
 end
 
 
--- TODO: determine water level from mapgens?
-local MG_VILLAGES_WATER_LEVEL = 1;
-if( minetest.get_modpath( 'mg' )) then
-	MG_VILLAGES_WATER_LEVEL = 0;
-end
-
---replacements_group.node_is_ground = {}; -- store nodes which have previously been identified as ground
+mg_villages.node_is_ground = {}; -- store nodes which have previously been identified as ground
 
 mg_villages.check_if_ground = function( ci )
 
 	-- pre-generate a list of no-ground-nodes for caching
-	if( ci==nil or replacements_group.node_is_ground[ minetest.get_content_id('air')]==nil) then
-		local no_ground_nodes = {'air','ignore','mcl_core:sandstone','mcl_core:cactus','default:wood','mcl_core:junglewood',
-			'mcl_core:sprucewood','mcl_core:jungleleaves','mcl_core:spruceleaves','mcl_core:acacialeaves','mcl_core:birchleaves','mcl_core:leaves','mcl_core:tree','mcl_core:pine_tree','mcl_core:acaciawood','mcl_core:acaciatree', 'mcl_core:aspenwood', 'mcl_core:birchtree',
-			'ethereal:mushroom_pore','ethereal:mushroom_trunk','ethereal:bamboo', 'ethereal:mushroom',
-                        'ethereal:bush', 'default:grass', 'default:grass_1','default:grass_2','default:grass_3','default:grass_4','default:grass_5'};
-		-- TODO: add all those other tree and leaf nodes that might be added by mapgen
+	if( #mg_villages.node_is_ground < 1 ) then
+		local no_ground_nodes = {'air','ignore','mcl_core:sandstonecarved','mcl_core:cactus',
+			'mcl_core:sprucewood','mcl_core:sprucetree','mcl_core:spruceleaves',
+			'mcl_core:wood','mcl_core:tree','mcl_core:leaves',
+			'mcl_core:junglewood','mcl_core:jungletree','mcl_core:jungleleaves',
+			'mcl_core:birchwood','mcl_core:birchtree','mcl_core:birchleaves',
+			'mcl_core:acaciawood','mcl_core:acaciatree','mcl_core:acacialeaves',
+			'group:huge_mushroom','ethereal:mushroom_trunk','ethereal:bamboo'};
 		for _,name in ipairs( no_ground_nodes ) do
-			if( minetest.registered_nodes[ name ]) then
-				replacements_group.node_is_ground[ minetest.get_content_id( name )] = false;
-			end
-		end
-		local ground_nodes = {'ethereal:dry_dirt', 'mcl_core:coarse_dirt','mcl_core:stone','mcl_core:sandstone','mcl_core:desertstone',
-                        'ethereal:grey_dirt', 'mcl_core:dirt_with_grass_snow', 'mcl_core:dirt_with_grass', 'mcl_core:podzol' , 'mcl_core:mycelium', 'ethereal:grove_dirt', 'ethereal:green_dirt',
-			'ethereal:grove_dirt','ethereal:jungle_dirt'};
-		for _,name in ipairs( ground_nodes ) do
-			if( minetest.registered_nodes[ name ]) then
-				replacements_group.node_is_ground[ minetest.get_content_id( name )] = true;
-			end
+			mg_villages.node_is_ground[ minetest.get_content_id( name )] = false;
 		end
 	end
 
 	if( not( ci )) then
 		return false;
 	end
-	if( replacements_group.node_is_ground[ ci ] ~= nil) then
-		return replacements_group.node_is_ground[ ci ];
+	if( mg_villages.node_is_ground[ ci ] ~= nil) then
+		return mg_villages.node_is_ground[ ci ];
 	end
 	-- analyze the node
 	-- only nodes on which walking is possible may be counted as ground
@@ -127,66 +87,36 @@ mg_villages.check_if_ground = function( ci )
 	local def = minetest.registered_nodes[ node_name ];	
 	-- store information about this node type for later use
 	if(     not( def )) then
-		replacements_group.node_is_ground[ ci ] = false;
+		mg_villages.node_is_ground[ ci ] = false;
 	elseif( not( def.walkable)) then
-		replacements_group.node_is_ground[ ci ] = false;
+		mg_villages.node_is_ground[ ci ] = false;
 	elseif( def.groups and def.groups.tree ) then
-		replacements_group.node_is_ground[ ci ] = false;
+		mg_villages.node_is_ground[ ci ] = false;
 	elseif(	def.drop   and def.drop == 'mcl_core:dirt') then
-		replacements_group.node_is_ground[ ci ] = true;
+		mg_villages.node_is_ground[ ci ] = true;
 	elseif( def.walkable == true and def.is_ground_content == true and not(def.node_box)) then
-		replacements_group.node_is_ground[ ci ] = true;
+		mg_villages.node_is_ground[ ci ] = true;
 	else
-		replacements_group.node_is_ground[ ci ] = false;
+		mg_villages.node_is_ground[ ci ] = false;
 	end
-	return replacements_group.node_is_ground[ ci ];
+	return mg_villages.node_is_ground[ ci ];
 end
-
--- call it once this way so that some grounds and non-grounds get identified
-mg_villages.check_if_ground(nil);
 
 
 -- sets evrything at x,z and above height target_height to air;
 -- the area below gets filled up in a suitable way (i.e. dirt with grss - dirt - stone)
-mg_villages.lower_or_raise_terrain_at_point = function( x, z, target_height, minp, maxp, vm, data, param2_data, a, cid, vh, treepos, has_artificial_snow, blend, force_ground, force_underground )
+mg_villages.lower_or_raise_terrain_at_point = function( x, z, target_height, minp, maxp, vm, data, param2_data, a, cid, vh, treepos, has_artificial_snow, blend )
 	local surface_node  = nil;
 	local has_snow      = has_artificial_snow;
 	local tree          = false;
 	local jtree         = false;
 	local ptree         = false;
-	local atree         = false;
-        local asptree       = false;
 	local old_height    = maxp.y;
 	local y = maxp.y;
-
-	local look_for_snow = true;
-	if( cid.c_snow==cid.c_ignore or cid.c_snow==cid.c_air
-	 or cid.c_ice ==cid.c_ignore or cid.c_ice ==cid.c_air ) then
-		look_for_snow = nil;
-	end
-
-	-- if we are working on a mapchunk above, set all to air;
-	-- any terrain blending happens in the mapchunk below
-	if( minp.y > vh ) then
-		local air_counted = 0;
-		for y=minp.y, minp.y+16 do
-			if( data[a:index( x, y, z )] == cid.c_air ) then
-				air_counted = air_counted + 1;
-			end
-		end
-		if( air_counted > 3 or blend==0) then
-			for y=minp.y+15, maxp.y do
-				data[a:index( x, y, z)] = cid.c_air;
-			end
-		end
-		-- else do nothing
-		return;
-	end
-
 	-- search for a surface and set everything above target_height to air
 	while( y > minp.y) do
 		local ci = data[a:index(x, y, z)];
-		if(     look_for_snow and (ci == cid.c_snow or ci == cid.c_ice or ci == cid.c_snowblock)) then
+		if(     ci == cid.c_snow ) then
 			has_snow = true;
 		elseif( ci == cid.c_tree ) then
 			tree  = true;
@@ -196,17 +126,11 @@ mg_villages.lower_or_raise_terrain_at_point = function( x, z, target_height, min
 		-- pinetrees
 		elseif( ci == cid.c_ptree and data[a:index( x, y-1, z)]==cid.c_ptree) then
 			ptree = true;
-		-- acacia
-		elseif( ci == cid.c_atree and data[a:index( x, y-1, z)]==cid.c_atree) then
-			atree = true;
-                -- aspen
-		elseif( ci == cid.c_asptree and data[a:index( x, y-1, z)]==cid.c_asptree) then
-			asptree = true;
 		elseif( not( surface_node) and ci ~= cid.c_air and ci ~= cid.c_ignore and mg_villages.check_if_ground( ci ) == true) then
 			-- we have found a surface of some kind
 			surface_node = ci;
 			old_height   = y;
-			if( look_for_snow and surface_node == cid.c_dirt_with_snow and cid.c_dirt_with_snow~=cid.c_ignore) then
+			if( surface_node == cid.c_dirt_with_snow ) then
 				has_snow = true;
 			end
 		end
@@ -230,16 +154,12 @@ mg_villages.lower_or_raise_terrain_at_point = function( x, z, target_height, min
 	if( not( surface_node ) or surface_node == cid.c_dirt) then
 		surface_node = cid.c_dirt_with_grass;
 	end
-	if( look_for_snow and has_snow and surface_node == cid.c_dirt_with_grass and target_height > 1) then
+	if( has_snow and surface_node == cid.c_dirt_with_grass and target_height > 1) then
 		surface_node = cid.c_dirt_with_snow;
 	end
 	local below_1 = cid.c_dirt;
 	local below_2 = cid.c_stone;
-	if(     force_ground and force_underground ) then
-		below_1 = force_ground;
-		below_2 = force_underground;
-		surface_node = below_1;
-	elseif( surface_node == cid.c_desert_sand ) then
+	if(     surface_node == cid.c_desert_sand ) then
 		below_1 = cid.c_desert_sand;
 		below_2 = cid.c_desert_stone;
 	elseif( surface_node == cid.c_sand ) then
@@ -259,7 +179,7 @@ mg_villages.lower_or_raise_terrain_at_point = function( x, z, target_height, min
 	end
 
 	-- do terrain blending; target_height has to be calculated based on old_height
-	if( target_height == maxp.y and old_height < maxp.y ) then
+	if( target_height == maxp.y ) then
 		local yblend = old_height;
 		if blend > 0 then -- leave some cliffs unblended
 			yblend = math.floor(vh + blend * (old_height - vh))
@@ -267,51 +187,39 @@ mg_villages.lower_or_raise_terrain_at_point = function( x, z, target_height, min
 		else	
 			target_height = old_height;
 		end
-		for y = math.max( minp.y, yblend), maxp.y do
-			if( y<=MG_VILLAGES_WATER_LEVEL ) then
-				-- keep ice
-				if( data[a:index( x, y, z )] ~= cid.c_ice ) then
-					data[a:index( x, y, z)] = cid.c_water;
-				end
+		for y = yblend, maxp.y do
+			if( y<=1 ) then
+				data[a:index( x, y, z)] = cid.c_water;
 			else
 				data[a:index( x, y, z)] = cid.c_air;
 			end
 		end
 	end
 	
-	-- only place the surface node if it is actually contained in this node
-	if( target_height >= minp.y and target_height < maxp.y ) then
-		if( target_height < 1 ) then
-			-- no trees or snow below water level
-		elseif( tree  and not( mg_villages.ethereal_trees ) and treepos) then
-			data[       a:index( x, target_height+1, z)] = cid.c_sapling
-			table.insert( treepos, {x=x, y=target_height+1, z=z, typ=0, snow=has_artificial_snow});
-		elseif( jtree and not( mg_villages.ethereal_trees ) and treepos) then
-			data[       a:index( x, target_height+1, z)] = cid.c_jsapling
-			table.insert( treepos, {x=x, y=target_height+1, z=z, typ=1, snow=has_artificial_snow});
-		elseif( ptree and not( mg_villages.ethereal_trees ) and treepos) then
-			data[       a:index( x, target_height+1, z)] = cid.c_psapling
-			table.insert( treepos, {x=x, y=target_height+1, z=z, typ=2, snow=has_artificial_snow});
-		elseif( atree and not( mg_villages.ethereal_trees ) and treepos) then
-			data[       a:index( x, target_height+1, z)] = cid.c_asapling
-			table.insert( treepos, {x=x, y=target_height+1, z=z, typ=3, snow=has_artificial_snow});
-		elseif( asptree and not( mg_villages.ethereal_trees ) and treepos) then
-			data[       a:index( x, target_height+1, z)] = cid.c_aspsapling
-			table.insert( treepos, {x=x, y=target_height+1, z=z, typ=3, snow=has_artificial_snow});
-		elseif( has_snow ) then
-			data[       a:index( x, target_height+1, z)] = cid.c_snow;
-		end
-		data[               a:index( x, target_height,   z)] = surface_node;
-		if( target_height-1 >= minp.y ) then
-			data[       a:index( x, target_height-1, z)] = below_1;
-		end
+	if( target_height < 1 ) then
+		-- no trees or snow below water level
+	elseif( tree  and not( mg_villages.ethereal_trees ) and treepos) then
+		data[       a:index( x, target_height+1, z)] = cid.c_sapling
+		table.insert( treepos, {x=x, y=target_height+1, z=z, typ=0, snow=has_artificial_snow});
+	elseif( jtree and not( mg_villages.ethereal_trees ) and treepos) then
+		data[       a:index( x, target_height+1, z)] = cid.c_jsapling
+		table.insert( treepos, {x=x, y=target_height+1, z=z, typ=1, snow=has_artificial_snow});
+	elseif( ptree and not( mg_villages.ethereal_trees ) and treepos) then
+		data[       a:index( x, target_height+1, z)] = cid.c_psapling
+		table.insert( treepos, {x=x, y=target_height+1, z=z, typ=2, snow=has_artificial_snow});
+	elseif( has_snow ) then
+		data[       a:index( x, target_height+1, z)] = cid.c_snow;
+	end
+	data[               a:index( x, target_height,   z)] = surface_node;
+	if( target_height-1 >= minp.y ) then
+		data[       a:index( x, target_height-1, z)] = below_1;
 	end
 
 	-- not every column will get a coal block; some may get two
 	local coal_height1 = math.random( minp.y, maxp.y );
 	local coal_height2 = math.random( minp.y, maxp.y );
 	y = target_height-2;
-	while( y > minp.y and y > target_height-40 and y <=maxp.y) do
+	while( y > minp.y and y > target_height-40 ) do
 		local old_node = data[a:index( x, y, z)];
 		-- abort as soon as we hit anything other than air
 		if( old_node == cid.c_air or old_node == cid.c_water ) then
@@ -335,20 +243,6 @@ mg_villages.flatten_village_area = function( villages, minp, maxp, vm, data, par
 	for z = minp.z, maxp.z do
 	for x = minp.x, maxp.x do
 		for village_nr, village in ipairs(villages) do
-			local force_ground = nil;
-			local force_underground = nil;
-			if( village.village_type
-			   and mg_villages.village_type_data[ village.village_type ] 
-			   and mg_villages.village_type_data[ village.village_type ].force_ground
-			   and mg_villages.village_type_data[ village.village_type ].force_underground ) then
-				force_ground      = minetest.get_content_id(mg_villages.village_type_data[ village.village_type ].force_ground);
-				force_underground = minetest.get_content_id(mg_villages.village_type_data[ village.village_type ].force_underground);
-				if( not( force_ground ) or force_ground < 0 or force_ground == cid.c_ignore 
-				   or not( force_underground ) or force_underground < 0 or force_underground == cid.c_ignore ) then
-					force_ground = nil;
-					force_underground = nil;
-				end
-			end
 			-- is village_nr the village that is the one that is relevant for this spot?
 			if(    village_area[ x ][ z ][ 1 ] > 0
 			   and village_area[ x ][ z ][ 1 ]==village_nr 
@@ -362,11 +256,11 @@ mg_villages.flatten_village_area = function( villages, minp, maxp, vm, data, par
 
 				if( village_area[ x ][ z ][ 2 ] > 0 ) then -- inside a village
 					mg_villages.lower_or_raise_terrain_at_point( x, z, village.vh, minp, maxp, vm, data, param2_data, a, cid, village.vh,
-											nil,     has_artificial_snow, 0, force_ground, force_underground   );
+											nil,     has_artificial_snow, 0   );
+
 				elseif( mg_villages.ENABLE_TERRAIN_BLEND and village_area[ x ][ z ][ 2 ] < 0) then
 					mg_villages.lower_or_raise_terrain_at_point( x, z, maxp.y,     minp, maxp, vm, data, param2_data, a, cid, village.vh,
-											treepos, has_artificial_snow, -1* village_area[ x ][ z ][ 2 ],
-											force_ground, force_underground);
+											treepos, has_artificial_snow, -1* village_area[ x ][ z ][ 2 ]);
 				end
 			end -- PM ^
 		end
@@ -380,8 +274,6 @@ mg_villages.flatten_village_area = function( villages, minp, maxp, vm, data, par
 			plant_id = cid.c_sapling;
 		elseif( tree.typ == 2 ) then
 			plant_id = cid.c_psapling;
-		elseif( tree.typ == 3 ) then
-			plant_id = cid.c_asapling;
 		end
 		mg_villages.grow_a_tree( {x=tree.x, y=tree.y, z=tree.z}, plant_id, minp, maxp, data, a, cid, nil, tree.snow ) -- no pseudorandom present
 	end
@@ -389,45 +281,9 @@ mg_villages.flatten_village_area = function( villages, minp, maxp, vm, data, par
 end
 
 
+-- TODO: limit this function to the shell in order to speed things up
 -- repair mapgen griefings
-mg_villages.repair_outer_shell = function( villages, minp, maxp, vm, data, param2_data, a, village_area, cid, edge_min, edge_max )
-	-- find out if this part of the shell has already been generated or not
-	if(    data[a:index(minp.x,minp.y,minp.z)] == cid.c_ignore
-
-	   and data[a:index(maxp.x,minp.y,minp.z)] == cid.c_ignore
-	   and data[a:index(minp.x,maxp.y,minp.z)] == cid.c_ignore
-	   and data[a:index(minp.x,minp.y,maxp.z)] == cid.c_ignore
-
-	   and data[a:index(maxp.x,maxp.y,maxp.z)] == cid.c_ignore
-
-	   and data[a:index(maxp.x,maxp.y,minp.z)] == cid.c_ignore
-	   and data[a:index(maxp.x,minp.y,maxp.z)] == cid.c_ignore
-	   and data[a:index(minp.x,maxp.y,maxp.z)] == cid.c_ignore ) then
-
-		-- no - none of the edges has been created yet; no point to place anything there
-		return;
-	end
-
-	if( minp.x < edge_min.x ) then
-		edge_min.x = minp.x;
-	end
-	if( minp.y < edge_min.y ) then
-		edge_min.y = minp.y;
-	end
-	if( minp.z < edge_min.z ) then
-		edge_min.z = minp.z;
-	end
-	if( maxp.x > edge_max.x ) then
-		edge_max.x = maxp.x;
-	end
-	if( maxp.y > edge_max.y ) then
-		edge_max.y = maxp.y;
-	end
-	if( maxp.z > edge_max.z ) then
-		edge_max.z = maxp.z;
-	end
-
-
+mg_villages.repair_outer_shell = function( villages, minp, maxp, vm, data, param2_data, a, village_area, cid )
 	for z = minp.z, maxp.z do
 	for x = minp.x, maxp.x do
 		-- inside a village
@@ -462,7 +318,7 @@ mg_villages.repair_outer_shell = function( villages, minp, maxp, vm, data, param
 					
 			-- remove mudflow
 			y = village.vh + 1;
-			while( y <= maxp.y ) do
+			while( y < village.vh+40 and y < maxp.y ) do
 				local ci = data[a:index(x, y, z)];
 				if( ci ~= cid.c_ignore and (ci==cid.c_dirt or ci==cid.c_dirt_with_grass or ci==cid.c_sand or ci==cid.c_desert_sand)) then
 					data[a:index(x,y,z)] = cid.c_air;
@@ -473,8 +329,7 @@ mg_villages.repair_outer_shell = function( villages, minp, maxp, vm, data, param
 					              ci==cid.c_msnow_9 or ci==cid.c_msnow_10 or ci==cid.c_msnow_11)) then
 					data[a:index(x, village.vh+1, z)] = cid.c_snow;
 					data[a:index(x, village.vh,   z)] = cid.c_dirt_with_snow;
-				elseif( ci == cid.c_ignore ) then
-					--data[a:index(x,y,z)] = cid.c_air;
+
 				end
 				y = y+1;
 			end
@@ -739,14 +594,6 @@ mg_villages.grow_a_tree = function( pos, plant_id, minp, maxp, data, a, cid, pr,
 	elseif( plant_id == cid.c_psapling and minetest.registered_nodes[ 'mcl_core:sprucetree']) then
 		mg_villages.grow_pinetree(   data, a, pos, snow);
 		return true;
-	-- an acacia tree; it does not have its own grow function
-	elseif( plant_id == cid.c_asapling and minetest.registered_nodes[ 'mcl_core:acaciatree']) then
-		data[ a:index( pos.x, pos.y, pos.z )] = cid.c_asapling;
-		return true;
-        -- aspen tree from newer minetest game
-	elseif( plant_id == cid.c_aspsapling and minetest.registered_nodes[ 'mcl_core:birchtree']) then
-		data[ a:index( pos.x, pos.y, pos.z )] = cid.c_aspsapling;
-		return true;
 	-- a savannatree from the mg mod
 	elseif( plant_id == cid.c_savannasapling and mg_villages.add_savannatree) then
 		mg_villages.add_savannatree(         data, a, pos.x, pos.y, pos.z, minp, maxp, pr) -- TODO: snow
@@ -762,32 +609,30 @@ end
 
 -- places trees and plants at empty spaces
 mg_villages.village_area_fill_with_plants = function( village_area, villages, minp, maxp, data, param2_data, a, cid )
-	-- do not place any plants if we are working on the mapchunk above
-	if( minp.y > 0 ) then
-		return;
-	end
 	-- trees which require grow functions to be called
-	cid.c_savannasapling  = minetest.get_content_id( 'mg:savannasapling');
-	cid.c_pinesapling     = minetest.get_content_id( 'mg:pinesapling');
+	cid.c_savannasapling  = minetest.get_content_id( 'mcl_core:acaciasapling');
+	cid.c_pinesapling     = minetest.get_content_id( 'mcl_core:sprucesapling');
 	-- add farmland
 	cid.c_wheat           = minetest.get_content_id( 'mcl_flowers:tallgrass' );
 	cid.c_cotton          = minetest.get_content_id( 'mcl_flowers:tallgrass' );
-	cid.c_shrub           = minetest.get_content_id( 'mcl_flowers:tallgrass');
+	cid.c_shrub           = minetest.get_content_id( 'mcl_core:deadbush');
 	-- these extra nodes are used in order to avoid abms on the huge fields around the villages
-	cid.c_soil_wet        = minetest.get_content_id( 'mg_villages:soil' ); --'farming:soil_wet' );
-	cid.c_soil_sand       = minetest.get_content_id( 'mg_villages:desert_sand_soil'); --'farming:desert_sand_soil_wet' );
+	cid.c_soil_wet        = minetest.get_content_id( 'mcl_farming:soil_wet' ); --'farming:soil_wet' );
+	cid.c_soil_sand       = minetest.get_content_id( 'mcl_core:sand'); --'farming:desert_sand_soil_wet' );
 	-- desert sand soil is only available in minetest_next
 	if( not( cid.c_soil_sand )) then
 		cid.c_soil_sand = cid.c_soil_wet;
 	end
+	local c_water_source    = minetest.get_content_id( 'mcl_core:water_source');
+	local c_clay            = minetest.get_content_id( 'mcl_core:clay');
 	local c_feldweg         = minetest.get_content_id( 'cottages:feldweg');
 	if( not( c_feldweg )) then
 		c_feldweg = cid.c_dirt_with_grass;
 	end
 
 	if( mg_villages.realtest_trees ) then
-		cid.c_soil_wet        = minetest.get_content_id( 'farming:soil' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
-		cid.c_soil_sand       = minetest.get_content_id( 'farming:soil' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
+		cid.c_soil_wet        = minetest.get_content_id( 'mcl_farming:soil_wet' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
+		cid.c_soil_sand       = minetest.get_content_id( 'mcl_farming:soil_wet' ); -- TODO: the one from mg_villages would be better...but that one lacks textures
 		cid.c_wheat           = minetest.get_content_id( 'farming:spelt_4' );
 		cid.c_cotton          = minetest.get_content_id( 'farming:flax_4' );
 --		cid.c_shrub           = minetest.get_content_id( 'default:dry_shrub');
@@ -813,7 +658,7 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 				local plant_selected = false;
 				local has_snow_cover = false;
 				for _,v in ipairs( village.to_add_data.plantlist ) do
-					if( plant_id == cid.c_snow or g==cid.c_dirt_with_snow or g==cid.c_snowblock) then
+					if( plant_id == cid.c_snow or g==cid.c_dirt_with_snow) then
 						has_snow_cover = true;
 					end
 					-- select the first plant that fits; if the node is not air, keep what is currently inside
@@ -839,12 +684,7 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 	
 				-- grow wheat and cotton on normal wet soil (and re-plant if it had been removed by mudslide)
 				elseif( on_soil and (g==cid.c_dirt_with_grass or g==cid.c_soil_wet or g==cid.c_dirt_with_snow)) then	
-					-- wheat needs another option there
-					if( plant_id == cid.c_wheat ) then
-						param2_data[a:index( x, h+1, z)] = 0;
-					else
-						param2_data[a:index( x, h+1, z)] = math.random( 1, 179 );
-					end
+					param2_data[a:index( x, h+1, z)] = math.random( 1, 179 );
 					data[a:index( x,  h,   z)] = cid.c_soil_wet;
 					-- no plants in winter
 					if( has_snow_cover and mg_villages.use_soil_snow) then
@@ -856,12 +696,7 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 
 				-- grow wheat and cotton on desert sand soil - or on soil previously placed (before mudslide overflew it; same as above)
 				elseif( on_soil and (g==cid.c_desert_sand or g==cid.c_soil_sand) and cid.c_soil_sand and cid.c_soil_sand > 0) then
-					-- wheat needs another option there
-					if( plant_id == cid.c_wheat ) then
-						param2_data[a:index( x, h+1, z)] = 0;
-					else
-						param2_data[a:index( x, h+1, z)] = math.random( 1, 179 );
-					end
+					param2_data[a:index( x, h+1, z)] = math.random( 1, 179 );
 					data[a:index( x,  h,   z)] = cid.c_soil_sand;
 					-- no plants in winter
 					if( has_snow_cover and mg_villages.use_soil_snow) then
@@ -884,11 +719,6 @@ mg_villages.village_area_fill_with_plants = function( village_area, villages, mi
 				if( has_snow_cover and cid.c_msnow_1 ~= cid.c_ignore) then
 					data[a:index( x,  h+2, z)] = cid.c_msnow_1;
 				end
-
-				-- place a water source now and then so that the fake soil can later be turned into real soil if needed
-				if( on_soil and x%3==0 and z%3==0 and h>minp.y) then
-					data[a:index( x, h-1, z)] = cid.c_water;
-				end
 			end
 		end
 	end
@@ -909,7 +739,7 @@ mg_villages.save_data = function()
 end
 
 
-mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, data, param2_data, a, top, seed )
+mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, data, param2_data, a, top )
 	local t1 = minetest.get_us_time();
 
 	local cid = {}
@@ -918,11 +748,10 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 	cid.c_stone  = minetest.get_content_id( 'mcl_core:stone');
 	cid.c_dirt   = minetest.get_content_id( 'mcl_core:dirt');
 	cid.c_snow   = minetest.get_content_id( 'mcl_core:snow');
-	cid.c_snowblock   = minetest.get_content_id( 'mcl_core:snowblock');
 	cid.c_dirt_with_snow  = minetest.get_content_id( 'mcl_core:dirt_with_grass_snow' );
 	cid.c_dirt_with_grass = minetest.get_content_id( 'mcl_core:dirt_with_grass' );
 	cid.c_desert_sand = minetest.get_content_id( 'mcl_core:redsand' ); -- PM v
-	cid.c_desert_stone  = minetest.get_content_id( 'mcl_core:desertstone');
+	cid.c_desert_stone  = minetest.get_content_id( 'mcl_core:redsandstone');
 	cid.c_sand = minetest.get_content_id( 'mcl_core:sand' ); 
 	cid.c_tree = minetest.get_content_id( 'mcl_core:tree');
 	cid.c_sapling = minetest.get_content_id( 'mcl_core:sapling');
@@ -930,10 +759,6 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 	cid.c_jsapling = minetest.get_content_id( 'mcl_core:junglesapling');
 	cid.c_ptree = minetest.get_content_id( 'mcl_core:sprucetree');
 	cid.c_psapling = minetest.get_content_id( 'mcl_core:sprucesapling');
-	cid.c_atree    = minetest.get_content_id( 'mcl_core:acaciatree');
-	cid.c_asapling = minetest.get_content_id( 'mcl_core:acaciasapling');
-	cid.c_asptree    = minetest.get_content_id( 'mcl_core:birchtree');
-	cid.c_aspsapling = minetest.get_content_id( 'mcl_core:birchsapling');
 	cid.c_water = minetest.get_content_id( 'mcl_core:water_source'); -- PM ^
 	cid.c_stone_with_coal = minetest.get_content_id( 'mcl_core:stone_with_coal');
 	cid.c_sandstone       = minetest.get_content_id( 'mcl_core:sandstone');
@@ -951,9 +776,8 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 	cid.c_msnow_11 = minetest.get_content_id( 'moresnow:snow_ramp_inner_top');
 	cid.c_msnow_soil=minetest.get_content_id( 'moresnow:snow_soil' );
 
-	cid.c_ice      = minetest.get_content_id( 'default:ice' );
-
-	cid.c_plotmarker = minetest.get_content_id( 'mg_villages:plotmarker');
+	--cid.c_plotmarker = minetest.get_content_id( 'mg_villages:plotmarker');
+	cid.c_plotmarker = minetest.get_content_id( 'air');
 
 	if( minetest.get_modpath('ethereal')) then
 		cid.c_ethereal_clay_red    = minetest.get_content_id( 'bakedclay:red' );
@@ -976,8 +800,6 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 			-- only add artificial snow if the village has at least a size of 15 (else it might look too artificial)
 			if( not( village.artificial_snow ) and village.vs > 15) then
 				if( mg_villages.artificial_snow_probability and math.random( 1, mg_villages.artificial_snow_probability )==1
-				    -- forbid artificial snow for some village types
-			   	    and not( mg_villages.village_type_data[ village.village_type ].no_snow )
 				    and minetest.registered_nodes['default:snow']) then
 					village.artificial_snow = 1;
 				else
@@ -1014,8 +836,8 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 			MaxEdge={x=emax.x, y=emax.y, z=emax.z},
 		}
 
-		data = vm:get_data(data);
-		param2_data = vm:get_param2_data(param2_data);
+		data = vm:get_data()
+		param2_data = vm:get_param2_data()
 	end
 	t1 = time_elapsed( t1, 'get_vmap_data' );
 
@@ -1060,18 +882,10 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 	end
 	t1 = time_elapsed( t1, 'change_height' );
 
-	--mg_villages.flatten_village_area( villages, minp, maxp, vm, data, param2_data, a, village_area, cid );
-	mg_villages.flatten_village_area( villages, tmin, tmax, vm, data, param2_data, a, village_area, cid );
+	mg_villages.flatten_village_area( villages, minp, maxp, vm, data, param2_data, a, village_area, cid );
 	t1 = time_elapsed( t1, 'flatten_village_area' );
 	-- repair cavegen griefings and mudflow which may have happened in the outer shell (which is part of other mapnodes)
-	local e1 = {x=minp.x,y=minp.y,z=minp.z};
-	local e2 = {x=maxp.x,y=maxp.y,z=maxp.z};
-	mg_villages.repair_outer_shell(   villages, {x=tmin.x,   y=tmin.y,z=tmin.z},    {x=tmin.x+16, y=tmax.y, z=tmax.z}, vm, data, param2_data, a, village_area, cid, e1, e2 );
-	mg_villages.repair_outer_shell(   villages, {x=tmax.x-16,y=tmin.y,z=tmin.z},    {x=tmax.x,    y=tmax.y, z=tmax.z}, vm, data, param2_data, a, village_area, cid, e1, e2 );
-	mg_villages.repair_outer_shell(   villages, {x=tmin.x+16,y=tmin.y,z=tmin.z},    {x=tmax.x-16, y=tmax.y, z=tmin.z+16}, vm, data, param2_data, a, village_area, cid, e1, e2 );
-	mg_villages.repair_outer_shell(   villages, {x=tmin.x+16,y=tmin.y,z=tmax.z-16}, {x=tmax.x-16, y=tmax.y, z=tmax.z},    vm, data, param2_data, a, village_area, cid, e1, e2 );
---	mg_villages.repair_outer_shell(   villages, tmin, tmax, vm, data, param2_data, a, village_area, cid );
-
+	mg_villages.repair_outer_shell(   villages, tmin, tmax, vm, data, param2_data, a, village_area, cid );
 	t1 = time_elapsed( t1, 'repair_outer_shell' );
 
 	local c_feldweg =  minetest.get_content_id('cottages:feldweg');
@@ -1083,10 +897,9 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 
 		-- the village_id will be stored in the plot markers
 		local village_id = tostring( village.vx )..':'..tostring( village.vz );
-		village.anz_buildings = mg_villages.count_inhabitated_buildings(village);
-		village.to_add_data = handle_schematics.place_buildings( village, tmin, tmax, data, param2_data, a, cid, village_id);
+		village.to_add_data = mg_villages.place_buildings( village, tmin, tmax, data, param2_data, a, cid, village_id);
 
-		handle_schematics.place_dirt_roads(                village, tmin, tmax, data, param2_data, a, c_feldweg);
+		mg_villages.place_dirt_roads(                      village, tmin, tmax, data, param2_data, a, c_feldweg);
 
 		-- grow trees which are part of buildings into saplings
 		for _,v in ipairs( village.to_add_data.extra_calls.trees ) do
@@ -1094,29 +907,19 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 		end
 	end
 	t1 = time_elapsed( t1, 'place_buildings and place_dirt_roads' );
---===========
 
---===========
---===========
---===========
---===========
---===========
---===========
---===========
-	mg_villages.village_area_fill_with_plants( village_area, villages, tmin, tmax, data, param2_data, a, cid );
+	-- TODO: uses the wrong nodes for some reason, so disable for now...
+	-- mg_villages.village_area_fill_with_plants( village_area, villages, tmin, tmax, data, param2_data, a, cid );
 	t1 = time_elapsed( t1, 'fill_with_plants' );
-
-	if( mg_villages.CREATE_HIGHLANDPOOLS ) then
-		mg_villages.do_highlandpools(minp, maxp, seed, vm, a, data, village_area, cid);
-	end
-	t1 = time_elapsed( t1, 'create highlandpools' );
 
 	vm:set_data(data)
 	vm:set_param2_data(param2_data)
 	t1 = time_elapsed( t1, 'vm data set' );
 
-	-- only update lighting where we actually placed the nodes
-	vm:calc_lighting( e1, e2 ); --minp, maxp ); --tmin, tmax)
+	vm:calc_lighting(
+		{x=minp.x-16, y=minp.y, z=minp.z-16},
+		{x=maxp.x+16, y=maxp.y, z=maxp.z+16}
+	)
 	t1 = time_elapsed( t1, 'vm calc lighting' );
 
 	vm:write_to_map(data)
@@ -1137,29 +940,6 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 		end
 	end
 
-	-- the doors need to be adjusted as well
-	for _, village in ipairs(villages) do
-	  if( village.to_add_data.extra_calls.door_b ) then
-		for k, v in pairs( village.to_add_data.extra_calls.door_b ) do
-			local meta = minetest.get_meta( v );
-
-			local l = 2 -- b
-			local h = meta:get_int("right") + 1
-
-			local replace = {
-			        { { type = "a", state = 0 }, { type = "a", state = 3 } },
-			        { { type = "b", state = 1 }, { type = "b", state = 2 } }
-			}
-			local new = replace[l][h]
---			minetest.swap_node(v, {name = name .. "_" .. new.type, param2 = v.p2})
-			meta:set_int("state", new.state)
-			-- wipe meta on top node as it's unused
-			minetest.set_node({x = v.x, y = v.y + 1, z = v.z}, { name = "doors:hidden" })
-		end
-          end
-	end
-
-
 	local pr = PseudoRandom(mg_villages.get_bseed(minp));
 	for _, village in ipairs(villages) do
 		for _,v in ipairs( village.to_add_data.extra_calls.chests ) do
@@ -1169,12 +949,6 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 		end
 	end
 	-- TODO: extra_calls.signs
-
-	
-	-- useful for spawning mobs etc.
-	for _, village in ipairs(villages) do
-		mg_villages.part_of_village_spawned( village, minp, maxp, data, param2_data, a, cid );
-	end
 
 	-- initialize the pseudo random generator so that the chests will be filled in a reproducable pattern
 	local meta
@@ -1206,9 +980,6 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 					tostring( village.village_type ).."\' of size "..tostring( village.vs )..
 					" spawned at: x = "..village.vx..", z = "..village.vz)
 			village_data_updated = true;
-
-			-- hook for doing stuff that needs to be done exactly once per village
-			mg_villages.new_village_spawned( village_id );
 		end
 	end
 	-- always save the changed village data
@@ -1219,18 +990,12 @@ mg_villages.place_villages_via_voxelmanip = function( villages, minp, maxp, vm, 
 end
 
 
---minetest.set_gen_notify('dungeon, temple, cave_begin, cave_end, large_cave_begin, large_cave_end',{});
-
 
 -- the actual mapgen
 -- It only does changes if there is at least one village in the area that is to be generated.
 minetest.register_on_generated(function(minp, maxp, seed)
--- this is just for learning more about dungeons and caves; it is not used anywhere here
---	local structures = minetest.get_mapgen_object('gennotify');
---	print('STRUCTURES BY MAPGEN: '..minetest.serialize( structures ));
-
 	-- only generate village on the surface chunks
-	if( minp.y < -32 or minp.y > mg_villages.MAX_HEIGHT_TREATED) then --64
+	if( minp.y ~= -32 or minp.y < -32 or minp.y > 64) then
 		return;
 	end
 	
@@ -1267,7 +1032,7 @@ minetest.register_on_generated(function(minp, maxp, seed)
 	end
 
 	if( villages and #villages > 0 ) then
-		mg_villages.place_villages_via_voxelmanip( villages, minp, maxp, nil, data_vm, data_param2_data, nil, nil, seed );
+		mg_villages.place_villages_via_voxelmanip( villages, minp, maxp, nil, nil,  nil, nil, nil );
 	end
 end)
 

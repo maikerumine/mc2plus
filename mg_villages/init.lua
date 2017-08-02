@@ -22,12 +22,19 @@ mg_villages.print = function( level, msg )
 end
 
 
--- save_restore is now part of handle_schematics
---dofile(mg_villages.modpath.."/save_restore.lua")
+dofile(mg_villages.modpath.."/save_restore.lua")
 mg_villages.all_villages     = save_restore.restore_data( 'mg_all_villages.data' ); -- read mg_villages.all_villages data saved for this world from previous runs
 mg_villages.mg_generated_map = save_restore.restore_data( 'mg_generated_map.data' );
 
 dofile(mg_villages.modpath.."/config.lua")
+
+dofile(mg_villages.modpath.."/worldedit_file.lua") -- deserialize worldedit savefiles
+dofile(mg_villages.modpath.."/analyze_we_file.lua")
+dofile(mg_villages.modpath.."/rotate.lua")
+
+-- read size from schematics files directly
+-- analyze_mts_file.lua uses handle_schematics.* namespace
+dofile(mg_villages.modpath.."/analyze_mts_file.lua") 
 
 -- adds a special gravel node which will neither fall nor be griefed by mapgen
 dofile(mg_villages.modpath.."/nodes.lua")
@@ -35,6 +42,7 @@ dofile(mg_villages.modpath.."/nodes.lua")
 -- the default game no longer provides helpful tree growing code
 dofile(mg_villages.modpath.."/trees.lua")
 
+-- replace some materials for entire villages randomly
 dofile(mg_villages.modpath.."/replacements.lua")
 
 -- multiple diffrent village types with their own sets of houses are supported
@@ -53,6 +61,7 @@ dofile(mg_villages.modpath.."/init_weights.lua")
 -- generate village names
 dofile(mg_villages.modpath.."/name_gen.lua");
 
+dofile(mg_villages.modpath.."/place_buildings.lua")
 dofile(mg_villages.modpath.."/villages.lua")
 
 -- adds a command that allows to teleport to a known village
@@ -66,8 +75,6 @@ dofile(mg_villages.modpath.."/fill_chest.lua")
 
 -- terrain blending for individual houses
 dofile(mg_villages.modpath.."/terrain_blend.lua")
--- highlandpools
-dofile(mg_villages.modpath.."/highlandpools.lua")
 -- the interface for the mapgen;
 -- also takes care of spawning the player
 dofile(mg_villages.modpath.."/mapgen.lua")

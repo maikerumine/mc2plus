@@ -78,12 +78,6 @@ local function choose_building(l, pr, village_type)
 	while true do
 		local p = pr:next(1, 3000)
 		
-		if(  not( mg_villages.village_type_data[ village_type ] )
-		  or not( mg_villages.village_type_data[ village_type ][ 'building_list'] )) then
-			mg_villages.print( mg_villages.DEBUG_LEVEL_INFO, 'Unsupported village type: '..tostring( village_type )..' for house at '..tostring(bx)..':'..tostring(bz)..'.');
-			-- ...and crash in the next few lines (because there is no real solution for this problem)
-		end
-
 		for _, b in ipairs( mg_villages.village_type_data[ village_type ][ 'building_list'] ) do
 			if (   mg_villages.BUILDINGS[ b ] and mg_villages.BUILDINGS[ b ].max_weight
 			   and mg_villages.BUILDINGS[ b ].max_weight[ village_type ] and  mg_villages.BUILDINGS[ b ].max_weight[ village_type ] >= p) then
@@ -187,16 +181,7 @@ end
 
 mg_villages.road_nr = 0;
 
-local function generate_road(village, l, pr, roadsize_list, road_materials, rx, rz, rdx, rdz, vnoise, space_between_buildings, iteration_depth)
-	local roadsize = math.floor(roadsize_list[ iteration_depth ]/2);
-	if( not( roadsize ) or roadsize==0) then
-		roadsize = mg_villages.FIRST_ROADSIZE;
-	end
-	local roadsize_a = roadsize;
-	local roadsize_b = roadsize;
-	if( roadsize_list[ iteration_depth ] % 2==1 ) then
-		roadsize_a = roadsize+1;
-	end	
+local function generate_road(village, l, pr, roadsize, rx, rz, rdx, rdz, vnoise, space_between_buildings)
 	local vx, vz, vh, vs = village.vx, village.vz, village.vh, village.vs
 	local village_type   = village.village_type;
 	local calls_to_do = {}
@@ -219,16 +204,14 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 	local mirror;
 	-- we have one more road
 	mg_villages.road_nr = mg_villages.road_nr + 1;
-	local first_building_a = false;
-	local first_building_b = false;
-	while mg_villages.inside_village(rx, rz, village, vnoise) and not road_in_building(rx, rz, rdx, rdz, roadsize_a, l) do
-		if iteration_depth > 1 and pr:next(1, 4) == 1 and first_building_a then
+	while mg_villages.inside_village(rx, rz, village, vnoise) and not road_in_building(rx, rz, rdx, rdz, roadsize, l) do
+		if roadsize > 1 and pr:next(1, 4) == 1 then
 			--generate_road(vx, vz, vs, vh, l, pr, roadsize-1, rx, rz, math.abs(rdz), math.abs(rdx))
-			calls_to_do[#calls_to_do+1] = {rx=rx+(roadsize_a - 0)*rdx, rz=rz+(roadsize_a - 0)*rdz, rdx=math.abs(rdz), rdz=math.abs(rdx)}
-			m2x = rx + (roadsize_a - 0)*rdx
-			m2z = rz + (roadsize_a - 0)*rdz
-			rx = rx + (2*roadsize_a - 0)*rdx
-			rz = rz + (2*roadsize_a - 0)*rdz
+			calls_to_do[#calls_to_do+1] = {rx=rx+(roadsize - 1)*rdx, rz=rz+(roadsize - 1)*rdz, rdx=math.abs(rdz), rdz=math.abs(rdx)}
+			m2x = rx + (roadsize - 1)*rdx
+			m2z = rz + (roadsize - 1)*rdz
+			rx = rx + (2*roadsize - 1)*rdx
+			rz = rz + (2*roadsize - 1)*rdz
 		end
 		--else
 			--::loop::
@@ -237,7 +220,7 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 			local bz
 			local tries = 0
 			while true do
-				if not mg_villages.inside_village(rx, rz, village, vnoise) or road_in_building(rx, rz, rdx, rdz, roadsize_a, l) then
+				if not mg_villages.inside_village(rx, rz, village, vnoise) or road_in_building(rx, rz, rdx, rdz, roadsize, l) then
 					exitloop = true
 					break
 				end
@@ -246,8 +229,8 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 					village_type_sub = 'fields';
 				end
 				btype, rotation, bsizex, bsizez, mirror = choose_building_rot(l, pr, orient1, village_type_sub)
-				bx = rx + math.abs(rdz)*(roadsize_a+1) - when(rdx==-1, bsizex-1, 0)
-				bz = rz + math.abs(rdx)*(roadsize_a+1) - when(rdz==-1, bsizez-1, 0)
+				bx = rx + math.abs(rdz)*(roadsize+1) - when(rdx==-1, bsizex-1, 0)
+				bz = rz + math.abs(rdx)*(roadsize+1) - when(rdz==-1, bsizez-1, 0)
 				if placeable(bx, bz, bsizex, bsizez, l) and inside_village2(bx, bsizex, bz, bsizez, village, vnoise) then
 					break
 				end
@@ -266,19 +249,18 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 			mx = rx - 2*rdx
 			mz = rz - 2*rdz
 			l[#l+1] = {x=bx, y=vh, z=bz, btype=btype, bsizex=bsizex, bsizez=bsizez, brotate = rotation, road_nr = mg_villages.road_nr, side=1, o=orient1, mirror=mirror }
-			first_building_a = true;
 		--end
 	end
 	rx = rxx
 	rz = rzz
-	while mg_villages.inside_village(rx, rz, village, vnoise) and not road_in_building(rx, rz, rdx, rdz, roadsize_b, l) do
-		if roadsize_b > 1 and pr:next(1, 4) == 1 and first_building_b then
+	while mg_villages.inside_village(rx, rz, village, vnoise) and not road_in_building(rx, rz, rdx, rdz, roadsize, l) do
+		if roadsize > 1 and pr:next(1, 4) == 1 then
 			--generate_road(vx, vz, vs, vh, l, pr, roadsize-1, rx, rz, -math.abs(rdz), -math.abs(rdx))
-			calls_to_do[#calls_to_do+1] = {rx=rx+(roadsize_b - 0)*rdx, rz=rz+(roadsize_b - 0)*rdz, rdx=-math.abs(rdz), rdz=-math.abs(rdx)}
-			m2x = rx + (roadsize_b - 0)*rdx
-			m2z = rz + (roadsize_b - 0)*rdz
-			rx = rx + (2*roadsize_b - 0)*rdx
-			rz = rz + (2*roadsize_b - 0)*rdz
+			calls_to_do[#calls_to_do+1] = {rx=rx+(roadsize - 1)*rdx, rz=rz+(roadsize - 1)*rdz, rdx=-math.abs(rdz), rdz=-math.abs(rdx)}
+			m2x = rx + (roadsize - 1)*rdx
+			m2z = rz + (roadsize - 1)*rdz
+			rx = rx + (2*roadsize - 1)*rdx
+			rz = rz + (2*roadsize - 1)*rdz
 		end
 		--else
 			--::loop::
@@ -287,7 +269,7 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 			local bz
 			local tries = 0
 			while true do
-				if not mg_villages.inside_village(rx, rz, village, vnoise) or road_in_building(rx, rz, rdx, rdz, roadsize_b, l) then
+				if not mg_villages.inside_village(rx, rz, village, vnoise) or road_in_building(rx, rz, rdx, rdz, roadsize, l) then
 					exitloop = true
 					break
 				end
@@ -296,8 +278,8 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 					village_type_sub = 'fields';
 				end
 				btype, rotation, bsizex, bsizez, mirror = choose_building_rot(l, pr, orient2, village_type_sub)
-				bx = rx - math.abs(rdz)*(bsizex+roadsize_b) - when(rdx==-1, bsizex-1, 0)
-				bz = rz - math.abs(rdx)*(bsizez+roadsize_b) - when(rdz==-1, bsizez-1, 0)
+				bx = rx - math.abs(rdz)*(bsizex+roadsize) - when(rdx==-1, bsizex-1, 0)
+				bz = rz - math.abs(rdx)*(bsizez+roadsize) - when(rdz==-1, bsizez-1, 0)
 				if placeable(bx, bz, bsizex, bsizez, l) and inside_village2(bx, bsizex, bz, bsizez, village, vnoise) then
 					break
 				end
@@ -316,7 +298,6 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 			m2x = rx - 2*rdx
 			m2z = rz - 2*rdz
 			l[#l+1] = {x=bx, y=vh, z=bz, btype=btype, bsizex=bsizex, bsizez=bsizez, brotate = rotation, road_nr = mg_villages.road_nr, side=2, o=orient2, mirror=mirror}
-			first_building_b = true;
 		--end
 	end
 	if road_in_building(rx, rz, rdx, rdz, roadsize, l) then
@@ -330,8 +311,8 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 	local rzmin;
 	local rzmax;
 	if rdx == 0 then
-		rxmin = rx - roadsize_a + 1
-		rxmax = rx + roadsize_b - 1
+		rxmin = rx - roadsize + 1
+		rxmax = rx + roadsize - 1
 		rzmin = math.min(rzz, mz)
 		rzmax = math.max(rzz, mz)
 		-- prolong the main road to the borders of the village
@@ -348,8 +329,8 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 			rzmax = rzmax+1;
 		end
 	else
-		rzmin = rz - roadsize_a + 1
-		rzmax = rz + roadsize_b - 1
+		rzmin = rz - roadsize + 1
+		rzmax = rz + roadsize - 1
 		rxmin = math.min(rxx, mx)
 		rxmax = math.max(rxx, mx)
 		-- prolong the main road to the borders of the village
@@ -366,21 +347,17 @@ local function generate_road(village, l, pr, roadsize_list, road_materials, rx, 
 			rxmax = rxmax+1;
 		end
 	end
-	l[#l+1] = {x = rxmin+1, y = vh, z = rzmin, btype = "road",
+	l[#l+1] = {x = rxmin, y = vh, z = rzmin, btype = "road",
 		bsizex = rxmax - rxmin + 1, bsizez = rzmax - rzmin + 1, brotate = 0, road_nr = mg_villages.road_nr}
-	if( road_materials and road_materials[ iteration_depth ] and minetest.registered_nodes[ road_materials[ iteration_depth ]] ) then
-		l[#l].road_material = minetest.get_content_id( road_materials[ iteration_depth ] );
-	end
 	
 	for _, i in ipairs(calls_to_do) do
---		local new_roadsize = roadsize -- - 1
+		local new_roadsize = roadsize - 1
 		if pr:next(1, 100) <= mg_villages.BIG_ROAD_CHANCE then
-			--new_roadsize = roadsize
-			iteration_depth = iteration_depth + 1;
+			new_roadsize = roadsize
 		end
 
 		--generate_road(vx, vz, vs, vh, l, pr, new_roadsize, i.rx, i.rz, i.rdx, i.rdz, vnoise)
-		calls[calls.index] = {village, l, pr, roadsize_list, road_materials, i.rx, i.rz, i.rdx, i.rdz, vnoise, space_between_buildings, iteration_depth-1}
+		calls[calls.index] = {village, l, pr, new_roadsize, i.rx, i.rz, i.rdx, i.rdz, vnoise, space_between_buildings}
 		calls.index = calls.index+1
 	end
 end
@@ -455,14 +432,7 @@ local function generate_bpos(village, pr, vnoise, space_between_buildings)
 	calls = {index = 1}
 	-- the function below is recursive; we need a way to count roads
 	mg_villages.road_nr = 0;
-	local roadsize_list = {};
-	for i=1,mg_villages.FIRST_ROADSIZE*2 do
-		roadsize_list[i] = i;
-	end
-	if( mg_villages.village_type_data[ village.village_type ].roadsize_list ) then
-		roadsize_list = mg_villages.village_type_data[ village.village_type ].roadsize_list;
-	end
-	generate_road(village, l, pr, roadsize_list, mg_villages.village_type_data[ village.village_type ].road_materials, rx, rz, 1, 0, vnoise, space_between_buildings, #roadsize_list)
+	generate_road(village, l, pr, mg_villages.FIRST_ROADSIZE, rx, rz, 1, 0, vnoise, space_between_buildings)
 	local i = 1
 	while i < calls.index do
 		generate_road(unpack(calls[i]))
@@ -669,7 +639,7 @@ mg_villages.generate_village = function(village, vnoise)
 	-- if the village is new, replacement_list is nil and a new replacement list will be created
 	local replacements = mg_villages.get_replacement_table( village.village_type, p, nil );
 	
-	local sapling_id = mg_villages.get_content_id_replaced( 'mcl_core:sapling', replacements );
+	local sapling_id = mg_villages.get_content_id_replaced( 'default:sapling', replacements );
 	-- 1/sapling_p = probability of a sapling beeing placed
 	local sapling_p  = 25;
 	if( mg_villages.sapling_probability[ sapling_id ] ) then
@@ -682,7 +652,7 @@ mg_villages.generate_village = function(village, vnoise)
 		{ id=c_plant,    p=            mg_villages.village_type_data[ village.village_type ].plant_frequency }};
 
 	if( village.is_single_house and plantlist and #plantlist>0 ) then
-		local c_grass = mg_villages.get_content_id_replaced( 'mcl_flowers:tallgrass', replacements);
+		local c_grass = mg_villages.get_content_id_replaced( 'default:grass_5', replacements);
 		plantlist[2] = { id=c_grass,    p=10        };
 		-- reduce the amount of plants grown so that the area stands out less from the sourroundings
 		plantlist[2].p = plantlist[2].p*3;
@@ -697,26 +667,6 @@ mg_villages.generate_village = function(village, vnoise)
 
 	--print('VILLAGE GENREATION: GENERATING NEW VILLAGE Nr. '..tostring( village.nr ));
 end
-
-
--- not all buildings contain beds so that mobs could live inside; some are just workplaces;
--- roads get only placed if there are enough inhabitants
-mg_villages.count_inhabitated_buildings = function(village)
-	local bpos             = village.to_add_data.bpos;
-	-- count the buildings
-	local anz_buildings = 0;
-	for i, pos in ipairs(bpos) do
-		if( pos.btype and not(pos.btype == 'road' )) then 
-			local binfo = mg_villages.BUILDINGS[pos.btype];
-			-- count buildings which can house inhabitants as well as those requiring workers
-			if( binfo and binfo.inh and binfo.inh ~= 0 ) then
-				anz_buildings = anz_buildings + 1;
-			end
-		end
-	end
-	return anz_buildings;
-end
-
 
 -- creates individual buildings outside of villages;
 -- the data structure is like that of a village, except that bpos (=buildings to be placed) is already set;

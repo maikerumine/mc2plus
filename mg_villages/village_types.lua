@@ -19,26 +19,25 @@
 --	plant_frequency = 1	The higher this value is, the less plants are placed.
 
 local village_type_data_list = {
-	nore         = { min = 19, max = 29,   space_between_buildings=1, mods={},            texture = 'default_stone_brick.png',
+	nore         = { min = 10, max = 30,   space_between_buildings=1, mods={},            texture = 'default_stone_brick.png',
 			 replacement_function = mg_villages.replacements_nore },
-	taoki        = { min = 19, max = 32,   space_between_buildings=1, mods={},            texture = 'default_brick.png' ,
-			 sapling_divisor =  5, plant_type = 'mcl_flowers:tallgrass',    plant_frequency = 1,
+	taoki        = { min = 10, max = 30,   space_between_buildings=1, mods={},            texture = 'default_brick.png' ,
+			 sapling_divisor =  5, plant_type = 'farming:cotton_8',    plant_frequency = 1,
 			 replacement_function = mg_villages.replacements_taoki },
-	medieval     = { min = 25, max = 60,   space_between_buildings=2, mods={'cottages'},  texture = 'cottages_darkage_straw.png', -- they often have straw roofs
-			 sapling_divisor = 10, plant_type =  'mcl_flowers:tallgrass',     plant_frequency = 1,
-			 replacement_function = mg_villages.replacements_medieval,
-			roadsize_list = {2,3,4,5,6},
---			road_materials = {'default:cobble','default:gravel','default:stonebrick','default:coalblock'},
-			}, --roadsize_list = {1,1,2,3,4} },
+	medieval     = { min = 25, max = 30,   space_between_buildings=2, mods={'cottages'},  texture = 'cottages_darkage_straw.png', -- they often have straw roofs
+			 sapling_divisor = 10, plant_type = 'farming:wheat_8',     plant_frequency = 1,
+			 replacement_function = mg_villages.replacements_medieval },
 	charachoal   = { min = 10, max = 15,   space_between_buildings=1, mods={'cottages'},  texture = 'default_coal_block.png',
 			 replacement_function = mg_villages.replacements_charachoal },
 	lumberjack   = { min = 10, max = 30,   space_between_buildings=1, mods={'cottages'},  texture = 'default_tree.png', name_prefix = 'Camp ',
-			 sapling_divisor =  1, plant_type = 'mcl_flowers:tallgrass', plant_frequency = 24,
+			 sapling_divisor =  1, plant_type = 'default:junglegrass', plant_frequency = 24,
 			 replacement_function = mg_villages.replacements_lumberjack },
 	claytrader   = { min = 10, max = 20,   space_between_buildings=1, mods={'cottages'},  texture = 'default_clay.png',
 			 replacement_function = mg_villages.replacements_claytrader },
 	logcabin     = { min = 15, max = 30,   space_between_buildings=1, mods={'cottages'},  texture = 'default_wood.png',
 			 replacement_function = mg_villages.replacements_logcabin },
+	canadian     = { min = 40, max = 110,  space_between_buildings=1, mods={'hdb','nbu'}, texture = 'wool_white.png',
+			 replacement_function = mg_villages.replacements_canadian },
 	grasshut     = { min = 10, max = 40,   space_between_buildings=1, mods={'dryplants'}, texture = 'dryplants_reed.png',
 			 replacement_function = mg_villages.replacements_grasshut },
 	tent         = { min =  5, max = 20,   space_between_buildings=2, mods={'cottages'},  texture = 'wool_white.png', name_preifx = 'Tent at',
@@ -94,10 +93,7 @@ mg_villages.add_village_type = function( type_name, v )
 		v.sapling_divisor = 10;
 	end
 	if( not( v.plant_type )) then
-		v.plant_type      = 'mcl_flowers:tallgrass';
-		if( not( minetest.registered_nodes[ v.plant_type ])) then
-			v.plant_type = 'mcl_flowers:fern';
-		end
+		v.plant_type      = 'default:grass_5';
 	end
 	if( not( v.plant_frequency )) then
 		v.plant_frequency = 3;

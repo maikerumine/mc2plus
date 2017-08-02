@@ -913,7 +913,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_top = 1,
 		node_filler = "mcl_core:snowblock",
 		depth_filler = 3,
-		node_stone = "mcl_core:ice",
+		node_stone = "mcl_core:packed_ice",
 		node_water_top = "mcl_core:ice",
 		depth_water_top = 10,
 		--node_water = "",
@@ -1541,10 +1541,10 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_river_water = "",
 		node_riverbed = "mcl_core:sand",
 		depth_riverbed = 2,
-		y_min = -1,
+		y_min = 4,
 		y_max = 50,
-		heat_point = 43,
-		humidity_point = 50,  --was 55
+		heat_point = -13,
+		humidity_point = 110,  --was 55
 	})
 
 		minetest.register_biome({
@@ -1563,8 +1563,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 56,
 		y_max = 900,
-		heat_point = 43,
-		humidity_point =  50,  --was 55
+		heat_point = -13,
+		humidity_point =  110,  --was 55
 	})
 
 	
@@ -2105,41 +2105,36 @@ minetest.register_decoration({
 		place_on = {"mcl_core:redsand", "mcl_core:sand"},
 		sidelen = 16,
 		noise_params = {
-			offset = -0.0003,
-			scale = 0.0009,
-			spread = {x = 200, y = 200, z = 200},
-			seed = 230,
+			offset = 0.0,
+			scale = -0.00008,
+			spread = {x = 250, y = 250, z = 250},
+			seed = 2,
 			octaves = 3,
-			persist = 0.6
+			persist = 0.66
 		},
-		biomes = {"desert"},
+		biomes = {"desert","sandstone_desert","grassland_dunes", "coniferous_forest_dunes"},
 		y_min = 5,
 		y_max = 31000,
 		decoration = "mcl_core:cactus",
 		flags = "place_center_x",
 		rotation = "random",
+		height = 1,
+		height_max = 3,
 	})
 
 	-- Cactus
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:redsand", "mcl_core:sand"},
-		sidelen = 16,
-		noise_params = {
-			offset = -0.0003,
-			scale = 0.0009,
-			spread = {x = 200, y = 200, z = 200},
-			seed = 230,
-			octaves = 3,
-			persist = 0.6
-		},
-		biomes = {"desert"},
+		place_on = {"mcl_core:sand", "mcl_core:redsand"},
+		sidelen = 80,
+		fill_ratio = 0.0004,
+		biomes = {"desert","sandstone_desert","grassland_dunes", "coniferous_forest_dunes"},
 		y_min = 5,
 		y_max = 31000,
 		decoration = "mcl_core:cactus",
-		height = 2,
-		y_max = 5,
+		height = 1,
+		height_max = 3,
 	})
 
 	-- Papyrus
@@ -2249,17 +2244,10 @@ minetest.register_decoration({
 
 	minetest.register_decoration({
 		deco_type = "simple",
-		place_on = {"mcl_core:redsand", "mcl_core:dirt_with_grass_snow","color:hardened_clay_brown", "mcl_core:coarse_dirt"},
-		sidelen = 16,
-		noise_params = {
-			offset = 0,
-			scale = 0.02,
-			spread = {x = 200, y = 200, z = 200},
-			seed = 329,
-			octaves = 3,
-			persist = 0.6
-		},
-		biomes = {"desert", "tundra","mesa", "savanna"},
+		place_on = {"mcl_core:sand", "mcl_core:redsand", "mcl_core:dirt_with_grass_snow","color:hardened_clay_brown", "mcl_core:coarse_dirt"},
+		sidelen = 80,
+		fill_ratio = 0.004,
+		biomes = {"desert","sandstone_desert",  "tundra","mesa", "savanna","grassland_dunes", "coniferous_forest_dunes"},
 		y_min = 2,
 		y_max = 31000,
 		decoration = "mcl_core:deadbush",

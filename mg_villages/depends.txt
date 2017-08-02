@@ -1,5 +1,6 @@
-handle_schematics
+mcl_sounds
 mcl_core
+default?
 doors?
 farming?
 wool?
@@ -19,4 +20,3 @@ metals?
 grounds?
 moreblocks?
 bell?
-mg?
