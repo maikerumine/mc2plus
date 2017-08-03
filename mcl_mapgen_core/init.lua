@@ -1035,9 +1035,11 @@ minetest.register_on_generated(function(minp, maxp)
 	-- Generate bedrock and lava layers
 	if minp.y <= GEN_MAX then
 		local c_bedrock = minetest.get_content_id("mcl_core:bedrock")
-		--local c_void = minetest.get_content_id("mcl_core:void")
+		--local c_void = minetest.get_content_id("mcl_core:void")  --supressed to create endstone shapes
+		--local c_void = minetest.get_content_id("air")  --
+		--local c_void = minetest.get_content_id("mcl_portals:void")  --
 		--local c_lava = minetest.get_content_id("mcl_core:lava_source")
-		local c_lava = minetest.get_content_id("mcl_portals:nether_air")
+		local c_lava = minetest.get_content_id("mcl_portals:nether_air")--supressed to hide lava from end
 		local c_air = minetest.get_content_id("air")
 
 		local max_y = math.min(maxp.y, GEN_MAX)
@@ -1073,7 +1075,7 @@ minetest.register_on_generated(function(minp, maxp)
 						if y >= BEDROCK_MIN and y <= BEDROCK_MAX then
 							setdata = c_bedrock
 						elseif y < BEDROCK_MIN then
-							setdata = c_void
+							setdata = c_void  --make layers here
 						end
 					end
 
@@ -1081,7 +1083,7 @@ minetest.register_on_generated(function(minp, maxp)
 						data[p_pos] = setdata
 						lvm_used = true
 					elseif mcl_vars.mg_lava and y <= mcl_vars.mg_lava_overworld_max then
-						if data[p_pos] == c_air then --this makes all air lava i.e. caves
+						if data[p_pos] == c_air then --this makes all air lava i.e. caves which turn into endstone
 							data[p_pos] = c_lava	--this makes all air lava i.e. caves
 						end
 						lvm_used = true

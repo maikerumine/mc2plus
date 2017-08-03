@@ -995,7 +995,7 @@ end
 -- It only does changes if there is at least one village in the area that is to be generated.
 minetest.register_on_generated(function(minp, maxp, seed)
 	-- only generate village on the surface chunks
-	if( minp.y ~= -32 or minp.y < -32 or minp.y > 64) then
+	if( minp.y ~= -32 or minp.y < -32 or minp.y > 264) then  --was 64
 		return;
 	end
 	

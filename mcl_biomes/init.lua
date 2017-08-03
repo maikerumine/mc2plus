@@ -879,11 +879,11 @@ minetest.register_ore({
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "mcl_end:end_stone",
-		wherein         = {"mcl_core:void", "mcl_core:end_stone","mcl_core:stone","air","ignore"},
+		wherein         = {"mcl_core:void", "mcl_core:end_stone","mcl_core:stone","air","ignore", "mcl_portals:void"},
 		clust_scarcity  = 30 * 30 * 30,  	--was26
 		clust_size      = 17,				--was5
-		y_min           = -6470,
-		y_max           = -6110,
+		y_min           = -5750,
+		y_max           = -5701,
 		noise_threshold = 0.0,
 		noise_params    = {
 			offset = 0.5,
@@ -922,8 +922,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -8,
 		y_max = upper_limit,
-		heat_point = 5,
-		humidity_point = 88,  --was73
+		heat_point = 0,
+		humidity_point = 73,  --was73
 	})
 
 	minetest.register_biome({
@@ -940,8 +940,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = -112,
 		y_max = -9,
-		heat_point = 5,
-		humidity_point = 74,  --was73
+		heat_point = 0,
+		humidity_point = 73,  --was73
 	})
 
 	-- Tundra
@@ -962,8 +962,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 2,
 		y_max = upper_limit,
-		heat_point = 10,
-		humidity_point = 20,  --was 40
+		heat_point = 0,
+		humidity_point = 40,  --was 40
 	})
 
 	minetest.register_biome({
@@ -982,8 +982,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -3,
 		y_max = 1,
-		heat_point = 10,
-		humidity_point = 20,  --was40
+		heat_point = 0,
+		humidity_point = 40,  --was40
 	})
 
 	minetest.register_biome({
@@ -1002,8 +1002,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -4,
-		heat_point = 10,
-		humidity_point = 20,  --was 40
+		heat_point = 0,
+		humidity_point = 40,  --was 40
 	})
 
 	-- Taiga
@@ -1024,7 +1024,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 15,
 		y_max = upper_limit,
-		heat_point = 15,
+		heat_point = 25,
 		humidity_point = 70,  --was 70
 	})
 
@@ -1044,7 +1044,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 1,
-		heat_point = 15,
+		heat_point = 25,
 		humidity_point = 70,  --was 70
 	})
 
@@ -1066,8 +1066,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = upper_limit,
-		heat_point = 30,
-		humidity_point = 45,  --was 35
+		heat_point = 20,
+		humidity_point = 35,  --was 35
 	})
 
 	minetest.register_biome({
@@ -1086,8 +1086,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 30,
-		humidity_point = 45,  --was 35
+		heat_point = 20,
+		humidity_point = 35,  --was 35
 	})
 
 	-- Grassland
@@ -1108,8 +1108,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 6,
 		y_max = upper_limit,
-		heat_point = 42,
-		humidity_point = 30,  --was 35
+		heat_point = 50,
+		humidity_point = 35,  --was 35
 	})
 
 	minetest.register_biome({
@@ -1128,8 +1128,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 1,
-		heat_point = 42,
-		humidity_point = 30,  --was 35
+		heat_point = 50,
+		humidity_point = 35,  --was 35
 	})
 
 	minetest.register_biome({
@@ -1148,8 +1148,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 0,
-		heat_point = 42,
-		humidity_point = 30,  --was 35
+		heat_point = 50,
+		humidity_point = 35,  --was 35
 	})
 
 	-- Coniferous forest
@@ -1232,8 +1232,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 50,
-		humidity_point = 60,  --was 68
+		heat_point = 60,
+		humidity_point = 68,  --was 68
 	})
 
 	minetest.register_biome({
@@ -1252,8 +1252,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 50,
-		humidity_point = 60,  --was 68
+		heat_point = 60,
+		humidity_point = 68,  --was 68
 	})
 
 	minetest.register_biome({
@@ -1272,8 +1272,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -2,
-		heat_point = 50,
-		humidity_point = 60,  --was 68
+		heat_point = 60,
+		humidity_point = 68,  --was 68
 	})
 
 	-- Desert
@@ -1294,8 +1294,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 88,
-		humidity_point = 20,  --was 16
+		heat_point = 92,
+		humidity_point = 16,  --was 16
 	})
 
 	minetest.register_biome({
@@ -1314,8 +1314,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 0,
-		heat_point = 88,
-		humidity_point = 20,  --was 16
+		heat_point = 92,
+		humidity_point = 16,  --was 16
 	})
 
 	-- Sandstone desert
@@ -1337,7 +1337,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = 0,
 		y_max = upper_limit,
 		heat_point = 60,
-		humidity_point = 15,  --was 0
+		humidity_point = 0,  --was 0
 	})
 
 	minetest.register_biome({
@@ -1357,7 +1357,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = -112,
 		y_max = 4,
 		heat_point = 60,
-		humidity_point = 15,  --was 0
+		humidity_point = 0,  --was 0
 	})
 
 	-- Cold desert
@@ -1378,8 +1378,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = upper_limit,
-		heat_point = 30,
-		humidity_point = 3,  --was 0
+		heat_point = 40,
+		humidity_point = 0,  --was 0
 	})
 
 	minetest.register_biome({
@@ -1398,8 +1398,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 30,
-		humidity_point = 3,  --was 0
+		heat_point = 40,
+		humidity_point = 0,  --was 0
 	})
 
 		-- Hot
@@ -1418,8 +1418,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = -35,
 		y_max = 31000,
-		heat_point = 100,
-		humidity_point = 1,  --was 40
+		heat_point = 110,
+		humidity_point = -10,  --was 40
 	})
 	-- Savanna
 
@@ -1439,8 +1439,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 79,
-		humidity_point = 35,  --was 42
+		heat_point = 89,
+		humidity_point = 42,  --was 42
 	})
 
 	minetest.register_biome({
@@ -1459,7 +1459,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 79,
+		heat_point = 89,
 		humidity_point = 42,  --was 42
 	})
 
@@ -1479,8 +1479,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -2,
-		heat_point = 59,
-		humidity_point = 40,  --was 42
+		heat_point = 89,
+		humidity_point = 42,  --was 42
 	})
 
 	-- Rainforest
@@ -1502,7 +1502,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = 1,
 		y_max = upper_limit,
 		heat_point = 86,
-		humidity_point = 70,  --was 65
+		humidity_point = 65,  --was 65
 	})
 
 	minetest.register_biome({
@@ -1522,12 +1522,13 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = -1,
 		y_max = 0,
 		heat_point = 86,
-		humidity_point = 80,  --was 65
+		humidity_point = 65,  --was 65
 	})
 
 	
 --mooshroom
-		minetest.register_biome({
+--hot
+	minetest.register_biome({
 		name = "mooshroom",
 		--node_dust = "",
 		node_top = "mcl_core:mycelium",
@@ -1541,13 +1542,55 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_river_water = "",
 		node_riverbed = "mcl_core:sand",
 		depth_riverbed = 2,
-		y_min = 4,
-		y_max = 50,
-		heat_point = -13,
-		humidity_point = 110,  --was 55
+		y_min = 1,
+		y_max = 20,
+		heat_point = 99,
+		humidity_point = 98,  --was 55
 	})
 
-		minetest.register_biome({
+	minetest.register_biome({
+		name = "mooshroom_plateu",
+		--node_dust = "",
+		--node_top = "air",
+		--depth_top = 1,
+		--node_filler = "mcl_core:gravel",
+		--depth_filler = 3,
+		node_stone = "air",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		node_riverbed = "mcl_core:coarse_dirt",
+		depth_riverbed = 2,
+		y_min = 21,
+		y_max = 31000,
+		heat_point = 99,
+		humidity_point = 98,  --was 55
+	})
+
+	minetest.register_biome({
+		name = "mooshroom_ocean",
+		--node_dust = "",
+		node_top = "mcl_core:stone",
+		depth_top = 1,
+		node_filler = "mcl_core:gravel",
+		depth_filler = 3,
+		--node_stone = "",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		node_riverbed = "mcl_core:coarse_dirt",
+		depth_riverbed = 2,
+		y_min = -112,
+		y_max = 0,
+		heat_point = 99,
+		humidity_point = 98,  --was 55
+	})
+
+	
+	--cold
+	minetest.register_biome({
 		name = "mooshroom_cold",
 		--node_dust = "",
 		node_top = "mcl_core:mycelium_snow",
@@ -1564,7 +1607,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = 56,
 		y_max = 900,
 		heat_point = -13,
-		humidity_point =  110,  --was 55
+		humidity_point =  34,  --was 55
 	})
 
 	
@@ -1586,49 +1629,54 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = -112,
 		y_max = -2,
 		heat_point = 86,
-		humidity_point =  50,  --was 65
+		humidity_point =  65,  --was 65
 	})
+
+	-- Underground
+
+	minetest.register_biome({
+		name = "underground",
+		--node_dust = "",
+		--node_top = "",
+		--depth_top = ,
+		--node_filler = "",
+		--depth_filler = ,
+		--node_stone = "",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -31000,
+		y_max = -10000,
+		heat_point = 50,
+		humidity_point = 50,
+	})
+
 	
 	-- Underground
 	--MAPGEN REALMS
 	minetest.register_biome({
-		name = "dropzone",
+		name = "void_1",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = 1,
 		--node_filler = "mcl_core:dummy",
 		--depth_filler = 3,
-		node_stone =  "mcl_portals:dummy",
+		node_stone =  "mcl_core:void",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -2974,
+		y_min = -2994,
 		y_max = -82,
 		heat_point = 50,
 		humidity_point = 50,
 	})
 	
-		minetest.register_biome({
-		name = "airworld",
-		--node_dust = "",
-		--node_top = "",
-		--depth_top = 1,
-		--node_filler = "air",
-		--depth_filler = 3,
-		node_stone =  "air",
-		--node_water_top = "",
-		--depth_water_top = ,
-		--node_water = "",
-		--node_river_water = "",
-		y_min = -2979,
-		y_max = -2975,
-		heat_point = 50,
-		humidity_point = 50,
-	})
+
 	
 	minetest.register_biome({
-		name = "void",
+		name = "nether_roof",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
@@ -1640,13 +1688,13 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -3000,
-		y_max = -2980,
+		y_max = -2995,
 		heat_point = 50,
 		humidity_point = 50,
 	})
 
 	minetest.register_biome({
-		name = "underground",
+		name = "nether",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
@@ -1657,7 +1705,7 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -3330,
+		y_min = -3369,
 		y_max = -3001,
 		heat_point = 50,
 		humidity_point = 50,
@@ -1676,13 +1724,13 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -3399,
-		y_max = -3331,
+		y_max = -3370,
 		heat_point = 50,
 		humidity_point = 50,
 	})
 
 	minetest.register_biome({
-		name = "lavabottom",
+	name = "nether_floor",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
@@ -1693,34 +1741,55 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -4000,
+		y_min = -3410,
 		y_max = -3400,
 		heat_point = 50,
 		humidity_point = 50,
 	})
 
 	minetest.register_biome({
-		name = "airworldlow",
+		name = "void_2",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
-		node_filler = "mcl_portals:dummy",
+		--node_filler = "mcl_portals:dummy",
 		--depth_filler = ,
-		node_stone =  "air",
+		node_stone =  "mcl_core:void",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -4900,
+		y_max = -3411,
+		heat_point = 50,
+		humidity_point = 50,
+	})	
+	
+	--====================
+	--====================
+	--====================
+	--====================
+	--realm 2
+	minetest.register_biome({
+		name = "water_world_sky",
+		--node_dust = "",
+		--node_top = "",
+		--depth_top = ,
+		--node_filler = "mcl_portals:dummy",
+		--depth_filler = ,
+		node_stone =  "mcl_portals:void",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -5000,
-		y_max = -4001,
+		y_max = -4901,
 		heat_point = 50,
 		humidity_point = 50,
-	})	
+	})
 	
-	
-	--realm 2
-		minetest.register_biome({
-		name = "realm2",
+	minetest.register_biome({
+		name = "water_world",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
@@ -1737,27 +1806,67 @@ function mcl_portals.register_biomes(upper_limit)
 		humidity_point = 50,
 	})	
 	
-		minetest.register_biome({
-		name = "realm2b",
+	minetest.register_biome({
+		name = "water_world_sea_floor",
 		--node_dust = "",
 		node_top = "mcl_core:dirt",
 		depth_top = 12,
 		node_filler = "mcl_core:sand",
 		depth_filler = 1,
-		node_stone =  "mcl_core:bedrock",
+		node_stone =  "mcl_core:stone",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -5600,
-		y_max = -5551,
+		y_max = -5501,
 		heat_point = 50,
 		humidity_point = 50,
-	})		
+	})	
+
+	minetest.register_biome({
+		name = "water_world_floor",
+		--node_dust = "",
+		--node_top = "",
+		--depth_top = ,
+		node_filler = "mcl_core:bedrock",
+		--depth_filler = ,
+		node_stone =  "mcl_core:bedrock",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -5610,
+		y_max = -5600,
+		heat_point = 50,
+		humidity_point = 50,
+	})
 	
+	--================
+	--================
+	--================
+	--================
 	--realm 3  "end"
-		minetest.register_biome({
-		name = "realm3",
+	minetest.register_biome({
+		name = "end_sky",
+		--node_dust = "",
+		--node_top = "",
+		--depth_top = ,
+		node_filler = "mcl_portals:void",
+		--depth_filler = ,
+		node_stone =  "mcl_portals:void",
+		--node_water_top = "",
+		--depth_water_top = ,
+		node_water = "mcl_end:purpur_block",
+		--node_river_water = "",
+		y_min = -5700,
+		y_max = -5611,
+		heat_point = 50,
+		humidity_point = 50,
+	})
+	
+	minetest.register_biome({
+		name = "end",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
@@ -1769,14 +1878,32 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -6470,
-		y_max = -6000,
+		y_min = -5730,
+		y_max = -5701,
+		heat_point = 50,
+		humidity_point = 50,
+	})	
+
+	minetest.register_biome({
+		name = "void_3",
+		--node_dust = "",
+		--node_top = "",
+		--depth_top = ,
+		--node_filler = "mcl_portals:dummy",
+		--depth_filler = ,
+		node_stone =  "mcl_core:void",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -6700,
+		y_max = -5731,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
 	
-		minetest.register_biome({
-		name = "realm3b",
+	minetest.register_biome({
+		name = "end_floor",
 		node_dust = "ignore",
 		node_top = "ignore",
 		depth_top = 12,
@@ -1787,12 +1914,31 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -6550,
-		y_max = -6099,
+		y_min = -6710,
+		y_max = -6701,
 		heat_point = 50,
 		humidity_point = 50,
-	})		
+	})	
 	
+		
+	minetest.register_biome({
+		name = "end_barrier",
+		--node_dust = "",
+		--node_top = "",
+		--depth_top = ,
+		node_filler = "mcl_core:barrier",
+		--depth_filler = ,
+		node_stone =  "mcl_core:barrier",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -6720,
+		y_max = -6711,
+		heat_point = 50,
+		humidity_point = 50,
+	})
+
 	
 	
 
@@ -2349,7 +2495,7 @@ minetest.register_decoration({
 		noise_params = {
 			offset = -0.01,
 			scale = 0.03,
-			spread = {x = 50, y = 50, z = 50},
+			spread = {x = 20, y = 20, z = 20},
 			seed = 420,
 			octaves = 2,
 			persist = 0.6,
@@ -2374,15 +2520,15 @@ minetest.register_decoration({
 			["mcl_flowers:fern"] = "mcl_flowers:double_fern"
 		},
 		-- This makes sure large ferns only appear in jungles
-		--spawn_by = { "mcl_core:jungletree", "mcl_core:pine_tree", "mcl_flowers:fern" },
-		--num_spawn_by = 1,
+		spawn_by = { "mcl_core:jungletree", "mcl_core:pine_tree", "mcl_flowers:fern" },
+		num_spawn_by = 2,
 		place_on = { "mcl_core:podzol", "mcl_core:dirt_with_rainforest_litter"},
 
 		sidelen = 16,
 		noise_params = {
-			offset = -0.01,
-			scale = 0.03,
-			spread = {x = 60, y = 60, z = 60},
+			offset = -0.1,
+			scale = 0.3,
+			spread = {x = 4, y = 4, z = 4},
 			seed = 333,
 			octaves = 2,
 			persist = 0.66,
@@ -2443,7 +2589,25 @@ minetest.register_decoration({
 		y_max = 50,
 		decoration = "mcl_flowers:tallgrass",
 	})
-
+	
+	--Savanna grass is much more.
+		minetest.register_decoration({
+		deco_type = "simple",
+		place_on = {"mcl_core:coarse_dirt"},
+		sidelen = 8,
+		noise_params = {
+			offset = 0.1,
+			scale = 0.1,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 420,
+			octaves = 2,
+			persist = 0.6
+		},
+		y_min = 1,
+		y_max = 90,
+		decoration = "mcl_flowers:tallgrass",
+	})
+	
 	-- Add a small amount of tall grass everywhere to avoid areas completely empty devoid of tall grass
 	minetest.register_decoration({
 		deco_type = "simple",
@@ -2459,9 +2623,16 @@ minetest.register_decoration({
 		deco_type = "simple",
 		place_on = {"mcl_end:end_stone"},
 		sidelen = 8,
-		fill_ratio = 0.01,
+		noise_params = {
+			offset = 0.1,
+			scale = 0.1,
+			spread = {x = 5, y = 5, z = 5},
+			seed = 420,
+			octaves = 2,
+			persist = 0.6
+		},
 		y_min = -7000,
-		y_max = -6000,
+		y_max = -5000,
 		decoration = "mcl_core:chorus_flower",
 	})
 

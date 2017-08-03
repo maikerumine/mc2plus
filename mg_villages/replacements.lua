@@ -331,7 +331,7 @@ mg_villages.get_replacement_list = function( housetype, pr )
   -- else some grass would never (re)grow (if it's below a roof)
 --   table.insert( replacements, {'default:dirt',            dirt_with_grass_replacement });
 --   table.insert( replacements, {'default:dirt_with_grass', dirt_with_grass_replacement });
-   table.insert( replacements, {'default:dirt',            'default:dirt_with_grass' });
+   table.insert( replacements, {'mcl_core:dirt',            'mcl_core:dirt_with_grass' });
 
    -- realtest lacks quite a lot from default
    if( mg_villages.realtest_trees ) then
