@@ -875,7 +875,7 @@ minetest.register_ore({
 	
 
 	-- endstone???  TODO make a mapgen
-
+--[[
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "mcl_end:end_stone",
@@ -888,12 +888,16 @@ minetest.register_ore({
 		noise_params    = {
 			offset = 0.5,
 			scale = 0.1,
-			spread = {x = 5, y = 5, z = 5},
+			--spread = {x = 5, y = 5, z = 5},  --works
+			spread = {x = 50, y = 50, z = 50},
 			seed = 16,
 			octaves = 1,
 			persist = 0.0
 		},
-	})	
+	})
+]]
+
+	
 end
 --
 -- Register biomes
@@ -1024,8 +1028,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 15,
 		y_max = upper_limit,
-		heat_point = 25,
-		humidity_point = 70,  --was 70
+		heat_point = 26,
+		humidity_point = 72,  --was 70
 	})
 
 	minetest.register_biome({
@@ -1044,8 +1048,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 1,
-		heat_point = 25,
-		humidity_point = 70,  --was 70
+		heat_point = 26,
+		humidity_point = 72,  --was 70
 	})
 
 	-- Snowy grassland
@@ -1066,8 +1070,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = upper_limit,
-		heat_point = 20,
-		humidity_point = 35,  --was 35
+		heat_point = 13,
+		humidity_point = 79,  --was 35
 	})
 
 	minetest.register_biome({
@@ -1086,8 +1090,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 20,
-		humidity_point = 35,  --was 35
+		heat_point = 13,
+		humidity_point = 79,  --was 35
 	})
 
 	-- Grassland
@@ -1108,8 +1112,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 6,
 		y_max = upper_limit,
-		heat_point = 50,
-		humidity_point = 35,  --was 35
+		heat_point = 26,
+		humidity_point = 45,  --was 35
 	})
 
 	minetest.register_biome({
@@ -1128,8 +1132,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = 1,
-		heat_point = 50,
-		humidity_point = 35,  --was 35
+		heat_point = 26,
+		humidity_point = 45,  --was 35
 	})
 
 	minetest.register_biome({
@@ -1148,8 +1152,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 0,
-		heat_point = 50,
-		humidity_point = 35,  --was 35
+		heat_point = 26,
+		humidity_point = 45,  --was 35
 	})
 
 	-- Coniferous forest
@@ -1170,8 +1174,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 6,
 		y_max = upper_limit,
-		heat_point = 45,
-		humidity_point = 70,  --was 70
+		heat_point = 47,
+		humidity_point = 73,  --was 70
 	})
 
 	minetest.register_biome({
@@ -1190,8 +1194,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = 56,
-		heat_point = 45,
-		humidity_point = 70,  --was 70
+		heat_point = 47,
+		humidity_point = 73,  --was 70
 	})
 
 	minetest.register_biome({
@@ -1210,8 +1214,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 0,
-		heat_point = 45,
-		humidity_point = 70,  --was 70
+		heat_point = 47,
+		humidity_point = 73,  --was 70
 	})
 
 	-- Deciduous forest
@@ -1232,8 +1236,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 60,
-		humidity_point = 68,  --was 68
+		heat_point = 33,
+		humidity_point = 44,  --was 68
 	})
 
 	minetest.register_biome({
@@ -1252,8 +1256,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 60,
-		humidity_point = 68,  --was 68
+		heat_point = 33,
+		humidity_point = 44,  --was 68
 	})
 
 	minetest.register_biome({
@@ -1272,8 +1276,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -2,
-		heat_point = 60,
-		humidity_point = 68,  --was 68
+		heat_point = 33,
+		humidity_point = 44,  --was 68
 	})
 
 	-- Desert
@@ -1294,8 +1298,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 92,
-		humidity_point = 16,  --was 16
+		heat_point = 64,
+		humidity_point = 37,  --was 16
 	})
 
 	minetest.register_biome({
@@ -1314,8 +1318,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 0,
-		heat_point = 92,
-		humidity_point = 16,  --was 16
+		heat_point = 64,
+		humidity_point = 37,  --was 16
 	})
 
 	-- Sandstone desert
@@ -1336,7 +1340,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 0,
 		y_max = upper_limit,
-		heat_point = 60,
+		heat_point = 57,
 		humidity_point = 0,  --was 0
 	})
 
@@ -1356,7 +1360,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 60,
+		heat_point = 57,
 		humidity_point = 0,  --was 0
 	})
 
@@ -1378,7 +1382,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 5,
 		y_max = upper_limit,
-		heat_point = 40,
+		heat_point = 26,
 		humidity_point = 0,  --was 0
 	})
 
@@ -1398,7 +1402,7 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = 4,
-		heat_point = 40,
+		heat_point = 26,
 		humidity_point = 0,  --was 0
 	})
 
@@ -1418,8 +1422,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_river_water = "",
 		y_min = -35,
 		y_max = 31000,
-		heat_point = 110,
-		humidity_point = -10,  --was 40
+		heat_point = 88,
+		humidity_point = 20,  --was 40
 	})
 	-- Savanna
 
@@ -1439,8 +1443,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 89,
-		humidity_point = 42,  --was 42
+		heat_point = 50,
+		humidity_point = 46,  --was 42
 	})
 
 	minetest.register_biome({
@@ -1459,8 +1463,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 89,
-		humidity_point = 42,  --was 42
+		heat_point = 50,
+		humidity_point = 46,  --was 42
 	})
 
 	minetest.register_biome({
@@ -1479,8 +1483,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -112,
 		y_max = -2,
-		heat_point = 89,
-		humidity_point = 42,  --was 42
+		heat_point = 50,
+		humidity_point = 46,  --was 42
 	})
 
 	-- Rainforest
@@ -1501,8 +1505,8 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = 1,
 		y_max = upper_limit,
-		heat_point = 86,
-		humidity_point = 65,  --was 65
+		heat_point = 90,
+		humidity_point = 91,  --was 65
 	})
 
 	minetest.register_biome({
@@ -1521,10 +1525,29 @@ function mcl_portals.register_biomes(upper_limit)
 		depth_riverbed = 2,
 		y_min = -1,
 		y_max = 0,
-		heat_point = 86,
-		humidity_point = 65,  --was 65
+		heat_point = 90,
+		humidity_point = 91,  --was 65
 	})
-
+	
+	minetest.register_biome({
+		name = "rainforest_ocean",
+		--node_dust = "",
+		node_top = "mcl_core:sand",
+		depth_top = 1,
+		node_filler = "mcl_core:sand",
+		depth_filler = 3,
+		--node_stone = "",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		node_riverbed = "mcl_core:sand",
+		depth_riverbed = 2,
+		y_min = -112,
+		y_max = -2,
+		heat_point = 90,
+		humidity_point =  91,  --was 65
+	})
 	
 --mooshroom
 --hot
@@ -1545,7 +1568,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = 1,
 		y_max = 20,
 		heat_point = 99,
-		humidity_point = 98,  --was 55
+		humidity_point = 99,  --was 55
 	})
 
 	minetest.register_biome({
@@ -1565,7 +1588,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = 21,
 		y_max = 31000,
 		heat_point = 99,
-		humidity_point = 98,  --was 55
+		humidity_point = 99,  --was 55
 	})
 
 	minetest.register_biome({
@@ -1585,7 +1608,7 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = -112,
 		y_max = 0,
 		heat_point = 99,
-		humidity_point = 98,  --was 55
+		humidity_point = 99,  --was 55
 	})
 
 	
@@ -1607,30 +1630,11 @@ function mcl_portals.register_biomes(upper_limit)
 		y_min = 56,
 		y_max = 900,
 		heat_point = -13,
-		humidity_point =  34,  --was 55
+		humidity_point =  30,  --was 55
 	})
 
 	
-	
-	minetest.register_biome({
-		name = "rainforest_ocean",
-		--node_dust = "",
-		node_top = "mcl_core:sand",
-		depth_top = 1,
-		node_filler = "mcl_core:sand",
-		depth_filler = 3,
-		--node_stone = "",
-		--node_water_top = "",
-		--depth_water_top = ,
-		--node_water = "",
-		--node_river_water = "",
-		node_riverbed = "mcl_core:sand",
-		depth_riverbed = 2,
-		y_min = -112,
-		y_max = -2,
-		heat_point = 86,
-		humidity_point =  65,  --was 65
-	})
+
 
 	-- Underground
 
@@ -1667,7 +1671,7 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -2994,
+		y_min = -2989,
 		y_max = -82,
 		heat_point = 50,
 		humidity_point = 50,
@@ -1688,7 +1692,7 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -3000,
-		y_max = -2995,
+		y_max = -2990,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -1741,7 +1745,7 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -3410,
+		y_min = -3430,
 		y_max = -3400,
 		heat_point = 50,
 		humidity_point = 50,
@@ -1760,7 +1764,7 @@ function mcl_portals.register_biomes(upper_limit)
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -4900,
-		y_max = -3411,
+		y_max = -3431,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
@@ -1771,12 +1775,12 @@ function mcl_portals.register_biomes(upper_limit)
 	--====================
 	--realm 2
 	minetest.register_biome({
-		name = "water_world_sky",
+		name = "water_worldsky",
 		--node_dust = "",
-		--node_top = "",
-		--depth_top = ,
-		--node_filler = "mcl_portals:dummy",
-		--depth_filler = ,
+		node_top = "mcl_end:purpur_block",
+		depth_top =1 ,
+		node_filler = "mcl_portals:void",
+		depth_filler = 22 ,
 		node_stone =  "mcl_portals:void",
 		--node_water_top = "",
 		--depth_water_top = ,
@@ -1800,44 +1804,44 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -5500,
+		y_min = -5470,
 		y_max = -5001,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
 	
 	minetest.register_biome({
-		name = "water_world_sea_floor",
+		name = "water_worldseafloor",
 		--node_dust = "",
-		node_top = "mcl_core:dirt",
+		node_top = "mcl_core:stone",
 		depth_top = 12,
-		node_filler = "mcl_core:sand",
+		node_filler = "mcl_core:stone",
 		depth_filler = 1,
-		node_stone =  "mcl_core:stone",
+		node_stone =  "mcl_core:barrier",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -5600,
-		y_max = -5501,
+		y_min = -5550,
+		y_max = -5471,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
 
 	minetest.register_biome({
-		name = "water_world_floor",
-		--node_dust = "",
-		--node_top = "",
-		--depth_top = ,
-		node_filler = "mcl_core:bedrock",
-		--depth_filler = ,
-		node_stone =  "mcl_core:bedrock",
+		name = "water_worldfloor",
+		node_dust = "mcl_core:dirt",
+		node_top = "mcl_core:stone",
+		depth_top = 5,
+		node_filler = "mcl_core:barrier",
+		depth_filler = 3,
+		node_stone =  "mcl_core:barrier",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
 		y_min = -5610,
-		y_max = -5600,
+		y_max = -5551,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -1848,19 +1852,36 @@ function mcl_portals.register_biomes(upper_limit)
 	--================
 	--realm 3  "end"
 	minetest.register_biome({
+		--name = "water_worldfloor",
+		--node_dust = "mcl_core:dirt",
+		--node_top = "mcl_core:stone",
+		--depth_top = 5,
+		--node_filler = "mcl_core:barrier",
+		--depth_filler = 3,
+		node_stone =  "mcl_core:barrier",
+		--node_water_top = "",
+		--depth_water_top = ,
+		--node_water = "",
+		--node_river_water = "",
+		y_min = -5700,
+		y_max = -5611,
+		heat_point = 50,
+		humidity_point = 50,
+	})
+	minetest.register_biome({
 		name = "end_sky",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
-		node_filler = "mcl_portals:void",
+		--node_filler = "mcl_portals:void",
 		--depth_filler = ,
 		node_stone =  "mcl_portals:void",
 		--node_water_top = "",
 		--depth_water_top = ,
-		node_water = "mcl_end:purpur_block",
+		--node_water = "mcl_end:purpur_block",
 		--node_river_water = "",
-		y_min = -5700,
-		y_max = -5611,
+		y_min = -5999,
+		y_max = -5701,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -1878,8 +1899,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -5730,
-		y_max = -5701,
+		y_min = -6800,
+		y_max = -6000,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
@@ -1896,29 +1917,13 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -6700,
-		y_max = -5731,
+		y_min = -7000,
+		y_max = -6801,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
 	
-	minetest.register_biome({
-		name = "end_floor",
-		node_dust = "ignore",
-		node_top = "ignore",
-		depth_top = 12,
-		node_filler = "ignore",
-		depth_filler = 1,
-		node_stone =  "ignore",
-		--node_water_top = "",
-		--depth_water_top = ,
-		--node_water = "",
-		--node_river_water = "",
-		y_min = -6710,
-		y_max = -6701,
-		heat_point = 50,
-		humidity_point = 50,
-	})	
+
 	
 		
 	minetest.register_biome({
@@ -1933,8 +1938,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -6720,
-		y_max = -6711,
+		y_min = -7500,
+		y_max = -7001,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -2713,21 +2718,21 @@ end
 
 
 --bedrock code
-
-local function replace(old, new, min, max)
-	for i=1,8 do
-		minetest.register_ore({
-			ore_type       = "scatter",
-			ore            = new,
-			wherein        = old,
-			clust_scarcity = 1,
-			clust_num_ores = 1,
-			clust_size     = 1,
-			y_min     = min,
-			y_max     = max,
-		})
+minetest.after(3, function()
+	local function replace(old, new, min, max)
+		for i=1,8 do
+			minetest.register_ore({
+				ore_type       = "scatter",
+				ore            = new,
+				wherein        = old,
+				clust_scarcity = 1,
+				clust_num_ores = 1,
+				clust_size     = 1,
+				y_min     = min,
+				y_max     = max,
+			})
+		end
 	end
-end
 
 
 
@@ -2766,15 +2771,16 @@ replace("mapgen_lava_source_lava_source", "mcl_end:end_stone", -6900, -5400)
 replace("mcl_core:lava_source", "mcl_end:end_stone", -6900, -5400)
 
 --dungeon swap
-replace("mcl_core:cobblestone", "mcl_nether:nether_brick", -3900, -2400)
+replace("mcl_core:cobble", "mcl_nether:nether_brick", -3900, -2400)
 replace("mcl_core:mossycobble", "mcl_nether:nether_brick", -3900, -2400)
 replace("stairs:stair_cobble", "stairs:stair_nether_brick", -3900, -2400)
 replace("stairs:stair_mossycobble", "stairs:stair_nether_brick", -3900, -2400)
 
-replace("mcl_core:cobblestone", "mcl_end:purpur_block", -6900, -4400)
+replace("mcl_core:cobble", "mcl_end:purpur_block", -6900, -4400)
 replace("mcl_core:mossycobble", "mcl_end:purpur_block", -6900, -4400)
 replace("stairs:stair_cobble", "stairs:stair_purpur_block", -6900, -4400)
 replace("stairs:stair_mossycobble", "stairs:stair_purpur_block", -6900, -4400)
+end)
 
 
 local function bedrock(old)

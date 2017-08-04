@@ -885,7 +885,7 @@ end
 if mg_name == "flat" then
 	minetest.set_mapgen_setting("mg_flags", "nocaves,nodungeons,nodecorations,light", true)
 else
-	minetest.set_mapgen_setting("mg_flags", "caves,nodungeons,decorations,light", true)
+	minetest.set_mapgen_setting("mg_flags", "caves,dungeons,decorations,light", true) --add dungeons
 end
 
 -- Perlin noise objects

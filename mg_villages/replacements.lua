@@ -264,58 +264,58 @@ end
 
 -- if buildings are made out of a certain wood type, people might expect trees of that type nearby
 mg_villages.replace_saplings = function( replacements, wood_type )
-	if(     wood_type == 'default:junglewood' ) then
-		table.insert( replacements, {'default:sapling',  'default:junglesapling'});
-	elseif( wood_type == 'default:pinewood' ) then
-		table.insert( replacements, {'default:sapling',  'default:pine_sapling'});
-	elseif( wood_type == 'mg:savannawood' ) then
-		table.insert( replacements, {'default:sapling',  'mg:savannasapling'});
-	elseif( wood_type == 'mg:pinewood' ) then
-		table.insert( replacements, {'default:sapling',  'mg:pinesapling'});
+	if(     wood_type == 'mcl_core:junglewood' ) then
+		table.insert( replacements, {'mcl_core:sapling',  'mcl_core:junglesapling'});
+	elseif( wood_type == 'mcl_core:pinewood' ) then
+		table.insert( replacements, {'mcl_core:sapling',  'mcl_core:sprucesapling'});
+	elseif( wood_type == 'mcl_core:acaciawood' ) then
+		table.insert( replacements, {'mcl_core:sapling',  'mcl_core:acaciasapling'});
+	elseif( wood_type == 'mcl_core:sprucewood' ) then
+		table.insert( replacements, {'mcl_core:sapling',  'mcl_core:sprucesapling'});
  	elseif( mg_villages.moretrees_treelist ) then
 		for _,v in ipairs( mg_villages.moretrees_treelist ) do
 			if( wood_type == "moretrees:"..v[1].."_planks" ) then
-				table.insert( replacements, {'default:sapling', "moretrees:"..v[1].."_sapling_ongen"});
+				table.insert( replacements, {'mcl_core:sapling', "moretrees:"..v[1].."_sapling_ongen"});
 			end
 		end
  	elseif( mg_villages.ethereal_trees ) then
 		for _,v in ipairs( mg_villages.ethereal_trees ) do
 			if( wood_type == "ethereal:"..v.."_wood" ) then
-				table.insert( replacements, {'default:sapling', "ethereal:"..v.."_sapling"});
+				table.insert( replacements, {'mcl_core:sapling', "ethereal:"..v.."_sapling"});
 			end
 		end
 
  	elseif( mg_villages.forest_trees ) then
 		for _,v in ipairs( mg_villages.forest_trees ) do
 			if( wood_type == "forest:"..v.."_wood" ) then
-				table.insert( replacements, {'default:sapling', "forest:"..v.."_sapling"});
+				table.insert( replacements, {'mcl_core:sapling', "forest:"..v.."_sapling"});
 			end
 		end
 
  	elseif( mg_villages.tinytrees_trees ) then
 		for _,v in ipairs( mg_villages.tinytrees_trees ) do
 			if( wood_type == "trees:wood_"..v ) then
-				table.insert( replacements, {'default:sapling', "trees:sapling_"..v});
+				table.insert( replacements, {'mcl_core:sapling', "trees:sapling_"..v});
 			end
 
 		end
  	elseif( mg_villages.realtest_trees ) then
 		for _,v in ipairs( mg_villages.realtest_trees ) do
 			if( wood_type == 'trees:'..v..'_planks' ) then
-				table.insert( replacements, {'default:sapling', "trees:"..v.."_sapling"});
-				table.insert( replacements, {'default:junglesapling', "trees:"..v.."_sapling"});
-				table.insert( replacements, {'default:pine_sapling',  "trees:"..v.."_sapling"});
+				table.insert( replacements, {'mcl_core:sapling', "trees:"..v.."_sapling"});
+				table.insert( replacements, {'mcl_core:junglesapling', "trees:"..v.."_sapling"});
+				table.insert( replacements, {'mcl_core:sprucesapling',  "trees:"..v.."_sapling"});
 			end
 		end
 
 	elseif( wood_type == 'deco:birch_plank' ) then
-		table.insert( replacements, {'default:sapling', "mapgen:birch_sapling"});
+		table.insert( replacements, {'mcl_core:sapling', "mapgen:birch_sapling"});
 	elseif( wood_type == 'deco:cherry_plank' ) then
-		table.insert( replacements, {'default:sapling', "mapgen:cherry_sapling"});
+		table.insert( replacements, {'mcl_core:sapling', "mapgen:cherry_sapling"});
 	elseif( wood_type == 'deco:evergreen_plank' ) then
-		table.insert( replacements, {'default:sapling', "mapgen:evergreen_sapling"});
+		table.insert( replacements, {'mcl_core:sapling', "mapgen:evergreen_sapling"});
 	elseif( wood_type == 'deco:oak_plank' ) then
-		table.insert( replacements, {'default:sapling', "mapgen:oak_sapling"});
+		table.insert( replacements, {'mcl_core:sapling', "mapgen:oak_sapling"});
 	end
 end
 
@@ -340,7 +340,7 @@ mg_villages.get_replacement_list = function( housetype, pr )
    		table.insert( replacements, {'farming:cotton_'..i,      'farming:flax_' ..tostring( (i+(i%2))/2) });
 	end
 	for i=1,5 do
-   		table.insert( replacements, {'default:grass_'..i,       'air' });
+   		table.insert( replacements, {'mcl_core:grass_'..i,       'air' });
 	end
   	table.insert(         replacements, {'default:apple',           'air' });
   	table.insert(         replacements, {'default:cobble',          'default:stone_macadam' });
@@ -372,11 +372,11 @@ mg_villages.replacements_taoki = function( housetype, pr, replacements )
       else    
       -- the main body of the houses in the .mts files is made out of wood
          wood_type = mg_villages.replace_materials( replacements, pr,
-		{'default:wood'},
+		{'mcl_core:wood'},
 		{''},
-		{'default:wood', 'default:junglewood', 'default:pinewood', 'mg:pinewood', 'mg:savannawood',
-		'default:clay', 'default:brick', 'default:sandstone', 
-		'default:stonebrick', 'default:desert_stonebrick','default:sandstonebrick', 'default:sandstone','default:stone','default:desert_stone',
+		{'mcl_core:wood', 'mcl_core:junglewood', 'mcl_core:sprucewood', 'mcl_core:birchwood', 'mcl_core:acaciawood',
+		'mcl_core:clay', 'mcl_core:brick_block', 'mcl_core:sandstone', 
+		'mcl_core:stonebrick', 'mcl_core:stonebrickcracked','mcl_core:sandstone_carved', 'mcl_core:sandstone','mcl_core:stone','mcl_core:granite',
 		--'default:coalblock','default:steelblock','default:goldblock', 'default:bronzeblock', 'default:copperblock', 'wool:white',
 		'default:stone_flat', 'default:desert_stone_flat', -- realtest
 		'darkage:adobe', 'darkage:basalt', 'darkage:basalt_cobble', 'darkage:chalk',
@@ -384,7 +384,7 @@ mg_villages.replacements_taoki = function( housetype, pr, replacements )
 		'darkage:mud', 'darkage:ors', 'darkage:ors_cobble',
 		'darkage:schist', 'darkage:serpentine', 'darkage:shale', 'darkage:silt', 'darkage:slate',
 		'mapgen:mese_stone', 'mapgen:soap_stone'},
-		'default:wood');
+		'mcl_core:wood');
       end
       -- tree trunks are seldom used in these houses; let's change them anyway
       mg_villages.replace_tree_trunk( replacements, wood_type );
