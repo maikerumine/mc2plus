@@ -2,7 +2,7 @@ mcl_portals = {}
 
 -- Parameters
 
-local REALM1_DEPTH = -4700
+local REALM1_DEPTH = -4400
 local TCAVE = 0.6
 local nobj_cave = nil
 -- 3D noise
