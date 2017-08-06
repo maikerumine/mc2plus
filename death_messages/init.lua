@@ -116,10 +116,14 @@ messages.pvp = {
 	" deader than ded ded ded",
 	" CHOSEN to be the ONE",
 	" all kinds of messed up",
-	" smoked like a Neuport",
+	" smoked like a Newport",
 	" hurted",
 	" ballistic-ed",
 	" jostled",
+	" messed-da-frig-up",
+	" lanced",
+	" shot",
+	" knocked da heck out",
 	" pooped on"
 }
 
@@ -135,6 +139,7 @@ messages.player = {
 	" for not being good at PVP.",
 	" because they are a n00b.",
 	" for reasons uncertain.",
+	" for using a tablet.",
 	" with the quickness.",
 	" while texting."
 }
@@ -185,40 +190,40 @@ minetest.register_on_dieplayer(function(player)
 	-- Death by lava
 	if node.name == "default:lava_source" then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
 		--player:setpos(death)
 	elseif node.name == "default:lava_flowing"  then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("lava"))
 		--player:setpos(death)
 	-- Death by drowning
 	elseif player:get_breath() == 0 then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("water"))
 		--player:setpos(death)
 	-- Death by fire
 	elseif node.name == "fire:basic_flame" then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("fire"))
 		--player:setpos(death)
 	-- Death by Toxic water
 	elseif node.name == "es:toxic_water_source" then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
 		--player:setpos(death)
 	elseif node.name == "es:toxic_water_flowing" then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
 		--player:setpos(death)
 	elseif node.name == "groups:radioactive" then
 		minetest.chat_send_all(
-		string.char(0x1b).."(c@#ffffff)"..player_name .. 
+		string.char(0x1b).."(c@#00CED1)"..player_name .. 
 		string.char(0x1b).."(c@#ff0000)"..get_message("toxic"))
 		--player:setpos(death)	
 		
@@ -262,13 +267,13 @@ minetest.register_on_punchplayer(function(player, hitter)
 				local weap = holding:get_name(holding:get_name())
 					if holding then  
 					minetest.chat_send_all(
-					string.char(0x1b).."(c@#ffffff)"..player:get_player_name()..
+					string.char(0x1b).."(c@#00CED1)"..player:get_player_name()..
 					string.char(0x1b).."(c@#ff0000)".." was"..
 					string.char(0x1b).."(c@#ff0000)"..get_message("pvp")..
 					string.char(0x1b).."(c@#ff0000)".." by "..
-					string.char(0x1b).."(c@#ffffff)"..hitter:get_player_name()..
+					string.char(0x1b).."(c@#00CED1)"..hitter:get_player_name()..
 					string.char(0x1b).."(c@#ffffff)".." with "..
-					string.char(0x1b).."(c@#00bbff)"..weap..
+					string.char(0x1b).."(c@#FF8C00)"..weap..
 					string.char(0x1b).."(c@#00bbff)"..get_message("player"))  --TODO: make custom mob death messages
 					
 					end 	
@@ -280,11 +285,11 @@ minetest.register_on_punchplayer(function(player, hitter)
 
 		elseif hitter:get_player_name() == "" and player:get_hp() == 0 then
 					minetest.chat_send_all(
-					string.char(0x1b).."(c@#ffffff)"..player:get_player_name()..
+					string.char(0x1b).."(c@#00CED1)"..player:get_player_name()..
 					string.char(0x1b).."(c@#ff0000)".." was"..
 					string.char(0x1b).."(c@#ff0000)"..get_message("pvp")..
 					string.char(0x1b).."(c@#ff0000)".." by "..
-					string.char(0x1b).."(c@#ffffff)"..hitter:get_luaentity().name..  --too many mobs add to crash
+					string.char(0x1b).."(c@#FF8C00)"..hitter:get_luaentity().name..  --too many mobs add to crash
 					string.char(0x1b).."(c@#00bbff)"..get_message("mobs"))  --TODO: make custom mob death messages
 					
 		if player=="" or hitter=="" or hitter=="*"  then return end -- no mob killers/victims
