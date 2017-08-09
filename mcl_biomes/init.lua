@@ -875,7 +875,7 @@ minetest.register_ore({
 	
 
 	-- endstone???  TODO make a mapgen
---[[
+
 	minetest.register_ore({
 		ore_type        = "blob",
 		ore             = "mcl_end:end_stone",
@@ -888,14 +888,33 @@ minetest.register_ore({
 		noise_params    = {
 			offset = 0.5,
 			scale = 0.1,
-			--spread = {x = 5, y = 5, z = 5},  --works
-			spread = {x = 50, y = 50, z = 50},
+			spread = {x = 5, y = 5, z = 5},
 			seed = 16,
 			octaves = 1,
 			persist = 0.0
 		},
 	})
-]]
+
+
+	minetest.register_ore({
+		ore_type        = "scatter",
+		ore             = "mcl_end:end_stone",
+		wherein         = {"mcl_core:void", "mcl_core:end_stone","mcl_core:stone","air","ignore", "mcl_portals:void"},
+		clust_scarcity  = 30 * 30 * 30,  	--was26
+		clust_size      = 34,				--was5
+		y_min           = -5780,
+		y_max           = -5711,
+		noise_threshold = 0.0,
+		noise_params    = {
+			offset = 0.5,
+			scale = 0.1,
+			spread = {x = 70, y = 15, z = 70},
+			seed = 16,
+			octaves = 1,
+			persist = 0.0
+		},
+	})
+
 
 	
 end
@@ -1813,11 +1832,11 @@ function mcl_portals.register_biomes(upper_limit)
 	minetest.register_biome({
 		name = "water_worldseafloor",
 		--node_dust = "",
-		node_top = "mcl_core:stone",
+		node_top = "mcl_core:dirt",
 		depth_top = 12,
-		node_filler = "mcl_core:stone",
+		node_filler = "mcl_core:sand",
 		depth_filler = 1,
-		node_stone =  "mcl_core:barrier",
+		node_stone =  "mcl_core:stone",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
@@ -1833,9 +1852,9 @@ function mcl_portals.register_biomes(upper_limit)
 		node_dust = "mcl_core:dirt",
 		node_top = "mcl_core:stone",
 		depth_top = 5,
-		node_filler = "mcl_core:barrier",
+		node_filler = "mcl_core:bedrock",
 		depth_filler = 3,
-		node_stone =  "mcl_core:barrier",
+		node_stone =  "mcl_core:bedrock",
 		--node_water_top = "",
 		--depth_water_top = ,
 		--node_water = "",
@@ -1852,36 +1871,19 @@ function mcl_portals.register_biomes(upper_limit)
 	--================
 	--realm 3  "end"
 	minetest.register_biome({
-		--name = "water_worldfloor",
-		--node_dust = "mcl_core:dirt",
-		--node_top = "mcl_core:stone",
-		--depth_top = 5,
-		--node_filler = "mcl_core:barrier",
-		--depth_filler = 3,
-		node_stone =  "mcl_core:barrier",
-		--node_water_top = "",
-		--depth_water_top = ,
-		--node_water = "",
-		--node_river_water = "",
-		y_min = -5700,
-		y_max = -5611,
-		heat_point = 50,
-		humidity_point = 50,
-	})
-	minetest.register_biome({
 		name = "end_sky",
 		--node_dust = "",
 		--node_top = "",
 		--depth_top = ,
-		--node_filler = "mcl_portals:void",
+		node_filler = "mcl_portals:void",
 		--depth_filler = ,
 		node_stone =  "mcl_portals:void",
 		--node_water_top = "",
 		--depth_water_top = ,
-		--node_water = "mcl_end:purpur_block",
+		node_water = "mcl_end:purpur_block",
 		--node_river_water = "",
 		y_min = -5999,
-		y_max = -5701,
+		y_max = -5611,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -1899,7 +1901,7 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -6800,
+		y_min = -6200,
 		y_max = -6000,
 		heat_point = 50,
 		humidity_point = 50,
@@ -1917,8 +1919,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -7000,
-		y_max = -6801,
+		y_min = -6700,
+		y_max = -6201,
 		heat_point = 50,
 		humidity_point = 50,
 	})	
@@ -1938,8 +1940,8 @@ function mcl_portals.register_biomes(upper_limit)
 		--depth_water_top = ,
 		--node_water = "",
 		--node_river_water = "",
-		y_min = -7500,
-		y_max = -7001,
+		y_min = -6800,
+		y_max = -6701,
 		heat_point = 50,
 		humidity_point = 50,
 	})
@@ -2766,12 +2768,12 @@ replace("mcl_colorblocks:hardened_clay_orange", "mcl_core:bedrock", -80, -64)
 --lava delete
 replace("mapgen_lava_source_lava_flowing", "mcl_end:end_stone", -6900, -5400)
 replace("mcl_core:lava_flowing", "mcl_end:end_stone", -6900, -5400)
-replace("mapgen_air", "mcl_end:end_stone", -6900, -5400)
+--replace("mapgen_air", "mcl_end:end_stone", -6900, -5400)
 replace("mapgen_lava_source_lava_source", "mcl_end:end_stone", -6900, -5400)
 replace("mcl_core:lava_source", "mcl_end:end_stone", -6900, -5400)
 
 --dungeon swap
-replace("mcl_core:cobble", "mcl_nether:nether_brick", -3900, -2400)
+replace("mcl_core:cobblestone", "mcl_nether:nether_brick", -3900, -2400)
 replace("mcl_core:mossycobble", "mcl_nether:nether_brick", -3900, -2400)
 replace("stairs:stair_cobble", "stairs:stair_nether_brick", -3900, -2400)
 replace("stairs:stair_mossycobble", "stairs:stair_nether_brick", -3900, -2400)

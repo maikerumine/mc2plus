@@ -2,7 +2,7 @@ mcl_portals = {}
 
 -- Parameters
 
-local END_DEPTH = -5700  --5750 is good emerald area  need 6000
+local END_DEPTH = -5750  --5600 is good emerald area
 local TCAVE = 0.6
 local nobj_cave = nil
 -- 3D noise

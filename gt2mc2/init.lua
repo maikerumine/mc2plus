@@ -2,6 +2,7 @@
 
 dofile(minetest.get_modpath("gt2mc2").."/craftitems.lua")
 dofile(minetest.get_modpath("gt2mc2").."/enchanted.lua")
+dofile(minetest.get_modpath("gt2mc2").."/mob_items.lua")
 
 --======================
 --MC2 beds
@@ -568,7 +569,7 @@ minetest.register_alias("default:pillar", "mcl_nether:quartz_pillar")
 minetest.register_alias("default:pillar_horizontal", "mcl_nether:quartz_pillar_horizontal")
 
 --======================
---alias to merge nether to mcl_core
+--alias to merge default-nether to mcl_core
 --======================
 minetest.register_alias("default:rack", "mcl_nether:netherrack")
 minetest.register_alias("default:quartz_ore", "mcl_nether:quartz_ore")
@@ -580,6 +581,22 @@ minetest.register_alias("default:glowstone_dust", "mcl_nether:glowstone_dust")
 minetest.register_alias("default:rack_with_diamond", "mcl_core:stone_with_diamond")
 minetest.register_alias("default:slowsand", "mcl_nether:soul_sand")
 minetest.register_alias("default:fence_nither", "mcl_fences:nether_brick_fence")
+
+--======================
+--alias to merge nether to mcl_core
+--======================
+minetest.register_alias("nether:rack", "mcl_nether:netherrack")
+minetest.register_alias("nether:quartz_ore", "mcl_nether:quartz_ore")
+minetest.register_alias("nether:quartz_crystal", "mcl_nether:quartz_crystal")
+minetest.register_alias("nether:nitherbrick", "mcl_nether:nether_brick")
+minetest.register_alias("nether:obsidiannitherbrick", "mcl_nether:nether_brick")
+minetest.register_alias("nether:glowstone", "mcl_nether:glowstone")
+minetest.register_alias("nether:glowstone_dust", "mcl_nether:glowstone_dust")
+minetest.register_alias("nether:rack_with_diamond", "mcl_core:stone_with_diamond")
+minetest.register_alias("nether:sand", "mcl_nether:soul_sand")
+minetest.register_alias("nether:portal", "mcl_portals:portal")
+minetest.register_alias("nether:fence_nither", "mcl_fences:nether_brick_fence")
+
 
 --======================
 --stairs
@@ -704,6 +721,7 @@ minetest.register_alias("mg_villages:plotmarker", "mcl_stairs:slab_stone")
 minetest.register_alias("mg_villages:road", "mcl_stairs:slab_stone")
 minetest.register_alias("mg_villages:road", "mcl_stairs:slab_stone")
 minetest.register_alias("mg_villages:soil", "mcl_farming:soil")
+minetest.register_alias("handle_schematics:support", "mcl_farming:soil")
 
 --======================
 --xdecor itemframes etc
