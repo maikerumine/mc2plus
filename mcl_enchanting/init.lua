@@ -2,7 +2,8 @@
 mcl_enchanting = {}
 local modpath = minetest.get_modpath("mcl_enchanting")
 
-local enchanting = {}
+--local enchanting = {}
+enchanting = {}
 
 --screwdriver = screwdriver or {}
 
@@ -206,7 +207,7 @@ end
 
 function enchanting.construct(pos)
 	local meta = minetest.get_meta(pos)
-	meta:set_string("infotext", "Enchantment Table")
+	meta:set_string("infotext", "Enchantment Table -Broken- Cannot Dig")
 	enchanting.formspec(pos, nil)
 
 	local inv = meta:get_inventory()
@@ -268,7 +269,7 @@ minetest.register_node("mcl_enchanting:stone", {
 	drop = 'mcl_core:cobble',
 	legacy_mineral = true,
 })
-
+--[[
 mcl_enchanting.register("stone2", {
 	description = "-XDECOR WAY mcl_enchanting Stone",
 	infotext = "-XDECOR WAY mcl_enchanting Stone",
@@ -277,23 +278,25 @@ mcl_enchanting.register("stone2", {
 	groups = {cracky = 3, stone = 1},
 
 })
-
+]]
 
 
 mcl_enchanting.register("enchantment_table", {
 --minetest.register_node("mcl_enchanting:enchantment_table", {
-	description = "Enchantment Table",
+
+	description = "Enchantment Table FIX ME PLEASE!!!!",
 	tiles = {"xdecor_enchantment_top.png",  "xdecor_enchantment_bottom.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png"},
-	--groups = {pickaxey=3, handy=2, building_block=1, material_stone=1},
-	groups = {cracky=1, level=1},
+	groups = {pickaxey=3, handy=2, building_block=1, material_stone=1},
 	stack_max = 1,
 	sounds = mcl_sounds.node_sound_stone_defaults(),
-	_mcl_blast_resistance = 17.5,
-	_mcl_hardness = 3.5,
-	--on_rotate = screwdriver.rotate_simple,
+	--_mcl_blast_resistance = 17.5,
+	--_mcl_hardness = 3.5,
+
+	--can_dig = enchanting.dig,  --was default?
 	can_dig = enchanting.dig,  --was default?
+	on_punch = enchanting.dig,
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,
 	on_destruct = enchanting.destruct,

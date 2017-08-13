@@ -156,17 +156,17 @@ function enchanting.timer(pos)
 	end
 	return true
 end
-
+--[[
 xdecor.register("enchantment_table", {
 	description = "Enchantment Table",
 	tiles = {"xdecor_enchantment_top.png",  "xdecor_enchantment_bottom.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png"},
-	groups = {cracky=1, level=1},
+	--groups = {cracky=1, level=1},
 	stack_max = 1,
 	sounds = default.node_sound_stone_defaults(),
 	on_rotate = screwdriver.rotate_simple,
-	can_dig = enchanting.dig,
+	--can_dig = enchanting.dig,
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,
 	on_destruct = enchanting.destruct,
@@ -192,7 +192,7 @@ minetest.register_entity("xdecor:book_open", {
 		end
 	end
 })
-
+]]
 local function cap(S) return S:gsub("^%l", string.upper) end
 
 function enchanting:register_tools(mod, def)
