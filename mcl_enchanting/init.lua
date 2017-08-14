@@ -207,7 +207,7 @@ end
 
 function enchanting.construct(pos)
 	local meta = minetest.get_meta(pos)
-	meta:set_string("infotext", "Enchantment Table -Broken- Cannot Dig")
+	meta:set_string("infotext", "Enchantment Table -Broken--Use Water to Dig Block-")
 	enchanting.formspec(pos, nil)
 
 	local inv = meta:get_inventory()
@@ -283,20 +283,20 @@ mcl_enchanting.register("stone2", {
 
 mcl_enchanting.register("enchantment_table", {
 --minetest.register_node("mcl_enchanting:enchantment_table", {
-
-	description = "Enchantment Table FIX ME PLEASE!!!!",
+	_doc_items_longdesc = "Use to enchant your tools or armour.  Place tool in tool slot, place Lapis in other slot, then choose enchant.  One enchant per item.",
+	_doc_items_hidden = false,
+	description = "Enchantment Table -Use Water to Dig Block-",
 	tiles = {"xdecor_enchantment_top.png",  "xdecor_enchantment_bottom.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png",
 		 "xdecor_enchantment_side.png", "xdecor_enchantment_side.png"},
-	groups = {pickaxey=3, handy=2, building_block=1, material_stone=1},
+	groups = {pickaxey=3, handy=2, building_block=1, material_stone=1, dig_by_water=1, creative_breakable=1},
 	stack_max = 1,
 	sounds = mcl_sounds.node_sound_stone_defaults(),
-	--_mcl_blast_resistance = 17.5,
-	--_mcl_hardness = 3.5,
+	_mcl_blast_resistance = 17.5,
+	_mcl_hardness = 3.5,
 
 	--can_dig = enchanting.dig,  --was default?
 	can_dig = enchanting.dig,  --was default?
-	on_punch = enchanting.dig,
 	on_timer = enchanting.timer,
 	on_construct = enchanting.construct,
 	on_destruct = enchanting.destruct,
@@ -419,8 +419,8 @@ enchanting:register_tools("3d_armor", {
 minetest.register_craft({
 	output = "mcl_enchanting:enchantment_table",
 	recipe = {
-		{"mesecons_torch:redstoneblock","mcl_books:book","mesecons_torch:redstoneblock"},
-		{"mcl_core:emeraldblock","mobs_mc:head_creeper","mcl_core:emeraldblock"},
-		{"mcl_core:obsidian","mcl_core:diamondblock","mcl_core:obsidian"},
+		{"","mcl_books:book",""},
+		{"mcl_core:diamond","mcl_core:obsidian","mcl_core:diamond"},
+		{"mcl_core:obsidian","mcl_core:obsidian","mcl_core:obsidian"},
 	}
 })
