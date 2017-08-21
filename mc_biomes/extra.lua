@@ -1,29 +1,19 @@
--- Minetest 0.4 mod: default
--- See README.txt for licensing and other information.
-
--- The API documentation in here was moved into game_api.txt
-
--- Definitions made by this mod that other mods can use too
-mcl_portals = {}
+mc_biomes = {}
 
 
-minetest.register_alias("default:particle", "mcl_portals:particle")
-minetest.register_alias("default:portal", "mcl_portals:portal")
-minetest.register_alias("default:portal2", "mcl_portals:portal2")
-minetest.register_alias("default:end_portal", "mcl_portals:end_portal")
-		
-			
--- Load files
-dofile(minetest.get_modpath("mcl_portals").."/nodes.lua")
---v7 mapgen W.I.P.  MOVED TO MCL_BIOMES
---dofile(minetest.get_modpath("mcl_portals").."/mapgen.lua")
-dofile(minetest.get_modpath("mcl_portals").."/portal.lua")
-dofile(minetest.get_modpath("mcl_portals").."/portal2.lua")
-dofile(minetest.get_modpath("mcl_portals").."/portal3.lua")
+minetest.register_alias("default:particle", "mc_biomes:particle")
+minetest.register_alias("default:portal", "mc_biomes:portal")
+minetest.register_alias("default:portal2", "mc_biomes:portal2")
+minetest.register_alias("default:end_portal", "mc_biomes:end_portal")
 
-minetest.after(2, function()
-dofile(minetest.get_modpath("mcl_portals").."/craftitems.lua")  --must register first
-end)
+minetest.register_alias("mcl_portals:void", "mc_biomes:void")
+minetest.register_alias("mcl_portals:dummy", "mc_biomes:dummy")
+minetest.register_alias("mcl_portals:nether_air", "mc_biomes:nether_air")
+minetest.register_alias("mcl_portals:portal", "mc_biomes:portal")
+minetest.register_alias("mcl_portals:portal2", "mc_biomes:portal2")
+minetest.register_alias("mcl_portals:end_portal", "mc_biomes:end_portal")
+
+
 
 
 

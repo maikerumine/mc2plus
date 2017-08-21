@@ -1,4 +1,4 @@
-mcl_portals = {}
+mc_biomes = {}
 
 -- Parameters
 
@@ -20,7 +20,7 @@ local np_cave = {
 
 -- Nodes
 
-minetest.register_node("mcl_portals:end_portal", {
+minetest.register_node("mc_biomes:end_portal", {
 	description = "END Portal",
 	tiles = {
 		"default_transparent.png",
@@ -100,7 +100,7 @@ local function build_end_portal(pos, target3)
 	for y = p1.y, p2.y do
 		p = {x = x, y = y, z = p1.z}
 		if not (x == p1.x or x == p2.x or y == p1.y or y == p2.y) then
-			minetest.set_node(p, {name = "mcl_portals:end_portal", param2 = 0})
+			minetest.set_node(p, {name = "mc_biomes:end_portal", param2 = 0})
 		end
 		local meta = minetest.get_meta(p)
 		meta:set_string("p1", minetest.pos_to_string(p1))
@@ -251,7 +251,7 @@ function make_end_portal(pos)
 			p = {x = p1.x, y = y, z = p1.z + d}
 		end
 		if minetest.get_node(p).name == "air" then
-			minetest.set_node(p, {name = "mcl_portals:end_portal", param2 = param2})
+			minetest.set_node(p, {name = "mc_biomes:end_portal", param2 = param2})
 		end
 		local meta = minetest.get_meta(p)
 		meta:set_string("p1", minetest.pos_to_string(p1))
@@ -267,7 +267,7 @@ end
 -- ABMs
 
 minetest.register_abm({
-	nodenames = {"mcl_portals:end_portal"},
+	nodenames = {"mc_biomes:end_portal"},
 	interval = 1,
 	chance = 2,
 	action = function(pos, node)
@@ -305,7 +305,7 @@ minetest.register_abm({
 					minetest.after(3, function(obj, pos, target3)
 						local objpos = obj:getpos()   if objpos == nil then return end	--maikerumine added for objects to travel
 						objpos.y = objpos.y + 0.1 -- Fix some glitches at -8000
-						if minetest.get_node(objpos).name ~= "mcl_portals:end_portal" then
+						if minetest.get_node(objpos).name ~= "mc_biomes:end_portal" then
 							return
 						end
 
@@ -314,7 +314,7 @@ minetest.register_abm({
 
 						local function check_and_build_end_portal(pos, target3)
 							local n = minetest.get_node_or_nil(target3)
-							if n and n.name ~= "mcl_portals:end_portal" then
+							if n and n.name ~= "mc_biomes:end_portal" then
 								build_end_portal(target3, pos)
 								minetest.after(2, check_and_build_end_portal, pos, target3)  --was 2
 								minetest.after(4, check_and_build_end_portal, pos, target3)

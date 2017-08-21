@@ -1,6 +1,10 @@
+mcl_core
+mcl_farming
+mcl_flowers
 mcl_init
 mcl_util
-mcl_core
 mcl_cocoas
 mcl_stairs
 mcl_structures
+doc_items
+doc?

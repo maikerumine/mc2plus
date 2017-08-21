@@ -1,4 +1,4 @@
---mcl_portals = {}
+--mc_biomes = {}
 
 --node override
 --minetest.after(1, function()
@@ -24,8 +24,8 @@ minetest.override_item("mcl_core:obsidian", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
-				if nn == "mcl_portals:portal" then
+			if nn == "mcl_core:obsidian" or nn == "mc_biomes:portal" then
+				if nn == "mc_biomes:portal" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
 				local m = minetest.get_meta({x = x, y = y, z = z})
@@ -51,8 +51,8 @@ minetest.override_item("mcl_core:obsidian", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:obsidian" or nn == "mcl_portals:portal" then
-				if nn == "mcl_portals:portal" then
+			if nn == "mcl_core:obsidian" or nn == "mc_biomes:portal" then
+				if nn == "mc_biomes:portal" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
 				local m = minetest.get_meta({x = x, y = y, z = z})
@@ -90,8 +90,8 @@ minetest.override_item("mcl_core:emeraldblock", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:emeraldblock" or nn == "mcl_portals:portal2" then
-				if nn == "mcl_portals:portal2" then
+			if nn == "mcl_core:emeraldblock" or nn == "mc_biomes:portal2" then
+				if nn == "mc_biomes:portal2" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
 				local m = minetest.get_meta({x = x, y = y, z = z})
@@ -117,8 +117,8 @@ minetest.override_item("mcl_core:emeraldblock", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_core:emeraldblock" or nn == "mcl_portals:portal2" then
-				if nn == "mcl_portals:portal2" then
+			if nn == "mcl_core:emeraldblock" or nn == "mc_biomes:portal2" then
+				if nn == "mc_biomes:portal2" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
 				local m = minetest.get_meta({x = x, y = y, z = z})
@@ -156,8 +156,8 @@ minetest.override_item("mcl_end:purpur_block", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_end:purpur_block" or nn == "mcl_portals:end_portal" then
-				if nn == "mcl_portals:end_portal" then
+			if nn == "mcl_end:purpur_block" or nn == "mc_biomes:end_portal" then
+				if nn == "mc_biomes:end_portal" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
 				local m = minetest.get_meta({x = x, y = y, z = z})
@@ -183,8 +183,8 @@ minetest.override_item("mcl_end:purpur_block", {
 		for y = p1.y, p2.y do
 		for z = p1.z, p2.z do
 			local nn = minetest.get_node({x = x, y = y, z = z}).name
-			if nn == "mcl_end:purpur_block" or nn == "mcl_portals:end_portal" then
-				if nn == "mcl_portals:end_portal" then
+			if nn == "mcl_end:purpur_block" or nn == "mc_biomes:end_portal" then
+				if nn == "mc_biomes:end_portal" then
 					minetest.remove_node({x = x, y = y, z = z})
 				end
 				local m = minetest.get_meta({x = x, y = y, z = z})
